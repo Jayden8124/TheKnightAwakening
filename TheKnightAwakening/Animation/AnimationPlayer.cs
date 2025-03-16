@@ -6,11 +6,11 @@ namespace TheKnightAwakening
 {
     public static class AnimationPlayer
     {
-        public static Dictionary<string, Animation> LoadAnimations(Texture2D player)
+        public static Dictionary<string, Animation> LoadAnimations(Texture2D texture)
         {
             return new Dictionary<string, Animation>
             {
-                { "Idle", new Animation(player, new List<Rectangle>
+                { "Idle", new Animation(texture, new List<Rectangle>
                     {
                         new Rectangle(5,   0, 43, 64),
                         new Rectangle(72,  0, 43, 64),
@@ -19,7 +19,7 @@ namespace TheKnightAwakening
                     }, 0.15f, true)
                 },
 
-                { "Walk", new Animation(player, new List<Rectangle>
+                { "Walk", new Animation(texture, new List<Rectangle>
                     {
                         new Rectangle(8,   80, 40, 64),
                         new Rectangle(74,  81, 43, 63),
@@ -32,7 +32,7 @@ namespace TheKnightAwakening
                     }, 0.10f, true)
                 },
 
-                { "Run", new Animation(player, new List<Rectangle>
+                { "Run", new Animation(texture, new List<Rectangle>
                     {
                         new Rectangle(2,   163, 48, 61),
                         new Rectangle(69,  165, 54, 59),
@@ -44,7 +44,7 @@ namespace TheKnightAwakening
                     }, 0.10f, true)
                 },
 
-                { "Jump", new Animation(player, new List<Rectangle>
+                { "Jump", new Animation(texture, new List<Rectangle>
                     {
                         new Rectangle(2,   247, 49, 57),
                         new Rectangle(81,  240, 49, 64),
@@ -55,7 +55,7 @@ namespace TheKnightAwakening
                     }, 0.12f, false)
                 },
 
-                { "Attack1", new Animation(player, new List<Rectangle>
+                { "Attack1", new Animation(texture, new List<Rectangle>
                     {
                         new Rectangle(4,   320, 43, 64),
                         new Rectangle(70,  320, 59, 64),
@@ -65,7 +65,7 @@ namespace TheKnightAwakening
                     }, 0.10f, false)
                 },
 
-                { "Attack2", new Animation(player, new List<Rectangle>
+                { "Attack2", new Animation(texture, new List<Rectangle>
                     {
                         new Rectangle(6,   405, 42, 75),
                         new Rectangle(101, 409, 43, 71),
@@ -74,7 +74,7 @@ namespace TheKnightAwakening
                     }, 0.10f, false)
                 },
 
-                { "Attack3", new Animation(player, new List<Rectangle>
+                { "Attack3", new Animation(texture, new List<Rectangle>
                     {
                         new Rectangle(9,   496, 48, 64),
                         new Rectangle(113, 496, 49, 64),
@@ -84,7 +84,7 @@ namespace TheKnightAwakening
                 },
 
 
-                { "Dead", new Animation(player, new List<Rectangle>
+                { "Dead", new Animation(texture, new List<Rectangle>
                     {
                         new Rectangle(5,   583, 43, 58),
                         new Rectangle(78,  596, 47, 45),
@@ -96,7 +96,7 @@ namespace TheKnightAwakening
                 },
 
 
-                { "Defend", new Animation(player, new List<Rectangle>
+                { "Defend", new Animation(texture, new List<Rectangle>
                     {
                         new Rectangle(7,   660, 43, 60),
                         new Rectangle(83,  659, 43, 61),

@@ -94,4 +94,7 @@ C:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/bin/D
 /Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/obj/Debug/net8.0/TheKnightAwakening.pdb
 /Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/obj/Debug/net8.0/TheKnightAwakening.genruntimeconfig.cache
 /Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/obj/Debug/net8.0/ref/TheKnightAwakening.dll
-/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/pole.xnb
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/flag.xnb
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/Flag_Raise.xnb
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/Skeleton_Dead.xnb
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/Sword_SFX.xnb

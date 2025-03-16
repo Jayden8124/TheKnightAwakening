@@ -10,185 +10,229 @@ namespace TheKnightAwakening
     {
         // Bullet Object of Player
         public Bullet Bullet;
-
         // Animation
         public AnimationManager AnimationManager;
         public Dictionary<string, Animation> Animations;
 
-        // Properties Status
-        public int Ultimate { get; set; }
-        // Movement
-        public Keys Left, Right, Up, Down, Fire, Defend, Attack2, Attack3;
-
-        // Properties
-        private int maxHealth;
-        private bool isAttacking = false;
-        private bool isDefending = false;
-        private float attackTimer = 0f;
-        private bool isInvincible = false;
-        private float invincibleTimer = 0f;
-        private float blinkTimer = 0f;
-        private bool isVisible = true;
-
         // Checkpoint
         public Vector2 LastCheckpoint { get; set; }
 
-        // Properties on ground
+        // Properties
+        private int maxHealth = 100;
+        public int Ultimate { get; private set; }
+        private float speed;
+        private bool isAttacking;
+        private float attackTimer;
+        private bool isInvincible;
+        private float invincibleTimer;
+        private float blinkTimer;
+        private bool isDefending;
+        private bool isVisible = true;
+        private float time = 5f;
+        // Movement
+        public Keys Left, Right, Up, Down, Fire, Defend, Attack2, Attack3, UltimateAttack;
+        // Debuff
+        public enum DebuffType { Slow, Stun, Poison, Weak }
+        private Dictionary<DebuffType, float> activeDebuffs = new();
+
+
         public Player(Dictionary<string, Animation> animations)
         {
             Animations = animations;
             AnimationManager = new AnimationManager(Animations["Idle"]);
             LastCheckpoint = Position;
             IsActive = true;
+            Reset();
         }
 
         public override void Reset()
         {
-            Health = 100;
-            maxHealth = 100;
+            Health = 20;
             Ultimate = 0;
+            isDead = false;
+            activeDebuffs.Clear();
             base.Reset();
         }
 
-        public override void Update(GameTime gameTime, List<GameObject> _gameObjects)
+        public override void Update(GameTime gameTime, List<GameObject> gameObjects)
         {
+            if (Singleton.Instance.CurrentKey.IsKeyDown(Keys.R))
+            {
+                Reset();
+            }
             if (isDead)
             {
+                AnimationManager.Play(Animations["Dead"]);
                 AnimationManager.Update(gameTime);
                 return;
             }
-            if (isInvincible)
+            if (activeDebuffs.ContainsKey(DebuffType.Poison))
             {
-                invincibleTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-                blinkTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (blinkTimer <= 0f)
-                {
-                    isVisible = !isVisible; // สลับการมองเห็น
-                    blinkTimer = 0.1f; // กระพริบทุก 0.1 วิ
-                }
 
-                if (invincibleTimer <= 0f)
+                time -= (float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                if (time < 0f)
                 {
-                    isInvincible = false;
-                    isVisible = true; // กลับมาแสดงผลปกติ
+                    TakeDamage(1, Vector2.Zero);
+                    time = 5f;
+                    Console.WriteLine("Poisoned! Health: " + Health);
                 }
             }
+            UpdateDebuffs(gameTime);
+            HandleInvincibility(gameTime);
+            HandleDefend();
+            HandleMovement();
+            HandleAttacks(gameTime, gameObjects);
+            AnimationManager.Update(gameTime);
 
+            Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
+            base.Update(gameTime, gameObjects);
+        }
+        private void UpdateDebuffs(GameTime gameTime)
+        {
+            var keys = new List<DebuffType>(activeDebuffs.Keys);
+            foreach (var debuff in keys)
+            {
+                activeDebuffs[debuff] -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (activeDebuffs[debuff] <= 0)
+                    activeDebuffs.Remove(debuff);
+            }
+        }
 
+        private void HandleInvincibility(GameTime gameTime)
+        {
+            if (!isInvincible) return;
+
+            invincibleTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            blinkTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            isVisible = blinkTimer <= 0f ? !isVisible : isVisible;
+            blinkTimer = blinkTimer <= 0f ? 0.1f : blinkTimer;
+            isInvincible = invincibleTimer > 0f;
+        }
+
+        private void HandleMovement()
+        {
             var velocity = Vector2.Zero;
             bool isRunning = Singleton.Instance.CurrentKey.IsKeyDown(Keys.LeftShift);
-            float speed = isRunning ? 8f : 3f; // Normal = 3, Run = 8
-            isDefending = false;
-            isJumping = false;
+            speed = isRunning ? 8f : 3f;
 
-            // isDefending = Singleton.Instance.CurrentMouse.RightButton == ButtonState.Pressed;
-            if (Singleton.Instance.CurrentKey.IsKeyDown(Defend))
+            if (activeDebuffs.ContainsKey(DebuffType.Slow))
+                speed *= 0.5f;
+            if (activeDebuffs.ContainsKey(DebuffType.Stun))
+                return;
+            if (isDefending)
+                speed *= 0.5f;
+
+            if (Singleton.Instance.CurrentKey.IsKeyDown(Left))
+            {
+                velocity.X -= speed;
+                AnimationManager.FacingRight = false;
+            }
+            if (Singleton.Instance.CurrentKey.IsKeyDown(Right))
+            {
+                velocity.X += speed;
+                AnimationManager.FacingRight = true;
+            }
+
+            if (OnGround && Singleton.Instance.CurrentKey.IsKeyDown(Up) &&
+                !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
+            {
+                Velocity.Y = -15;
+                OnGround = false;
+                AnimationManager.Play(Animations["Jump"]);
+            }
+
+            if (!OnGround)
+            {
+                Velocity.Y += Gravity;
+                Position.Y += Velocity.Y;
+            }
+
+            Position += new Vector2(velocity.X, 0);
+
+            if (OnGround && !isAttacking && !isDefending)
+            {
+                if (velocity.X != 0)
+                    AnimationManager.Play(isRunning ? Animations["Run"] : Animations["Walk"]);
+                else
+                    AnimationManager.Play(Animations["Idle"]);
+            }
+        }
+
+        private void HandleDefend()
+        {
+            if (Singleton.Instance.CurrentKey.IsKeyDown(Defend) &&
+            !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
             {
                 AnimationManager.Play(Animations["Defend"]);
                 isDefending = true;
             }
-            if (!isDefending)
+            else if (Singleton.Instance.CurrentKey.IsKeyUp(Defend) &&
+            !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
             {
-                if (Singleton.Instance.CurrentKey.IsKeyDown(Left))
-                {
-                    velocity.X -= speed;
-                    AnimationManager.FacingRight = false;
-                }
-                if (Singleton.Instance.CurrentKey.IsKeyDown(Right))
-                {
-                    velocity.X += speed;
-                    AnimationManager.FacingRight = true;
-                }
+                isDefending = false;
+            }
+        }
 
-                // กด Up เพื่อกระโดด เมื่ออยู่บนพื้น
-                if (Singleton.Instance.CurrentKey.IsKeyDown(Up) && OnGround &&
+        private void HandleAttacks(GameTime gameTime, List<GameObject> _gameObjects)
+        {
+            if (isAttacking)
+            {
+                attackTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (attackTimer >= Animations["Attack1"].FrameSpeed * Animations["Attack1"].FrameCount)
+                    isAttacking = false;
+                return;
+            }
+
+            if (Singleton.Instance.CurrentKey.IsKeyDown(Fire) &&
                 !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
-                {
-                    isJumping = true;
-                    OnGround = false;
-                    Velocity.Y = -15;
-                    AnimationManager.Play(Animations["Jump"]);
-                }
-
-                // ถ้าอยู่ในสถานะกระโดดหรือกำลังตก (ไม่ติดพื้น) ให้อัพเดทแรงโน้มถ่วง
-                if (!OnGround)
-                {
-                    Velocity.Y += Gravity;
-                    Position.Y += Velocity.Y;
-                }
-
-                // Fire bullet, but only if not attacking
-                if (!isAttacking)
-                {
-                    if (Singleton.Instance.CurrentKey.IsKeyDown(Fire) &&
-                        !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
-                    {
-                        AnimationManager.Play(Animations["Attack1"]);
-                        isAttacking = true;
-                        attackTimer = 0f;
-                        Ultimate += 1;
-                    }
-                    else if (Singleton.Instance.CurrentKey.IsKeyDown(Attack2) &&
-                        !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
-                    {
-                        AnimationManager.Play(Animations["Attack2"]);
-                        isAttacking = true;
-                        attackTimer = 0f;
-                        Ultimate = 0;
-                    }
-                    else if (Singleton.Instance.CurrentKey.IsKeyDown(Attack3) &&
-                        !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
-                    {
-                        AnimationManager.Play(Animations["Attack3"]);
-                        isAttacking = true;
-                        attackTimer = 0f;
-                    }
-                }
-                // Ensure Attack Animation Plays Fully Before Allowing Another Attack
-                if (isAttacking)
-                {
-                    attackTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    foreach (var obj in _gameObjects)
-                    {
-                        if (obj is MonsterType monster)
-                        {
-                            if (GameObject.CheckAABBCollision(Rectangle, monster.Rectangle)) // Check if player is colliding with monster
-                            {
-                                // Call TakeDamage method on monster if colliding with attack
-                                monster.TakeDamage(5, Position); // You can adjust the damage value as needed
-                                Heal(10);
-                            }
-                        }
-                    }
-                    if (attackTimer >= Animations["Attack1"].FrameSpeed * Animations["Attack1"].FrameCount)
-                    {
-                        isAttacking = false;
-                    }
-                }
-            }
-
-            // อัพเดทการเคลื่อนที่ในแนว X (ไม่เกี่ยวกับแรงโน้มถ่วง)
-            Position += new Vector2(velocity.X, 0);
-
-            // เลือก Animation สำหรับการเดินหรือวิ่งถ้าไม่อยู่ในสถานะกระโดด
-            if (OnGround && !isDefending && !isAttacking && !isJumping)
             {
-                if (velocity.X != 0)
-                {
-                    AnimationManager.Play(isRunning ? Animations["Run"] : Animations["Walk"]);
-                }
-                else
-                {
-                    AnimationManager.Play(Animations["Idle"]);
-                }
+                TriggerAttack("Attack1", _gameObjects);
+                Ultimate++;
             }
+            else if (Singleton.Instance.CurrentKey.IsKeyDown(Attack2) &&
+            !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
+            {
+                TriggerAttack("Attack2", _gameObjects);
+            }
+            else if (Singleton.Instance.CurrentKey.IsKeyDown(Attack3) &&
+            !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
+            {
+                TriggerAttack("Attack3", _gameObjects);
+                Ultimate = 0;
+            }
+            else if (Ultimate >= 10 && Singleton.Instance.CurrentKey.IsKeyDown(UltimateAttack) &&
+                     !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
+            {
+                TriggerAttack("UltimateAttack", _gameObjects);
+                Ultimate = 0;
+            }
+        }
 
-            // ปรับการหันหน้าให้ถูกต้อง (ตัวอย่างนี้สามารถปรับปรุงเพิ่มเติมได้)
-            AnimationManager.FacingRight = AnimationManager.FacingRight;
-
-            AnimationManager.Update(gameTime);
-            Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
-            base.Update(gameTime, _gameObjects);
+        private void TriggerAttack(string attack, List<GameObject> gameObjects)
+        {
+            AnimationManager.Play(Animations[attack]);
+            isAttacking = true;
+            attackTimer = 0f;
+            if (activeDebuffs.ContainsKey(DebuffType.Weak))
+                this.Damage /= 2;
+            foreach (var gameObject in gameObjects)
+            {
+                if (gameObject is MonsterType monster)
+                {
+                    if (Player.CheckAABBCollision(this.Rectangle, monster.Rectangle))
+                    {
+                        monster.TakeDamage(this.Damage, this.Position);
+                        Console.WriteLine("Monster taken damage: " + this.Damage);
+                    }
+                }
+                // if (gameObject is Bullet bullet)
+                // {
+                //     if (Player.CheckAABBCollision(this.Rectangle, bullet.Rectangle))
+                //     {
+                //         bullet.IsActive = false;
+                //     }
+                // }
+            }
         }
 
         public void TakeDamage(int damage, Vector2 enemyPosition)
@@ -213,24 +257,65 @@ namespace TheKnightAwakening
                 else
                 {
                     isInvincible = true;
-                    invincibleTimer = 1f; // อมตะ 2 วิ
-                    blinkTimer = 0.1f; // ความเร็วกระพริบ
+                    invincibleTimer = 1f;
                 }
+            }
+        }
+
+        public void TakeDebuff(DebuffType debuffType, float duration, Vector2 enemyPosition)
+        {
+            bool isFacingEnemy = (enemyPosition.X > Position.X && AnimationManager.FacingRight) ||
+                                 (enemyPosition.X < Position.X && !AnimationManager.FacingRight);
+
+            if (!activeDebuffs.ContainsKey(debuffType))
+            {
+                if (!isDefending || (isDefending && !isFacingEnemy))
+                {
+                    activeDebuffs[debuffType] = duration;
+
+                    if (debuffType == DebuffType.Stun)
+                    {
+                        AnimationManager.Play(Animations["Idle"]);
+                        isAttacking = false;
+                        isDefending = false;
+                    }
+                    else if (debuffType == DebuffType.Slow)
+                    {
+                        speed *= 0.5f;
+                    }
+                }
+            }
+            else {
+                Console.WriteLine("Debuff already applied");
             }
         }
 
         public void Heal(int heal)
         {
             this.Health += heal;
-            if (this.Health > maxHealth) this.Health = maxHealth; 
+            if (this.Health > maxHealth) this.Health = maxHealth;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            Color playerColor = Color.White;
+            if (activeDebuffs.ContainsKey(DebuffType.Stun))
+            {
+                playerColor = Color.Gray;
+            }
+            else if (activeDebuffs.ContainsKey(DebuffType.Slow))
+            {
+                playerColor = Color.Red;
+            }
+            else if (activeDebuffs.ContainsKey(DebuffType.Poison))
+            {
+                playerColor = Color.Green;
+            }
+
             if (isVisible)
             {
                 AnimationManager.Position = Position;
-                AnimationManager.Draw(spriteBatch);
+                AnimationManager.Draw(spriteBatch, playerColor);
             }
         }
     }

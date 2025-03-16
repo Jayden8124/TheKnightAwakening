@@ -4,31 +4,36 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/cutscene1.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/cutscene2.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Map/bg.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Map/prop.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Map/TilesetGround.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Objects/blue_slime.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Objects/chest.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Objects/gold_coin.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Objects/health_potion.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Objects/medusa.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Objects/player.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Objects/pole.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_archer.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_spearman.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_warrior.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/UI/game_font.spritefont</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/UI/health_bar.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/UI/hitbox.PNG</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/UI/Icon_game.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/UI/icon.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/UI/menu.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/UI/message_box.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/E/TheKnightAwakening/TheKnightAwakening/Content/UI/ultimate.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Skeleton_Dead.mp3</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Sword_SFX.mp3</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/cutscene1.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/cutscene2.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Map/bg.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Map/prop.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Map/TilesetGround.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Objects/blue_slime.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Objects/chest.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Objects/Flag_Raise.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Objects/flag.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Objects/gold_coin.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Objects/health_potion.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Objects/medusa.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Objects/player.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_archer.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_spearman.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_warrior.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/UI/game_font.spritefont</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/UI/health_bar.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/UI/hitbox.PNG</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/UI/icon_game.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/UI/icon.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/UI/menu.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/UI/Message_Box.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/G/TheKnightAwakening/TheKnightAwakening/Content/UI/ultimate.png</File>
   </SourceFiles>
   <DestFiles>
+    <File>Skeleton_Dead.mp3</File>
+    <File>Sword_SFX.mp3</File>
     <File>cutscene1.png</File>
     <File>cutscene2.png</File>
     <File>bg.png</File>
@@ -36,21 +41,22 @@
     <File>TilesetGround.png</File>
     <File>blue_slime.png</File>
     <File>chest.png</File>
+    <File>Flag_Raise.png</File>
+    <File>flag.png</File>
     <File>gold_coin.png</File>
     <File>health_potion.png</File>
     <File>medusa.png</File>
     <File>player.png</File>
-    <File>pole.png</File>
     <File>skeleton_archer.png</File>
     <File>skeleton_spearman.png</File>
     <File>skeleton_warrior.png</File>
     <File>game_font.spritefont</File>
     <File>health_bar.png</File>
     <File>hitbox.PNG</File>
-    <File>Icon_game.png</File>
+    <File>icon_game.png</File>
     <File>icon.png</File>
     <File>menu.png</File>
-    <File>message_box.png</File>
+    <File>Message_Box.png</File>
     <File>ultimate.png</File>
   </DestFiles>
 </SourceFileCollection>

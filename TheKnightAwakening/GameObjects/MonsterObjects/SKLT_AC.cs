@@ -59,16 +59,22 @@ namespace TheKnightAwakening
             // ส่วนการเคลื่อนที่และโจมตี
             if (gameTime.TotalGameTime.TotalSeconds > 1)
             {
-                if (DistanceMoved <= 200)
+                if (DistanceMoved <= 2000)
                 {
+                    bool isFacingEnemy = (Singleton.Instance.player.Position.X < Position.X && AnimationManager.FacingRight) ||
+                                 (Singleton.Instance.player.Position.X > Position.X && !AnimationManager.FacingRight);
+
+                    if (isFacingEnemy)
+                    {
+                        AnimationManager.FacingRight = !AnimationManager.FacingRight;
+                    }
+
                     attackTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds; // ลด attackTimer ทุกเฟรม
 
-                    if (attackTimer <= -attackDelay) // ตรวจสอบว่าเวลาถึงการโจมตีหรือยัง
+                    if (attackTimer < -attackDelay) // ตรวจสอบว่าเวลาถึงการโจมตีหรือยัง
                     {
-                        attackTimer = attackDelay; // รีเซ็ต attackTimer ด้วยค่า delay ใหม่
-                        // AnimationManager.Play(Animations["Attack"]);
-
-                        // เมื่อ delay หมดแล้ว ให้เล่นแอนิเมชัน Attack และโจมตี Player
+                        attackTimer = 0;
+                        
                         var newBullet = Bullet.Clone() as Bullet;
                         newBullet.Position = new Vector2(Rectangle.X + (AnimationManager.FacingRight ? Rectangle.Width : -newBullet.Rectangle.Width), Position.Y + 15);
                         newBullet.Velocity = new Vector2(AnimationManager.FacingRight ? 300 : -300, 0);
@@ -125,3 +131,5 @@ namespace TheKnightAwakening
         }
     }
 }
+
+// Fix Distance !isAttack

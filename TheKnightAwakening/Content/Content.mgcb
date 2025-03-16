@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/SFX/Skeleton_Dead.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Skeleton_Dead.mp3;Skeleton_Dead.mp3
+
+#begin Audio/SFX/Sword_SFX.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Sword_SFX.mp3;Sword_SFX.mp3
+
 #begin CutScreen/cutscene1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -97,6 +109,30 @@
 /processorParam:TextureFormat=Color
 /build:Objects/chest.png;chest.png
 
+#begin Objects/Flag_Raise.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Objects/Flag_Raise.png;Flag_Raise.png
+
+#begin Objects/flag.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Objects/flag.png;flag.png
+
 #begin Objects/gold_coin.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -144,18 +180,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Objects/player.png;player.png
-
-#begin Objects/pole.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Objects/pole.png;pole.png
 
 #begin Objects/skeleton_archer.png
 /importer:TextureImporter
@@ -224,7 +248,7 @@
 /processorParam:TextureFormat=Color
 /build:UI/hitbox.PNG;hitbox.PNG
 
-#begin UI/Icon_game.png
+#begin UI/icon_game.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -234,7 +258,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UI/Icon_game.png;Icon_game.png
+/build:UI/icon_game.png;icon_game.png
 
 #begin UI/icon.png
 /importer:TextureImporter
@@ -260,7 +284,7 @@
 /processorParam:TextureFormat=Color
 /build:UI/menu.png;menu.png
 
-#begin UI/message_box.png
+#begin UI/Message_Box.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -270,7 +294,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UI/message_box.png;message_box.png
+/build:UI/Message_Box.png;Message_Box.png
 
 #begin UI/ultimate.png
 /importer:TextureImporter

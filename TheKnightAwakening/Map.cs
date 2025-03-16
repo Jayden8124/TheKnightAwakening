@@ -18,7 +18,7 @@ namespace TheKnightAwakening
         private GraphicsDevice _graphicsDevice;
 
         private int TILESIZE = 24; // size of the tile in the game
-        private int num_tile_per_row = 32; // number of tiles per row in the tileset
+        private int num_tile_per_row = 32; // number of tiles per row in the tileset (Viewport Tileset)
         private int pixel_tilesize = 16;  // size of the tile in the tileset
 
         public Map(GraphicsDevice graphicsDevice)
@@ -31,8 +31,8 @@ namespace TheKnightAwakening
             textureMap = Content.Load<Texture2D>("TilesetGround");
             hitboxTexture = Content.Load<Texture2D>("hitbox");
             propTexture = Content.Load<Texture2D>("prop"); 
-            fg = LoadMap("../../../TileMap/2Map1_full_ground.csv");
-            collisions = LoadMap("../../../TileMap/2Map1_full_hitblock.csv");
+            fg = LoadMap("../../../TileMap/Test_Real_Map_ground.csv");
+            collisions = LoadMap("../../../TileMap/Test_Real_Map_hitblock.csv");
             prop = LoadMap("../../../TileMap/2Map1_full_prop.csv");
         }
 

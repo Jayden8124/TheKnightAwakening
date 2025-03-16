@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Objects/gold_coin.png</SourceFile>
-  <SourceTime>2025-03-10T21:41:23.2835672+07:00</SourceTime>
+  <SourceTime>2025-03-10T22:14:17+07:00</SourceTime>
   <DestFile>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Content/gold_coin.xnb</DestFile>
-  <DestTime>2025-03-10T21:41:26.8428729+07:00</DestTime>
+  <DestTime>2025-03-14T16:19:46.1598354+07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

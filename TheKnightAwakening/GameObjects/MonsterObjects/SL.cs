@@ -67,6 +67,9 @@ namespace TheKnightAwakening
                         // เมื่อ delay หมดแล้ว ให้เล่นแอนิเมชัน Attack และโจมตี Player แล้วรีเซ็ต timer
                         AnimationManager.Play(Animations["Attack"]);
                         Singleton.Instance.player.TakeDamage(this.Damage, this.Position);
+                        // Singleton.Instance.player.TakeDebuff(Player.DebuffType.Stun, 5.0f, this.Position);
+                        Singleton.Instance.player.TakeDebuff(Player.DebuffType.Slow, 5.0f, this.Position);
+                        Singleton.Instance.player.TakeDebuff(Player.DebuffType.Poison, 15.0f, this.Position);
                         attackTimer = attackDelay;
                     }
                     else

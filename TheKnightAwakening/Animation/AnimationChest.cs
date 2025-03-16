@@ -15,18 +15,18 @@ namespace TheKnightAwakening
 
     public static class AnimationChest
     {
-        public static Dictionary<ChestType, Dictionary<string, Animation>> LoadChestsAnimations(Texture2D chestSheet)
+        public static Dictionary<ChestType, Dictionary<string, Animation>> LoadAnimations(Texture2D texture)
         {
             return new Dictionary<ChestType, Dictionary<string, Animation>>
             {
-                { ChestType.GoldChest, LoadChestAnimations(chestSheet, "gold") },
-                { ChestType.SilverChest, LoadChestAnimations(chestSheet, "silver") },
-                { ChestType.BronzeChest, LoadChestAnimations(chestSheet, "bronze") },
-                { ChestType.WoodChest, LoadChestAnimations(chestSheet, "wood") }
+                { ChestType.GoldChest, LoadChestAnimations(texture, "gold") },
+                { ChestType.SilverChest, LoadChestAnimations(texture, "silver") },
+                { ChestType.BronzeChest, LoadChestAnimations(texture, "bronze") },
+                { ChestType.WoodChest, LoadChestAnimations(texture, "wood") }
             };
         }
 
-        private static Dictionary<string, Animation> LoadChestAnimations(Texture2D chestSheet, string chestName)
+        private static Dictionary<string, Animation> LoadChestAnimations(Texture2D texture, string chestName)
         {
             int yPosition = chestName switch
             {
@@ -51,10 +51,10 @@ namespace TheKnightAwakening
 
             return new Dictionary<string, Animation>
             {
-                { "Closed", new Animation(chestSheet, new List<Rectangle> { closedFrames[0] }, 0.15f, false) },
-                { "Opening", new Animation(chestSheet, closedFrames, 0.15f, false) },
-                { "Open", new Animation(chestSheet, new List<Rectangle> { openFrame }, 0.15f, false) },
-                { "Closing", new Animation(chestSheet, closedFrames.AsReadOnly().Reverse().ToList(), 0.15f, false) }
+                { "Closed", new Animation(texture, new List<Rectangle> { closedFrames[0] }, 0.15f, false) },
+                { "Opening", new Animation(texture, closedFrames, 0.15f, false) },
+                { "Open", new Animation(texture, new List<Rectangle> { openFrame }, 0.15f, false) },
+                { "Closing", new Animation(texture, closedFrames.AsReadOnly().Reverse().ToList(), 0.15f, false) }
             };
         }
     }

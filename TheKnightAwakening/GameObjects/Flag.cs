@@ -6,35 +6,24 @@ using System.Collections.Generic;
 
 namespace TheKnightAwakening
 {
-    public class Coin : GameObject
+    public class Flag : GameObject
     {
-        public bool IsOpen;
-        public Keys openKey;
-
+        private bool Checked;
         // Animation
         private AnimationManager AnimationManager;
         private Dictionary<string, Animation> Animations;
 
-        public Coin(Dictionary<string, Animation> animations)
+        public Flag(Dictionary<string, Animation> animations)
         {
             Animations = animations;
-            AnimationManager = new AnimationManager(Animations["Closed"]);
+            AnimationManager = new AnimationManager(Animations["Move"]);
+            Checked = false;
             IsActive = true;
-            IsOpen = false;
         }
 
-        public void Toggle()
+        public void Collected()
         {
-            if (!IsOpen)
-            {
-                IsOpen = true;
-                AnimationManager.Play(Animations["Opening"]);
-            }
-            else
-            {
-                IsOpen = false;
-                AnimationManager.Play(Animations["Closing"]);
-            }
+                IsActive = false;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -47,10 +36,8 @@ namespace TheKnightAwakening
         {
             if (CheckAABBCollision(Rectangle, Singleton.Instance.player.Rectangle))
             {
-                if (Singleton.Instance.CurrentKey.IsKeyDown(openKey) && !IsOpen)
-                {
-                    Toggle();
-                }
+                Collected();
+                Singleton.Instance.Score++;
             }
 
             AnimationManager.Update(gameTime);

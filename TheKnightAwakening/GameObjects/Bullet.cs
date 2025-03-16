@@ -62,7 +62,6 @@ namespace TheKnightAwakening
                 {
                     if (CheckAABBCollision(s.Rectangle, Rectangle) && s.Name.Equals("Player"))
                     {
-                        s.Reset();
                         IsActive = false;
                         Singleton.Instance.player.TakeDamage(10, Position);
                     }

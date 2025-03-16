@@ -89,7 +89,11 @@ public class MainScene : Game
         _ultimatebar = new Ultimatebar(ultimateTexture, bgSourceUltimate, fgSourceUltimate, 5);
         _ultimatebarAnimated = new UltimatebarAnimated(ultimateTexture, bgSourceUltimate, fgSourceUltimate, 5);
 
-
+        // Load Content
+        Singleton.Instance._rect =  new Texture2D(_graphics.GraphicsDevice, 20, 20);
+        Color[] data = new Color[20 * 20];
+        for (int i = 0; i < data.Length; i++) data[i] = Color.White;
+        Singleton.Instance._rect.SetData(data);
 
         _map.LoadContent(Content);
         _cutscene.LoadContent(Content);
@@ -196,13 +200,13 @@ public class MainScene : Game
                     }
                 }
 
-                // ตรวจสอบการตกออกนอกแผนที่ (เช่น ตกลงไปมากกว่า Y = 50000)
-                if (Singleton.Instance.player.Position.X > 13000)
-                {
-                    // รีเซ็ตตำแหน่งผู้เล่นกลับไปที่ Checkpoint ล่าสุด
-                    Singleton.Instance.player.Position = Singleton.Instance.player.LastCheckpoint;
-                    Singleton.Instance.player.Velocity = Vector2.Zero;
-                }
+                // // ตรวจสอบการตกออกนอกแผนที่ (เช่น ตกลงไปมากกว่า Y = 50000)
+                // if (Singleton.Instance.player.Position.X > 13000)
+                // {
+                //     // รีเซ็ตตำแหน่งผู้เล่นกลับไปที่ Checkpoint ล่าสุด
+                //     Singleton.Instance.player.Position = Singleton.Instance.player.LastCheckpoint;
+                //     Singleton.Instance.player.Velocity = Vector2.Zero;
+                // }
 
                 _healthbar.Update(Singleton.Instance.player.Health);
                 _healthbarAnimated.Update(Singleton.Instance.player.Health, gameTime);
@@ -278,7 +282,7 @@ public class MainScene : Game
         // Layer 1: Background
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-        // _spriteBatch.Draw(_background, new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
+        _spriteBatch.Draw(_background, new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
 
         _spriteBatch.End();
 
@@ -391,7 +395,7 @@ public class MainScene : Game
         {
             Name = "Player",
             Viewport = new Rectangle(5, 0, 43, 64),
-            Position = new Vector2(12000, 100),
+            Position = new Vector2(200, 100),
             Left = Keys.Left,
             Right = Keys.Right,
             Up = Keys.Up,
@@ -472,28 +476,54 @@ public class MainScene : Game
         // _gameObjects.Add(monster1);
         // _gameObjects.Add(monster2);
         // _gameObjects.Add(monster3);
-        _gameObjects.Add(boss);
+        // _gameObjects.Add(boss);
     }
 
     public void ResetObject()
     {
-        // Load Texture Chest
-        Texture2D chestSheet = Content.Load<Texture2D>("chest");
+        // // Load Texture Chest
+        // Texture2D chestSheet = Content.Load<Texture2D>("chest");
 
-        // Chest Instance
-        var _animationsChest = AnimationChest.LoadChestsAnimations(chestSheet);
-        var goldChestAnimations = _animationsChest[ChestType.GoldChest];
+        // // Chest Instance
+        // var _animationsChest = AnimationChest.LoadAnimations(chestSheet);
+        // var goldChestAnimations = _animationsChest[ChestType.GoldChest];
 
 
-        Chest chest = new Chest(goldChestAnimations)
+        // Chest chest = new Chest(goldChestAnimations)
+        // {
+        //     Name = "Chest",
+        //     openKey = Keys.E,
+        //     Position = new Vector2(300, 800)
+        // };
+
+        // // Add GameObjects
+        // _gameObjects.Add(chest);
+
+         
+        Texture2D coinSheet = Content.Load<Texture2D>("gold_coin");
+
+        var _animationCoin = AnimationCoin.LoadAnimations(coinSheet);
+
+        Coin coin = new Coin(_animationCoin)
         {
-            Name = "Chest",
-            openKey = Keys.E,
-            Position = new Vector2(300, 800)
+            Name = "Coin",
+            Position = new Vector2(12100, Singleton.SCREENHEIGHT - 50)
         };
 
-        // Add GameObjects
-        _gameObjects.Add(chest);
+        _gameObjects.Add(coin);
+
+        Texture2D flagSheet = Content.Load<Texture2D>("Flag_Raise");
+
+        var _animationFlag = AnimationCoin.LoadAnimations(flagSheet);
+
+        Flag flag = new Flag(_animationFlag)
+        {
+            Name = "Flag",
+            // Viewport = 
+            Position = new Vector2(12200, Singleton.SCREENHEIGHT - 50)
+        };
+
+        _gameObjects.Add(flag);
     }
 
     private bool IsButtonClicked(Rectangle buttonRect)
