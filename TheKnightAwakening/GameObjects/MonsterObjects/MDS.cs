@@ -136,5 +136,11 @@ namespace TheKnightAwakening
             attackDelay = 3.0f;
             base.Reset();
         }
+
+        public static List<Vector2> SpawnPositions = new List<Vector2>
+        {
+            new Vector2(6740, 4049)
+        };
     }
 }
+

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TheKnightAwakening")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d9ce1a1b555836a7934ee270a376ccedff211ef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6148730bc383a8aa3335d6f3b5a9671bbe7664d7")]
 [assembly: System.Reflection.AssemblyProductAttribute("TheKnightAwakening")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TheKnightAwakening")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

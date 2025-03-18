@@ -16,14 +16,17 @@ namespace TheKnightAwakening
         public Flag(Dictionary<string, Animation> animations)
         {
             Animations = animations;
-            AnimationManager = new AnimationManager(Animations["Move"]);
+            AnimationManager = new AnimationManager(Animations["0"]);
             Checked = false;
             IsActive = true;
         }
 
         public void Collected()
         {
-                IsActive = false;
+            Console.WriteLine("Flag Collected");
+            Singleton.Instance.player.LastCheckpoint = Position;
+            Checked = true;
+            AnimationManager.Play(Animations["Raise"]);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -36,8 +39,8 @@ namespace TheKnightAwakening
         {
             if (CheckAABBCollision(Rectangle, Singleton.Instance.player.Rectangle))
             {
+                if(!Checked)
                 Collected();
-                Singleton.Instance.Score++;
             }
 
             AnimationManager.Update(gameTime);

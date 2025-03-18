@@ -11,7 +11,7 @@ namespace TheKnightAwakening
         // Animation
         private AnimationManager AnimationManager;
         private Dictionary<string, Animation> Animations;
-
+        
         public Coin(Dictionary<string, Animation> animations)
         {
             Animations = animations;
@@ -21,7 +21,8 @@ namespace TheKnightAwakening
 
         public void Collected()
         {
-                IsActive = false;
+            Console.WriteLine("Coin Collected");
+            IsActive = false;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -37,7 +38,7 @@ namespace TheKnightAwakening
                 Collected();
                 Singleton.Instance.Score++;
             }
-
+            AnimationManager.Play(Animations["Move"]);
             AnimationManager.Update(gameTime);
             base.Update(gameTime, _gameObjects);
         }

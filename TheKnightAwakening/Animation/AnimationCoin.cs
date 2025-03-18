@@ -22,7 +22,7 @@ namespace TheKnightAwakening
                         new Rectangle(258, 2, 23, 25),
                         new Rectangle(289, 1, 26, 27),
                         new Rectangle(320, 1, 27, 27)
-                    }, 0.25f, true)
+                    }, 0.7f, true)
                 }
             };
         }

@@ -14,7 +14,7 @@ namespace TheKnightAwakening
         {
             // รีเซ็ต flag ของ hitblock ในแต่ละเฟรม
             collidedWithHitblock = false;
-            
+
             // สร้าง front rectangle เพื่อตรวจสอบว่ากำแพง (hitblock) อยู่ด้านหน้าหรือไม่
             int offset = 5; // ระยะที่ใช้ตรวจสอบด้านหน้า
             Rectangle frontRect;
@@ -26,7 +26,7 @@ namespace TheKnightAwakening
             {
                 frontRect = new Rectangle(this.Rectangle.X - offset, this.Rectangle.Y, offset, this.Rectangle.Height);
             }
-            
+
             // ตรวจสอบ collision กับ hitblock เฉพาะส่วนด้านหน้า (เพื่อไม่ให้ตรวจจับพื้น)
             if (Singleton.Instance.HitblockTiles != null)
             {
@@ -39,14 +39,14 @@ namespace TheKnightAwakening
                     }
                 }
             }
-            
+
             // ถ้าชนกับกำแพงที่ด้านหน้า ให้เปลี่ยนทิศทาง
             if (collidedWithHitblock)
             {
                 moveDirection *= -1;
                 AnimationManager.FacingRight = moveDirection > 0;
             }
-            
+
             // ส่วนการเคลื่อนที่และโจมตี
             if (gameTime.TotalGameTime.TotalSeconds > 1)
             {
@@ -120,14 +120,34 @@ namespace TheKnightAwakening
 
         public override void Reset()
         {
-            Health = 5;
-            Damage = 20;
-            walkSpeed = 1f;
-            runSpeed = 2f;
+            Health = 200;
+            Damage = 15;
+            walkSpeed = 3f;
+            runSpeed = 7f;
             moveDirection = -1;
             attackTimer = 0f;
             attackDelay = 3.0f;
             base.Reset();
         }
+
+       public static List<Vector2> SpawnPositions = new List<Vector2>
+        {
+            new Vector2(6780, 470),
+            new Vector2(9303, 470),
+            new Vector2(1190, 1108),
+            new Vector2(3504, 1108),
+            new Vector2(5871, 1189),
+            new Vector2(7900, 1189),
+            new Vector2(10969, 1190),
+            new Vector2(11834, 1190),
+            new Vector2(4016, 1893),
+            new Vector2(8540, 1908),
+            new Vector2(10745, 1909),
+            new Vector2(1573, 3525),
+            new Vector2(1870, 3140),
+            new Vector2(2833, 3446),
+            new Vector2(6557, 3012),
+            new Vector2(2661, 4068)
+        };
     }
 }

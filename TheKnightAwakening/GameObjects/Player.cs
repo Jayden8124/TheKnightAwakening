@@ -40,16 +40,18 @@ namespace TheKnightAwakening
         {
             Animations = animations;
             AnimationManager = new AnimationManager(Animations["Idle"]);
-            LastCheckpoint = Position;
             IsActive = true;
             Reset();
         }
 
         public override void Reset()
         {
-            Health = 20;
+            Health = 100;
+            Damage = 20;
             Ultimate = 0;
             isDead = false;
+            Position = LastCheckpoint;
+            Velocity = Vector2.Zero;
             activeDebuffs.Clear();
             base.Reset();
         }
@@ -113,7 +115,7 @@ namespace TheKnightAwakening
         {
             var velocity = Vector2.Zero;
             bool isRunning = Singleton.Instance.CurrentKey.IsKeyDown(Keys.LeftShift);
-            speed = isRunning ? 8f : 3f;
+            speed = isRunning ? 8f : 4f;
 
             if (activeDebuffs.ContainsKey(DebuffType.Slow))
                 speed *= 0.5f;

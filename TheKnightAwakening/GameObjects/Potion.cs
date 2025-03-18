@@ -7,30 +7,39 @@ namespace TheKnightAwakening
 {
     public class Potion : GameObject
     {
-        private int HealingAmount;
-
-        public Potion(string name, int healingAmount)
+        // Animation
+        private AnimationManager AnimationManager;
+        private Dictionary<string, Animation> Animations;
+        
+        public Potion(Dictionary<string, Animation> animations)
         {
-            HealingAmount = healingAmount;
+            Animations = animations;
+            AnimationManager = new AnimationManager(Animations["Move"]);
+            IsActive = true;
         }
 
-        public override void Update(GameTime gameTime, List<GameObject> _gameObjects)
+        public void Collected()
         {
-            // Logic to update potion state if needed
-            foreach (var gameObject in _gameObjects)
-            {
-                if (GameObject.CheckAABBCollision(this.Rectangle, gameObject.Rectangle) && gameObject is Player)
-                {
-                    // Apply healing to player
-                    (gameObject as Player).Health += HealingAmount;
-                    IsActive = false;
-                }
-            }
+            Console.WriteLine("Potion Collected");
+            IsActive = false;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Singleton.Instance._rect, Position, Color.Red);
+            AnimationManager.Position = Position;
+            AnimationManager.Draw(spriteBatch);
+        }
+
+        public override void Update(GameTime gameTime, List<GameObject> _gameObjects)
+        {
+            if (CheckAABBCollision(Rectangle, Singleton.Instance.player.Rectangle))
+            {
+                Collected();
+                Singleton.Instance.player.Health += 10;
+            }
+            AnimationManager.Play(Animations["Move"]);
+            AnimationManager.Update(gameTime);
+            base.Update(gameTime, _gameObjects);
         }
     }
 }

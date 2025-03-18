@@ -126,13 +126,36 @@ namespace TheKnightAwakening
 
         public override void Reset()
         {
-            Health = 5;
-            walkSpeed = 1f;
-            runSpeed = 2f;
+            Health = 150;
+            Damage = 20;
+            walkSpeed = 4f;
+            runSpeed = 7f;
             moveDirection = -1;
             attackTimer = 0f;
             attackDelay = 3.0f;
             base.Reset();
         }
+
+        public static List<Vector2> SpawnPositions = new List<Vector2>
+        {   
+            new Vector2(7540, 470),
+            new Vector2(11049, 448),
+            new Vector2(2717, 1086),
+            new Vector2(7443, 1167),
+            new Vector2(8737, 1167),
+            new Vector2(1228, 1888),
+            new Vector2(2250, 1793),
+            new Vector2(3208, 1870),
+            new Vector2(5081, 1758),
+            new Vector2(6998, 1680),
+            new Vector2(3856, 3118),
+            new Vector2(5734, 3327),
+            new Vector2(7068, 3327),
+            new Vector2(8579, 3327),
+            new Vector2(183, 4046),
+            new Vector2(1449, 3712),
+            new Vector2(3504, 4046)
+        };
+
     }
 }

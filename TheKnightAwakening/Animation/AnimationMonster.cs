@@ -230,7 +230,7 @@ namespace TheKnightAwakening
                         new Rectangle(272, 226, 56, 30),
                         new Rectangle(336, 224, 51, 32),
                         new Rectangle(400, 222, 48, 34)
-                    }, 0.12f, false)
+                    }, 0.25f, true)
                 },
                 { "Hurt", new Animation(texture, new List<Rectangle>
                     {

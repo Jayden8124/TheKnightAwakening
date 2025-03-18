@@ -12,6 +12,7 @@ namespace TheKnightAwakening
         public Dictionary<string, Animation> Animations;
 
         // Monster Status
+        public int Score;
         protected float walkSpeed;
         protected float runSpeed;
         protected float DistanceMoved;
@@ -23,7 +24,7 @@ namespace TheKnightAwakening
         public MonsterType(Dictionary<string, Animation> animations)
         {
             Animations = animations;
-            AnimationManager = new AnimationManager(Animations["Walk"]);
+            // AnimationManager = new AnimationManager(Animations["Idle"]);  // จำเป็นไหม?
             IsActive = true;
         }
 
@@ -43,8 +44,9 @@ namespace TheKnightAwakening
             {
                 Health = 0;
                 isDead = true;
+                Singleton.Instance.Score += Score;
                 AnimationManager.Play(Animations["Dead"]);
-
+                Console.WriteLine(Singleton.Instance.Score);
                 IsActive = false;
             }
 
@@ -76,9 +78,11 @@ namespace TheKnightAwakening
 
         }
 
-        public void Offset()
+        public new virtual MonsterType Clone()
         {
-
+            MonsterType clone = (MonsterType)this.MemberwiseClone();
+            clone.AnimationManager = new AnimationManager(this.Animations["Idle"]);
+            return clone;
         }
     }
 }

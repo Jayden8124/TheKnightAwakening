@@ -33,6 +33,7 @@ public class MainScene : Game
 
     // Textures
     private Texture2D _background, _menuIcon, _menuButton;
+    private Texture2D chestSheet, coinSheet, potionSheet;
 
     // Button
     Rectangle _menuPlay, _menuExit;
@@ -75,22 +76,30 @@ public class MainScene : Game
         _menuButton = Content.Load<Texture2D>("menu");
         _font = Content.Load<SpriteFont>("game_font");
 
-        Texture2D healthbarTexture = Content.Load<Texture2D>("health_bar");
-        Rectangle bgSource = new Rectangle(0, 0, 163, 23);
-        Rectangle fgSource = new Rectangle(21, 36, 140, 7);
+        chestSheet = Content.Load<Texture2D>("chest");
+        coinSheet = Content.Load<Texture2D>("gold_coin");
+        potionSheet = Content.Load<Texture2D>("health_potion");
 
-        _healthbar = new Healthbar(healthbarTexture, bgSource, fgSource, 100);
-        _healthbarAnimated = new HealthbarAnimated(healthbarTexture, bgSource, fgSource, 100);
+        {   // Health Bar
+            Texture2D healthbarTexture = Content.Load<Texture2D>("health_bar");
+            Rectangle bgSource = new Rectangle(0, 0, 163, 23);
+            Rectangle fgSource = new Rectangle(21, 36, 140, 7);
 
-        Texture2D ultimateTexture = Content.Load<Texture2D>("ultimate");
-        Rectangle bgSourceUltimate = new Rectangle(25, 0, 41, 44);
-        Rectangle fgSourceUltimate = new Rectangle(0, 12, 17, 19);
+            _healthbar = new Healthbar(healthbarTexture, bgSource, fgSource, 100);
+            _healthbarAnimated = new HealthbarAnimated(healthbarTexture, bgSource, fgSource, 100);
+        }
 
-        _ultimatebar = new Ultimatebar(ultimateTexture, bgSourceUltimate, fgSourceUltimate, 5);
-        _ultimatebarAnimated = new UltimatebarAnimated(ultimateTexture, bgSourceUltimate, fgSourceUltimate, 5);
+        {   // Ultimate Bar
+            Texture2D ultimateTexture = Content.Load<Texture2D>("ultimate");
+            Rectangle bgSourceUltimate = new Rectangle(25, 0, 41, 44);
+            Rectangle fgSourceUltimate = new Rectangle(0, 12, 17, 19);
+
+            _ultimatebar = new Ultimatebar(ultimateTexture, bgSourceUltimate, fgSourceUltimate, 5);
+            _ultimatebarAnimated = new UltimatebarAnimated(ultimateTexture, bgSourceUltimate, fgSourceUltimate, 5);
+        }
 
         // Load Content
-        Singleton.Instance._rect =  new Texture2D(_graphics.GraphicsDevice, 20, 20);
+        Singleton.Instance._rect = new Texture2D(_graphics.GraphicsDevice, 20, 20);
         Color[] data = new Color[20 * 20];
         for (int i = 0; i < data.Length; i++) data[i] = Color.White;
         Singleton.Instance._rect.SetData(data);
@@ -183,25 +192,25 @@ public class MainScene : Game
                     }
                 }
 
-                foreach (var obj in _gameObjects)
-                {
-                    if (obj is Checkpoint checkpoint)
-                    {
-                        if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, checkpoint.Rectangle))
-                        {
-                            if (!checkpoint.Activated)
-                            {
-                                checkpoint.Activate();
-                                // คุณอาจเพิ่มเสียงหรือเอฟเฟคที่นี่
-                            }
-                            // อัปเดต LastCheckpoint ของผู้เล่นให้เป็นตำแหน่งของ checkpoint นี้
-                            Singleton.Instance.player.LastCheckpoint = checkpoint.Position;
-                        }
-                    }
-                }
+                // foreach (var obj in _gameObjects)
+                // {
+                //     if (obj is Checkpoint checkpoint)
+                //     {
+                //         if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, checkpoint.Rectangle))
+                //         {
+                //             if (!checkpoint.Activated)
+                //             {
+                //                 checkpoint.Activate();
+                //                 // คุณอาจเพิ่มเสียงหรือเอฟเฟคที่นี่
+                //             }
+                //             // อัปเดต LastCheckpoint ของผู้เล่นให้เป็นตำแหน่งของ checkpoint นี้
+                //             Singleton.Instance.player.LastCheckpoint = checkpoint.Position;
+                //         }
+                //     }
+                // }
 
                 // // ตรวจสอบการตกออกนอกแผนที่ (เช่น ตกลงไปมากกว่า Y = 50000)
-                // if (Singleton.Instance.player.Position.X > 13000)
+                // if (Singleton.Instance.player.Position.Y > 50000)
                 // {
                 //     // รีเซ็ตตำแหน่งผู้เล่นกลับไปที่ Checkpoint ล่าสุด
                 //     Singleton.Instance.player.Position = Singleton.Instance.player.LastCheckpoint;
@@ -214,10 +223,6 @@ public class MainScene : Game
                 _ultimatebar.Update(Singleton.Instance.player.Ultimate);
                 // _ultimatebarAnimated.Update(Singleton.Instance.player.Ultimate, gameTime);
 
-                if (Singleton.Instance.player.Position.Y > 50000)
-                {
-                    // Reset CheckPoint
-                }
                 break;
 
             case Singleton.GameState.GamePaused: //Game Paused
@@ -344,7 +349,10 @@ public class MainScene : Game
         _ultimatebar.Draw(_spriteBatch);
 
         // _ultimatebarAnimated.Draw(_spriteBatch);
-        // ResetUI();
+
+
+        _spriteBatch.DrawString(_font, Singleton.Instance.Score.ToString() ,new Vector2(1050, 55), Color.White);
+        _spriteBatch.Draw(coinSheet, new Vector2(1100, 50), new Rectangle(0, 0, 27, 27), Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0); // Background
 
         _spriteBatch.End();
     }
@@ -383,7 +391,7 @@ public class MainScene : Game
         }
     }
 
-    public void ResetPlayer()
+    public void ResetPlayer() // Adjust
     {
         // Load Texture Singleton.Instance.player
         Texture2D knightSheet = Content.Load<Texture2D>("player");
@@ -395,7 +403,8 @@ public class MainScene : Game
         {
             Name = "Player",
             Viewport = new Rectangle(5, 0, 43, 64),
-            Position = new Vector2(200, 100),
+            // Position = new Vector2(200, 100),
+            LastCheckpoint = new Vector2(200, 0),
             Left = Keys.Left,
             Right = Keys.Right,
             Up = Keys.Up,
@@ -417,7 +426,7 @@ public class MainScene : Game
 
     public void ResetMonster()
     {
-        // Load Texture Monster
+        // Load Texture each Monster Type
         var monsterTextures = new Dictionary<AnimationMonster.AnimationMonsterType, Texture2D>
         {
             { AnimationMonster.AnimationMonsterType.SKLT_WR, Content.Load<Texture2D>("skeleton_warrior") },
@@ -427,36 +436,37 @@ public class MainScene : Game
             { AnimationMonster.AnimationMonsterType.MDS, Content.Load<Texture2D>("medusa") }
         };
 
-        // Monster Instance
-        var _animationMonster = new AnimationMonster();
+        // Load Animation Monster
+        AnimationMonster _animationMonster = new AnimationMonster();
         _animationMonster.LoadAllAnimations(monsterTextures);
 
-        MonsterType monster = new SKLT_WR(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_WR))
+        // Prototype each Monster Type
+        MonsterType prototypeWR = new SKLT_WR(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_WR))
         {
-            Name = "SKLT1",
-            Viewport = new Rectangle(0, 0, 36, 65),
-            Position = new Vector2(12200, 100)
+            Name = "SKLT_WR",
+            Score = 10,
+            Viewport = new Rectangle(0, 0, 53, 58)
         };
 
-        MonsterType monster1 = new SL(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SL))
+        MonsterType prototypeSL = new SL(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SL))
         {
-            Name = "SL1",
-            Viewport = new Rectangle(0, 0, 36, 35),
-            Position = new Vector2(12300, 100)
+            Name = "SL",
+            Score = 20,
+            Viewport = new Rectangle(0, 0, 47, 32)
         };
 
-        MonsterType monster2 = new SKLT_SM(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_SM))
+        MonsterType prototypeSM = new SKLT_SM(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_SM))
         {
-            Name = "SKLT2",
-            Viewport = new Rectangle(0, 0, 36, 90),
-            Position = new Vector2(12400, 100)
+            Name = "SKLT_SM",
+            Score = 30,
+            Viewport = new Rectangle(0, 0, 30, 80)
         };
 
-        MonsterType monster3 = new SKLT_AC(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_AC))
+        MonsterType prototypeAC = new SKLT_AC(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_AC))
         {
-            Name = "SKLT3",
-            Viewport = new Rectangle(0, 0, 36, 65),
-            Position = new Vector2(12500, 100),
+            Name = "SKLT_AC",
+            Score = 40,
+            Viewport = new Rectangle(0, 0, 37, 64),
             Bullet = new Bullet(Content.Load<Texture2D>("skeleton_archer"))
             {
                 Name = "BulletEnemy",
@@ -465,65 +475,113 @@ public class MainScene : Game
             }
         };
 
-        MonsterType boss = new MDS(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.MDS))
+        MonsterType prototypeMDS = new MDS(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.MDS))
         {
-            Name = "MDS1",
-            Viewport = new Rectangle(0, 0, 65, 85),
-            Position = new Vector2(12000, 100)
+            Name = "MDS",
+            Score = 50,
+            Viewport = new Rectangle(0, 0, 65, 77),
+            Position = new Vector2(6740, 4049)
         };
 
-        // _gameObjects.Add(monster);
-        // _gameObjects.Add(monster1);
-        // _gameObjects.Add(monster2);
-        // _gameObjects.Add(monster3);
-        // _gameObjects.Add(boss);
+        // Postion each monster type
+        List<Vector2> spawnPositionsSL = SL.SpawnPositions;
+        List<Vector2> spawnPositionsWR = SKLT_WR.SpawnPositions;
+        List<Vector2> spawnPositionsSM = SKLT_SM.SpawnPositions;
+        List<Vector2> spawnPositionsAC = SKLT_AC.SpawnPositions;
+        List<Vector2> spawnPositionsMDS = SKLT_AC.SpawnPositions;
+
+        // Clone prototype and Set Potion from spawnPositions each Monster Type
+        foreach (var pos in spawnPositionsWR)
+        {
+            var clone = prototypeWR.Clone();
+            clone.Position = pos;
+            clone.Name += "_" + pos.ToString();
+            _gameObjects.Add(clone);
+        }
+
+        foreach (var pos in spawnPositionsSL)
+        {
+            var clone = prototypeSL.Clone();
+            clone.Position = pos;
+            clone.Name += "_" + pos.ToString();
+            _gameObjects.Add(clone);
+        }
+
+        foreach (var pos in spawnPositionsSM)
+        {
+            var clone = prototypeSM.Clone();
+            clone.Position = pos;
+            clone.Name += "_" + pos.ToString();
+            _gameObjects.Add(clone);
+        }
+
+        foreach (var pos in spawnPositionsAC)
+        {
+            var clone = prototypeAC.Clone();
+            clone.Position = pos;
+            clone.Name += "_" + pos.ToString();
+            _gameObjects.Add(clone);
+        }
+
+        foreach (var pos in spawnPositionsMDS)
+        {
+            var clone = prototypeMDS.Clone();
+            clone.Position = pos;
+            clone.Name += "_" + pos.ToString();
+            _gameObjects.Add(clone);
+        }
     }
 
-    public void ResetObject()
+
+    public void ResetObject() // Clone 
     {
-        // // Load Texture Chest
-        // Texture2D chestSheet = Content.Load<Texture2D>("chest");
-
-        // // Chest Instance
-        // var _animationsChest = AnimationChest.LoadAnimations(chestSheet);
-        // var goldChestAnimations = _animationsChest[ChestType.GoldChest];
-
-
-        // Chest chest = new Chest(goldChestAnimations)
-        // {
-        //     Name = "Chest",
-        //     openKey = Keys.E,
-        //     Position = new Vector2(300, 800)
-        // };
-
-        // // Add GameObjects
-        // _gameObjects.Add(chest);
-
-         
-        Texture2D coinSheet = Content.Load<Texture2D>("gold_coin");
+        // Chest Instance
+        var _animationsChest = AnimationChest.LoadAnimations(chestSheet);
+        var goldChestAnimations = _animationsChest[ChestType.GoldChest];
 
         var _animationCoin = AnimationCoin.LoadAnimations(coinSheet);
 
-        Coin coin = new Coin(_animationCoin)
+        var _animationPotion = AnimationPotion.LoadAnimations(potionSheet);
+
+
+        Chest chest = new Chest(goldChestAnimations)
         {
-            Name = "Coin",
-            Position = new Vector2(12100, Singleton.SCREENHEIGHT - 50)
+            Name = "Chest",
+            openKey = Keys.E,
+            Position = new Vector2(300, 750),
+            coin = new Coin(_animationCoin)
+            {
+                Name = "Coin",
+            },
+            potion = new Potion(_animationPotion)
+            {
+                Name = "Potion",
+            }
         };
 
-        _gameObjects.Add(coin);
+        // Add GameObjects
+        _gameObjects.Add(chest);
 
         Texture2D flagSheet = Content.Load<Texture2D>("Flag_Raise");
 
-        var _animationFlag = AnimationCoin.LoadAnimations(flagSheet);
+        var _animationFlag = AnimationFlag.LoadAnimations(flagSheet);
 
-        Flag flag = new Flag(_animationFlag)
+        Flag flag1 = new Flag(_animationFlag)
         {
             Name = "Flag",
-            // Viewport = 
-            Position = new Vector2(12200, Singleton.SCREENHEIGHT - 50)
+            Viewport = new Rectangle(41, 20, 63, 172),
+            Position = new Vector2(500, 500)
         };
 
-        _gameObjects.Add(flag);
+        _gameObjects.Add(flag1);
+        Flag flag2 = new Flag(_animationFlag)
+        {
+            Name = "Flag",
+            Viewport = new Rectangle(41, 20, 63, 172),
+            Position = new Vector2(1500, 500)
+        };
+
+        _gameObjects.Add(flag2);
     }
 
     private bool IsButtonClicked(Rectangle buttonRect)
