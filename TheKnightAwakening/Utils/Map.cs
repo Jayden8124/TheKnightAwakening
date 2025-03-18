@@ -33,7 +33,7 @@ namespace TheKnightAwakening
             propTexture = Content.Load<Texture2D>("prop"); 
             fg = LoadMap("../../../TileMap/Test_Real_Map_ground.csv");
             collisions = LoadMap("../../../TileMap/Test_Real_Map_hitblock.csv");
-            prop = LoadMap("../../../TileMap/2Map1_full_prop.csv");
+            // prop = LoadMap("../../../TileMap/2Map1_full_prop.csv");
         }
 
         public void Draw(SpriteBatch spriteBatch)

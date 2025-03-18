@@ -14,7 +14,6 @@
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Objects/blue_slime.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Objects/chest.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Objects/Flag_Raise.png</File>
-    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Objects/flag.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Objects/gold_coin.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Objects/health_potion.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Objects/medusa.png</File>
@@ -42,7 +41,6 @@
     <File>blue_slime.png</File>
     <File>chest.png</File>
     <File>Flag_Raise.png</File>
-    <File>flag.png</File>
     <File>gold_coin.png</File>
     <File>health_potion.png</File>
     <File>medusa.png</File>
