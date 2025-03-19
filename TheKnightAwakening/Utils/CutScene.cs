@@ -51,35 +51,35 @@ namespace TheKnightAwakening
             {
                 case CutsceneType.StartGame:
                     messages.Add("King: My knight, Medusa's curse has spread across our kingdom...");
-                    backgrounds.Add(0, Content.Load<Texture2D>("cutscene1"));
+                    backgrounds.Add(0, Content.Load<Texture2D>("Scene1"));
 
                     messages.Add("King: You must vanquish her and end this catastrophe!");
-                    backgrounds.Add(1, Content.Load<Texture2D>("cutscene1"));
+                    backgrounds.Add(1, Content.Load<Texture2D>("Scene1"));
 
                     messages.Add("Knight: Your Majesty, I shall obey your command...");
-                    backgrounds.Add(2, Content.Load<Texture2D>("cutscene2"));
+                    backgrounds.Add(2, Content.Load<Texture2D>("Scene2"));
                     break;
 
                 case CutsceneType.BossRoom:
                     messages.Add("Medusa: Did he send you to 'free' the kingdom from my curse?");
-                    backgrounds.Add(0, Content.Load<Texture2D>("cutscene1"));
+                    backgrounds.Add(0, Content.Load<Texture2D>("Scene1"));
 
                     messages.Add("Medusa: This shall be your end!");
-                    backgrounds.Add(1, Content.Load<Texture2D>("cutscene1"));
+                    backgrounds.Add(1, Content.Load<Texture2D>("Scene1"));
 
                     messages.Add("Knight: Even if it costs me my life, I will stop you!");
-                    backgrounds.Add(2, Content.Load<Texture2D>("cutscene1"));
+                    backgrounds.Add(2, Content.Load<Texture2D>("Scene1"));
                     break;
 
                 case CutsceneType.BossDefeated:
                     messages.Add("Medusa: I... I only wanted him to feel my pain...");
-                    backgrounds.Add(0, Content.Load<Texture2D>("cutscene1"));
+                    backgrounds.Add(0, Content.Load<Texture2D>("Scene1"));
 
                     messages.Add("Knight: Who do you mean?");
-                    backgrounds.Add(1, Content.Load<Texture2D>("cutscene1"));
+                    backgrounds.Add(1, Content.Load<Texture2D>("Scene1"));
 
                     messages.Add("Medusa: Your king! He betrayed me...");
-                    backgrounds.Add(2, Content.Load<Texture2D>("cutscene1"));
+                    backgrounds.Add(2, Content.Load<Texture2D>("Scene1"));
                     break;
             }
         }

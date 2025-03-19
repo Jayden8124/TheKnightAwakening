@@ -9,17 +9,22 @@ namespace TheKnightAwakening
     public class Map
     {
         private Texture2D textureMap;
+        private Texture2D textureMapCave;
         private Texture2D hitboxTexture;
         private Texture2D propTexture;
         private Dictionary<Vector2, int> fg;
+        private Dictionary<Vector2, int> cave;
         private Dictionary<Vector2, int> collisions;
         private Dictionary<Vector2, int> prop;
         public Rectangle hitbox;
         private GraphicsDevice _graphicsDevice;
 
-        private int TILESIZE = 24; // size of the tile in the game
+        private int TILESIZE = 16; // size of the tile in the game
         private int num_tile_per_row = 32; // number of tiles per row in the tileset (Viewport Tileset)
         private int pixel_tilesize = 16;  // size of the tile in the tileset
+
+        private int num_tile_per_row_cave = 64;
+        private int num_tile_per_row_prop = 64;
 
         public Map(GraphicsDevice graphicsDevice)
         {
@@ -29,9 +34,11 @@ namespace TheKnightAwakening
         public void LoadContent(Microsoft.Xna.Framework.Content.ContentManager Content)
         {
             textureMap = Content.Load<Texture2D>("TilesetGround");
+            textureMapCave = Content.Load<Texture2D>("Cave");
             hitboxTexture = Content.Load<Texture2D>("hitbox");
             propTexture = Content.Load<Texture2D>("prop"); 
-            fg = LoadMap("../../../TileMap/Test_Real_Map_ground.csv");
+            fg = LoadMap("../../../TileMap/test03_ground.csv");
+            cave = LoadMap("../../../TileMap/test03_cave.csv");
             collisions = LoadMap("../../../TileMap/Test_Real_Map_hitblock.csv");
             // prop = LoadMap("../../../TileMap/2Map1_full_prop.csv");
         }
@@ -59,6 +66,27 @@ namespace TheKnightAwakening
                 );
                 spriteBatch.Draw(textureMap, drest, src, Color.White);
             }
+             foreach (var item in cave)
+            {
+                Rectangle drest = new(
+                    (int)item.Key.X * TILESIZE,
+                    (int)item.Key.Y * TILESIZE,
+                    TILESIZE,
+                    TILESIZE
+                );
+
+                int x = item.Value % num_tile_per_row_cave;
+                int y = item.Value / num_tile_per_row_cave;
+
+                Rectangle src = new(
+                    x * pixel_tilesize,
+                    y * pixel_tilesize,
+                    pixel_tilesize,
+                    pixel_tilesize
+                );
+                spriteBatch.Draw(textureMapCave, drest, src, Color.White);
+            }
+            
             foreach (var item in collisions)
             {
                 Rectangle drest = new(

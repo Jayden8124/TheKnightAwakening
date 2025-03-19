@@ -483,53 +483,53 @@ public class MainScene : Game
             Position = new Vector2(6740, 4049)
         };
 
-        // Postion each monster type
-        List<Vector2> spawnPositionsSL = SL.SpawnPositions;
-        List<Vector2> spawnPositionsWR = SKLT_WR.SpawnPositions;
-        List<Vector2> spawnPositionsSM = SKLT_SM.SpawnPositions;
-        List<Vector2> spawnPositionsAC = SKLT_AC.SpawnPositions;
-        List<Vector2> spawnPositionsMDS = SKLT_AC.SpawnPositions;
+        // // Postion each monster type
+        // List<Vector2> spawnPositionsSL = SL.SpawnPositions;
+        // List<Vector2> spawnPositionsWR = SKLT_WR.SpawnPositions;
+        // List<Vector2> spawnPositionsSM = SKLT_SM.SpawnPositions;
+        // List<Vector2> spawnPositionsAC = SKLT_AC.SpawnPositions;
+        // List<Vector2> spawnPositionsMDS = SKLT_AC.SpawnPositions;
 
-        // Clone prototype and Set Potion from spawnPositions each Monster Type
-        foreach (var pos in spawnPositionsWR)
-        {
-            var clone = prototypeWR.Clone();
-            clone.Position = pos;
-            clone.Name += "_" + pos.ToString();
-            _gameObjects.Add(clone);
-        }
+        // // Clone prototype and Set Potion from spawnPositions each Monster Type
+        // foreach (var pos in spawnPositionsWR)
+        // {
+        //     var clone = prototypeWR.Clone();
+        //     clone.Position = pos;
+        //     clone.Name += "_" + pos.ToString();
+        //     _gameObjects.Add(clone);
+        // }
 
-        foreach (var pos in spawnPositionsSL)
-        {
-            var clone = prototypeSL.Clone();
-            clone.Position = pos;
-            clone.Name += "_" + pos.ToString();
-            _gameObjects.Add(clone);
-        }
+        // foreach (var pos in spawnPositionsSL)
+        // {
+        //     var clone = prototypeSL.Clone();
+        //     clone.Position = pos;
+        //     clone.Name += "_" + pos.ToString();
+        //     _gameObjects.Add(clone);
+        // }
 
-        foreach (var pos in spawnPositionsSM)
-        {
-            var clone = prototypeSM.Clone();
-            clone.Position = pos;
-            clone.Name += "_" + pos.ToString();
-            _gameObjects.Add(clone);
-        }
+        // foreach (var pos in spawnPositionsSM)
+        // {
+        //     var clone = prototypeSM.Clone();
+        //     clone.Position = pos;
+        //     clone.Name += "_" + pos.ToString();
+        //     _gameObjects.Add(clone);
+        // }
 
-        foreach (var pos in spawnPositionsAC)
-        {
-            var clone = prototypeAC.Clone();
-            clone.Position = pos;
-            clone.Name += "_" + pos.ToString();
-            _gameObjects.Add(clone);
-        }
+        // foreach (var pos in spawnPositionsAC)
+        // {
+        //     var clone = prototypeAC.Clone();
+        //     clone.Position = pos;
+        //     clone.Name += "_" + pos.ToString();
+        //     _gameObjects.Add(clone);
+        // }
 
-        foreach (var pos in spawnPositionsMDS)
-        {
-            var clone = prototypeMDS.Clone();
-            clone.Position = pos;
-            clone.Name += "_" + pos.ToString();
-            _gameObjects.Add(clone);
-        }
+        // foreach (var pos in spawnPositionsMDS)
+        // {
+        //     var clone = prototypeMDS.Clone();
+        //     clone.Position = pos;
+        //     clone.Name += "_" + pos.ToString();
+        //     _gameObjects.Add(clone);
+        // }
     }
 
 

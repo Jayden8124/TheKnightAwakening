@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/TheKnightAwakening.csproj": {}
+    "C:\\Study-Comsci\\Y3T2\\COMGAME\\Final\\H\\TheKnightAwakening\\TheKnightAwakening\\TheKnightAwakening.csproj": {}
   },
   "projects": {
-    "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/TheKnightAwakening.csproj": {
+    "C:\\Study-Comsci\\Y3T2\\COMGAME\\Final\\H\\TheKnightAwakening\\TheKnightAwakening\\TheKnightAwakening.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/TheKnightAwakening.csproj",
+        "projectUniqueName": "C:\\Study-Comsci\\Y3T2\\COMGAME\\Final\\H\\TheKnightAwakening\\TheKnightAwakening\\TheKnightAwakening.csproj",
         "projectName": "TheKnightAwakening",
-        "projectPath": "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/TheKnightAwakening.csproj",
-        "packagesPath": "/Users/jay/.nuget/packages/",
-        "outputPath": "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/obj/",
+        "projectPath": "C:\\Study-Comsci\\Y3T2\\COMGAME\\Final\\H\\TheKnightAwakening\\TheKnightAwakening\\TheKnightAwakening.csproj",
+        "packagesPath": "C:\\Users\\Petch\\.nuget\\packages\\",
+        "outputPath": "C:\\Study-Comsci\\Y3T2\\COMGAME\\Final\\H\\TheKnightAwakening\\TheKnightAwakening\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/jay/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Petch\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
