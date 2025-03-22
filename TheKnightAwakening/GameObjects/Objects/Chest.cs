@@ -111,5 +111,22 @@ namespace TheKnightAwakening
 
             return ItemType.None; // Default fallback
         }
+
+        public static List<Vector2> SpawnChestPosition = new List<Vector2>
+        {
+            new Vector2(11136, 197),
+            new Vector2(125, 1013),
+            new Vector2(3102, 1141),
+            new Vector2(10016, 1220),
+            new Vector2(3902, 1588),
+            new Vector2(7599, 1941),
+            new Vector2(11376, 1891),
+            new Vector2(3997, 3380),
+            new Vector2(6254, 3045),
+            new Vector2(9327, 2917),
+            new Vector2(61, 4101),
+            new Vector2(5054, 3923),
+            new Vector2(7023, 4100)
+        };
     }
 }

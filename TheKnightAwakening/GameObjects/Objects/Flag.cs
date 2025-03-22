@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
@@ -39,12 +38,21 @@ namespace TheKnightAwakening
         {
             if (CheckAABBCollision(Rectangle, Singleton.Instance.player.Rectangle))
             {
-                if(!Checked)
-                Collected();
+                if (!Checked)
+                    Collected();
             }
 
             AnimationManager.Update(gameTime);
             base.Update(gameTime, _gameObjects);
         }
+
+        public static List<Vector2> SpawnFlagPosition = new List<Vector2>
+        {
+            new Vector2(100, 0), // Test
+            new Vector2(10400, 164),
+            new Vector2(4097, 932),
+            new Vector2(7971, 3013),
+            new Vector2(4000, 3847)
+        };
     }
 }

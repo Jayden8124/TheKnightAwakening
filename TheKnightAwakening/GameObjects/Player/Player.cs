@@ -196,16 +196,16 @@ namespace TheKnightAwakening
             {
                 TriggerAttack("Attack2", _gameObjects);
             }
-            else if (Singleton.Instance.CurrentKey.IsKeyDown(Attack3) &&
+            else if (Ultimate >= 0 && Singleton.Instance.CurrentKey.IsKeyDown(Attack3) &&
             !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
             {
                 TriggerAttack("Attack3", _gameObjects);
-                Ultimate = 0;
-            }
-            else if (Ultimate >= 10 && Singleton.Instance.CurrentKey.IsKeyDown(UltimateAttack) &&
-                     !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
-            {
-                TriggerAttack("UltimateAttack", _gameObjects);
+                var newBullet = Bullet.Clone() as Bullet;
+                newBullet.Position = new Vector2(Rectangle.X + (AnimationManager.FacingRight ? Rectangle.Width : -newBullet.Rectangle.Width), Position.Y + 15);
+                newBullet.Velocity = new Vector2(AnimationManager.FacingRight ? 300 : -300, 0);
+                newBullet.Reset();
+                _gameObjects.Add(newBullet);
+                Console.WriteLine("Bullet spawned");
                 Ultimate = 0;
             }
         }

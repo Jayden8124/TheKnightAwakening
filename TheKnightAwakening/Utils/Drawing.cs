@@ -30,6 +30,7 @@ namespace TheKnightAwakening
         public Texture2D CoinSheet { get; private set; }
         public Texture2D PotionSheet { get; private set; }
         public Texture2D IconSheet { get; private set; }
+        public Texture2D FlagSheet { get; private set; }
 
         // Button Rectangles
         public Rectangle MenuPlay { get; private set; }
@@ -73,6 +74,7 @@ namespace TheKnightAwakening
             CoinSheet = Content.Load<Texture2D>("gold_coin");
             PotionSheet = Content.Load<Texture2D>("health_potion");
             IconSheet = Content.Load<Texture2D>("Icon-sheet");
+            FlagSheet = Content.Load<Texture2D>("Flag_Raise");
 
             // Health Bar
             Texture2D healthbarTexture = Content.Load<Texture2D>("health_bar");

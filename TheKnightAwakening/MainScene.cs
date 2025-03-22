@@ -74,9 +74,11 @@ public class MainScene : Game
                     Exit();
                 }
                 break;
+
             case Singleton.GameState.Cutscene:
                 _cutscene.Update(gameTime);
                 break;
+                
             case Singleton.GameState.GamePlaying:
                 
                 // if (IsButtonClicked(_setting))
@@ -159,8 +161,9 @@ public class MainScene : Game
                 //     Singleton.Instance.player.Position = Singleton.Instance.player.LastCheckpoint;
                 //     Singleton.Instance.player.Velocity = Vector2.Zero;
                 // }
-
-                 
+                
+                // Paremeters: Health, Ultimate
+                _drawing.Healthbar.Update(Singleton.Instance.player.Health);
                 _drawing.HealthbarAnimated.Update(Singleton.Instance.player.Health, gameTime);
 
                 _drawing.Ultimatebar.Update(Singleton.Instance.player.Ultimate);
@@ -172,6 +175,7 @@ public class MainScene : Game
                 if (Singleton.Instance.CurrentKey.IsKeyDown(Keys.Escape) && !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
                     Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
                 break;
+
             case Singleton.GameState.GameOver:
                 if (Singleton.Instance.CurrentMouse.LeftButton == ButtonState.Pressed && Singleton.Instance.PreviousMouse.LeftButton == ButtonState.Released)
                 {
@@ -247,10 +251,11 @@ public class MainScene : Game
     {
         // Load Texture Singleton.Instance.player
         Texture2D knightSheet = Content.Load<Texture2D>("player");
+        Texture2D bulletSheet = Content.Load<Texture2D>("Sword_Projectile");
 
         // Player Instance
         var _animationsPlayer = AnimationPlayer.LoadAnimations(knightSheet);
-
+        var _animationsBullet = AnimationUlitmate.LoadAnimations(bulletSheet);
         Singleton.Instance.player = new Player(_animationsPlayer)
         {
             Name = "Player",
@@ -265,11 +270,10 @@ public class MainScene : Game
             Defend = Keys.LeftControl,
             Attack2 = Keys.F,
             Attack3 = Keys.G,
-            Bullet = new Bullet(knightSheet)
+            Bullet = new Bullet(_animationsBullet)
             {
                 Name = "BulletPlayer",
-                Viewport = new Rectangle(0, 0, 10, 10),
-                Velocity = new Vector2(-500f, 0)
+                Viewport = new Rectangle(25, 6, 54, 65),
             }
         };
 
@@ -387,20 +391,16 @@ public class MainScene : Game
 
     public void ResetObject() // Clone 
     {
-        // Chest Instance
+        // Chest Instance & Texture 
         var _animationsChest = AnimationChest.LoadAnimations(_drawing.ChestSheet);
         var goldChestAnimations = _animationsChest[ChestType.GoldChest];
-
         var _animationCoin = AnimationCoin.LoadAnimations(_drawing.CoinSheet);
-
         var _animationPotion = AnimationPotion.LoadAnimations(_drawing.PotionSheet);
-
-
-        Chest chest = new Chest(goldChestAnimations)
+        
+        Chest prototypeChest = new Chest(goldChestAnimations)
         {
             Name = "Chest",
             openKey = Keys.E,
-            Position = new Vector2(300, 750),
             coin = new Coin(_animationCoin)
             {
                 Name = "Coin",
@@ -411,29 +411,36 @@ public class MainScene : Game
             }
         };
 
-        // Add GameObjects
-        _gameObjects.Add(chest);
+        List<Vector2> spawnPositionsChest = Chest.SpawnChestPosition;
 
-        Texture2D flagSheet = Content.Load<Texture2D>("Flag_Raise");
+        foreach (var pos in spawnPositionsChest)
+        {
+            var clone = (Chest)prototypeChest.Clone();
+            clone.Position = pos;
+            clone.Name += "_" + pos.ToString();
+            _gameObjects.Add(clone);
+        }
+        
 
-        var _animationFlag = AnimationFlag.LoadAnimations(flagSheet);
+        // Flag Instance & Texture
+        var _animationFlag = AnimationFlag.LoadAnimations(_drawing.FlagSheet);
 
-        Flag flag1 = new Flag(_animationFlag)
+        Flag prototypeFlag = new Flag(_animationFlag)
         {
             Name = "Flag",
             Viewport = new Rectangle(41, 20, 63, 172),
-            Position = new Vector2(500, 500)
         };
 
-        _gameObjects.Add(flag1);
-        Flag flag2 = new Flag(_animationFlag)
+        List<Vector2> spawnPositionsFlag = Flag.SpawnFlagPosition;
+
+        foreach (var pos in spawnPositionsFlag)
         {
-            Name = "Flag",
-            Viewport = new Rectangle(41, 20, 63, 172),
-            Position = new Vector2(1500, 500)
-        };
+            var clone = (Flag)prototypeFlag.Clone();
+            clone.Position = pos;
+            clone.Name += "_" + pos.ToString();
+            _gameObjects.Add(clone);
+        }
 
-        _gameObjects.Add(flag2);
     }
 
     private bool IsButtonClicked(Rectangle buttonRect)

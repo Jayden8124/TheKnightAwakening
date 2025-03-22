@@ -48,6 +48,10 @@ namespace TheKnightAwakening
                 Health = 0;
                 isDead = true;
                 Singleton.Instance.Score += Score;
+                if (Singleton.Instance.player.Health <= 50)
+                {
+                    Singleton.Instance.player.Health += 10;
+                }
                 AnimationManager.Play(Animations["Dead"]);
                 Console.WriteLine(Singleton.Instance.Score);
                 IsActive = false;
