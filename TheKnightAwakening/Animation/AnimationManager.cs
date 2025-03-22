@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace TheKnightAwakening
@@ -35,7 +36,6 @@ namespace TheKnightAwakening
             _currentFrame = 0;
         }
 
-
         // Update the current frame based on elapsed time.
         public void Update(GameTime gameTime)
         {
@@ -60,12 +60,12 @@ namespace TheKnightAwakening
             }
         }
 
-        // Draw the current frame to the screen.
-        public void Draw(SpriteBatch spriteBatch)
+        
+        public void Draw(SpriteBatch spriteBatch) // Draw the current frame to the screen.
         {
             SpriteEffects spriteEffect = FacingRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             Rectangle source = _animation.Frames[_currentFrame];
-            spriteBatch.Draw(_animation.Texture, Position, source, Color.White, 0f,Vector2.Zero, Scale, spriteEffect, 0f);
+            spriteBatch.Draw(_animation.Texture, Position, source, Color.White, 0f, Vector2.Zero, Scale, spriteEffect, 0f);
         }
 
         public void Draw(SpriteBatch spriteBatch, Color color)
@@ -73,7 +73,7 @@ namespace TheKnightAwakening
             SpriteEffects spriteEffect = FacingRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             Rectangle source = _animation.Frames[_currentFrame];
             // Vector2 drawPosition = Position + _animation.Offset;
-             
+
             spriteBatch.Draw(_animation.Texture, Position, source, color, 0f, Vector2.Zero, Scale, spriteEffect, 0f);
             // วาดกรอบ hitbox ของเฟรม (debug)
             Texture2D rectTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
@@ -81,5 +81,20 @@ namespace TheKnightAwakening
             spriteBatch.Draw(rectTexture, new Rectangle((int)Position.X, (int)Position.Y, source.Width, source.Height), Color.Red * 0.5f);
 
         }
+
+        public Animation CurrentAnimation // Check Animation Current
+        {
+            get { return _animation; }
+        }
+
+        public bool IsAnimationFinished() // For Animation is not looping
+        {
+            if (!_animation.IsLooping && _currentFrame == _animation.FrameCount - 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }

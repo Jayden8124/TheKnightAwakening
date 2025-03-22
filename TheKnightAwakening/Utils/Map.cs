@@ -37,9 +37,9 @@ namespace TheKnightAwakening
             textureMapCave = Content.Load<Texture2D>("Cave");
             hitboxTexture = Content.Load<Texture2D>("hitbox");
             propTexture = Content.Load<Texture2D>("prop"); 
-            fg = LoadMap("../../../TileMap/test03_ground.csv");
-            cave = LoadMap("../../../TileMap/test03_cave.csv");
-            collisions = LoadMap("../../../TileMap/Test_Real_Map_hitblock.csv");
+            fg = LoadMap("../../../TileMap/Real_Map_ground.csv");
+            cave = LoadMap("../../../TileMap/Real_Map_cave.csv");
+            collisions = LoadMap("../../../TileMap/Real_Map_hitblock.csv");
             // prop = LoadMap("../../../TileMap/2Map1_full_prop.csv");
         }
 

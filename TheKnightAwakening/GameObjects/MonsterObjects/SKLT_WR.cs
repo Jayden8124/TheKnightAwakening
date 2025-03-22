@@ -80,8 +80,54 @@ namespace TheKnightAwakening
                 {
                     // เมื่อไม่ชนกับ Player ให้รีเซ็ต timer และเคลื่อนที่ตามปกติ
                     attackTimer = 0f;
-                    if (DistanceMoved <= 150)
+                    // if (DistanceMoved <= 150) 
+                    // {
+                    //     // เมื่อ Player ใกล้ (≤150) และอยู่ในแนวเดียวกัน ให้วิ่งเข้าหา
+                    //     if (Singleton.Instance.player.Position.X < Position.X)
+                    //     {
+                    //         Position = new Vector2(Position.X - runSpeed, Position.Y);
+                    //         moveDirection = -1;
+                    //         AnimationManager.FacingRight = false;
+                    //     }
+                    //     else
+                    //     {
+                    //         Position = new Vector2(Position.X + runSpeed, Position.Y);
+                    //         moveDirection = 1;
+                    //         AnimationManager.FacingRight = true;
+                    //     }
+                    //     AnimationManager.Play(Animations["Run"]);
+                    // }
+                    // else
+                    // {
+                    //     // หากระยะห่าง > 150 ให้เดินตามทิศทางที่กำหนด
+                    //     Position = new Vector2(Position.X + walkSpeed * moveDirection, Position.Y);
+                    //     AnimationManager.FacingRight = moveDirection > 0;
+                    //     AnimationManager.Play(Animations["Walk"]);
+                    // }
+                    if (DistanceMoved <= 150 && this.Position.Y == Singleton.Instance.player.Position.Y)
                     {
+                        bool isFacingEnemy = (Singleton.Instance.player.Position.X < Position.X && AnimationManager.FacingRight) ||
+                                     (Singleton.Instance.player.Position.X > Position.X && !AnimationManager.FacingRight);
+
+                        if (isFacingEnemy)
+                        {
+                            AnimationManager.FacingRight = !AnimationManager.FacingRight;
+                        }
+
+                        attackTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds; // ลด attackTimer ทุกเฟรม
+
+                        if (attackTimer < -attackDelay) // ตรวจสอบว่าเวลาถึงการโจมตีหรือยัง
+                        {
+                            attackTimer = 0;
+                        }
+                        else
+                        {
+                            AnimationManager.Play(Animations["Attack"]);
+                        }
+                    }
+                    else
+                    {
+                        attackTimer = 0f;
                         // เมื่อ Player ใกล้ (≤150) และอยู่ในแนวเดียวกัน ให้วิ่งเข้าหา
                         if (Singleton.Instance.player.Position.X < Position.X)
                         {
@@ -95,13 +141,6 @@ namespace TheKnightAwakening
                             moveDirection = 1;
                             AnimationManager.FacingRight = true;
                         }
-                        AnimationManager.Play(Animations["Run"]);
-                    }
-                    else
-                    {
-                        // หากระยะห่าง > 150 ให้เดินตามทิศทางที่กำหนด
-                        Position = new Vector2(Position.X + walkSpeed * moveDirection, Position.Y);
-                        AnimationManager.FacingRight = moveDirection > 0;
                         AnimationManager.Play(Animations["Walk"]);
                     }
                 }
@@ -130,24 +169,25 @@ namespace TheKnightAwakening
             base.Reset();
         }
 
-       public static List<Vector2> SpawnPositions = new List<Vector2>
+        public static List<Vector2> SpawnPositions = new List<Vector2>
         {
-            new Vector2(6780, 470),
-            new Vector2(9303, 470),
-            new Vector2(1190, 1108),
-            new Vector2(3504, 1108),
-            new Vector2(5871, 1189),
-            new Vector2(7900, 1189),
-            new Vector2(10969, 1190),
-            new Vector2(11834, 1190),
-            new Vector2(4016, 1893),
-            new Vector2(8540, 1908),
-            new Vector2(10745, 1909),
-            new Vector2(1573, 3525),
-            new Vector2(1870, 3140),
-            new Vector2(2833, 3446),
-            new Vector2(6557, 3012),
-            new Vector2(2661, 4068)
+            new Vector2(100, 0), // Test
+            // new Vector2(6780, 470),
+            // new Vector2(9303, 470),
+            // new Vector2(1190, 1108),
+            // new Vector2(3504, 1108),
+            // new Vector2(5871, 1189),
+            // new Vector2(7900, 1189),
+            // new Vector2(10969, 1190),
+            // new Vector2(11834, 1190),
+            // new Vector2(4016, 1893),
+            // new Vector2(8540, 1908),
+            // new Vector2(10745, 1909),
+            // new Vector2(1573, 3525),
+            // new Vector2(1870, 3140),
+            // new Vector2(2833, 3446),
+            // new Vector2(6557, 3012),
+            // new Vector2(2661, 4068)
         };
     }
 }

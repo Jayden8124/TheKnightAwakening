@@ -4,48 +4,52 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Audio/Music/Bgm.mp3</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Audio/Music/Boss_Bgm.mp3</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Coin_Collect.mp3</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Death_SFX.mp3</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Item_Obtain.mp3</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Skeleton_Dead.mp3</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Slime_Die.mp3</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Sword_SFX.mp3</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/bulletObject/Contract_Fire_Ball.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/bulletObject/Energy_Ball.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/bulletObject/Fire_Ball.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/bulletObject/Sword_Projectile.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/Scene1.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/Scene2.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/Petrify.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/Slow.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/Weakness.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Map/bg_menu.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Map/bg.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Map/Cave.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Map/hitbox.PNG</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Map/prop.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Map/TilesetGround.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Objects/blue_slime.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Objects/chest.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Objects/Flag_Raise.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Objects/gold_coin.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Objects/health_potion.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Objects/medusa.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Objects/player.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_archer.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_spearman.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_warrior.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/UI/game_font.spritefont</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/UI/health_bar.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/UI/hitbox.PNG</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/UI/icon_game.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/UI/icon.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/UI/Icon2.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/UI/menu.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/UI/message_box.png</File>
-    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/UI/ultimate.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Audio/Music/Bgm.mp3</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Audio/Music/Boss_Bgm.mp3</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Coin_Collect.mp3</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Death_SFX.mp3</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Item_Obtain.mp3</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Skeleton_Dead.mp3</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Slime_Die.mp3</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Sword_SFX.mp3</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/bulletObject/Contract_Fire_Ball.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/bulletObject/Energy_Ball.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/bulletObject/Fire_Ball.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/bulletObject/Sword_Projectile.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/Scene1.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/Scene2.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/Scene3.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/Scene4.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/Scene5.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/Scene6.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/Petrify.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/Slow.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/Weakness.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Map/bg_menu.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Map/bg.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Map/Cave.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Map/hitbox.PNG</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Map/prop.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Map/TilesetGround.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Objects/blue_slime.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Objects/chest.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Objects/Flag_Raise.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Objects/gold_coin.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Objects/health_potion.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Objects/medusa.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Objects/player.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_archer.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_spearman.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_warrior.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/UI/Button Ui.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/UI/game_font.spritefont</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/UI/health_bar.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/UI/hitbox.PNG</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/UI/icon_game.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/UI/Icon-sheet.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/UI/menu.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/UI/message_box.png</File>
+    <File>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/UI/ultimate.png</File>
   </SourceFiles>
   <DestFiles>
     <File>Bgm.mp3</File>
@@ -62,6 +66,10 @@
     <File>Sword_Projectile.png</File>
     <File>Scene1.png</File>
     <File>Scene2.png</File>
+    <File>Scene3.png</File>
+    <File>Scene4.png</File>
+    <File>Scene5.png</File>
+    <File>Scene6.png</File>
     <File>Petrify.png</File>
     <File>Slow.png</File>
     <File>Weakness.png</File>
@@ -81,12 +89,12 @@
     <File>skeleton_archer.png</File>
     <File>skeleton_spearman.png</File>
     <File>skeleton_warrior.png</File>
+    <File>Button Ui.png</File>
     <File>game_font.spritefont</File>
     <File>health_bar.png</File>
     <File>hitbox.PNG</File>
     <File>icon_game.png</File>
-    <File>icon.png</File>
-    <File>Icon2.png</File>
+    <File>Icon-sheet.png</File>
     <File>menu.png</File>
     <File>message_box.png</File>
     <File>ultimate.png</File>

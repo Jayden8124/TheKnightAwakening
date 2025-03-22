@@ -12,35 +12,15 @@ public class MainScene : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    // Font
-    SpriteFont _font;
-
     // GameObjects
     List<GameObject> _gameObjects;
     public int _numOjects;
 
-    // Health Bar
-    private Healthbar _healthbar;
-    private HealthbarAnimated _healthbarAnimated;
-
-    // Ultimate
-    private Ultimatebar _ultimatebar;
-    private UltimatebarAnimated _ultimatebarAnimated;
-
-    // Camera & Map
+    // Camera & Map & Cutscene & Drawing
     private Camera _camera;
     private Map _map;
-
-    // Textures
-    private Texture2D _background, _menuIcon, _menuButton;
-    private Texture2D chestSheet, coinSheet, potionSheet;
-
-    // Button
-    Rectangle _menuPlay, _menuExit;
-
-    // Cutscene
     private CutScene _cutscene;
-
+    private Drawing _drawing;
 
     public MainScene()
     {
@@ -57,12 +37,10 @@ public class MainScene : Game
 
         _gameObjects = new List<GameObject>();
 
-        _camera = new Camera(GraphicsDevice.Viewport); // Initialize camera
-        _map = new Map(GraphicsDevice); // Initialize map
+        _camera = new Camera(GraphicsDevice.Viewport); 
+        _map = new Map(GraphicsDevice); 
         _cutscene = new CutScene(GraphicsDevice);
-
-        _menuPlay = new Rectangle(565, 410, 165, 98);
-        _menuExit = new Rectangle(565, 524, 165, 98);
+        _drawing = new Drawing(GraphicsDevice, _camera, _map, _cutscene); 
 
         base.Initialize();
     }
@@ -71,45 +49,10 @@ public class MainScene : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        _background = Content.Load<Texture2D>("bg");
-        _menuIcon = Content.Load<Texture2D>("icon_game");
-        _menuButton = Content.Load<Texture2D>("menu");
-        _font = Content.Load<SpriteFont>("game_font");
+        // Drawing
+        _drawing.LoadContent(Content);
 
-        chestSheet = Content.Load<Texture2D>("chest");
-        coinSheet = Content.Load<Texture2D>("gold_coin");
-        potionSheet = Content.Load<Texture2D>("health_potion");
-
-        {   // Health Bar
-            Texture2D healthbarTexture = Content.Load<Texture2D>("health_bar");
-            Rectangle bgSource = new Rectangle(0, 0, 163, 23);
-            Rectangle fgSource = new Rectangle(21, 36, 140, 7);
-
-            _healthbar = new Healthbar(healthbarTexture, bgSource, fgSource, 100);
-            _healthbarAnimated = new HealthbarAnimated(healthbarTexture, bgSource, fgSource, 100);
-        }
-
-        {   // Ultimate Bar
-            Texture2D ultimateTexture = Content.Load<Texture2D>("ultimate");
-            Rectangle bgSourceUltimate = new Rectangle(25, 0, 41, 44);
-            Rectangle fgSourceUltimate = new Rectangle(0, 12, 17, 19);
-
-            _ultimatebar = new Ultimatebar(ultimateTexture, bgSourceUltimate, fgSourceUltimate, 5);
-            _ultimatebarAnimated = new UltimatebarAnimated(ultimateTexture, bgSourceUltimate, fgSourceUltimate, 5);
-        }
-
-        // Load Content
-        Singleton.Instance._rect = new Texture2D(_graphics.GraphicsDevice, 20, 20);
-        Color[] data = new Color[20 * 20];
-        for (int i = 0; i < data.Length; i++) data[i] = Color.White;
-        Singleton.Instance._rect.SetData(data);
-
-        _map.LoadContent(Content);
-        _cutscene.LoadContent(Content);
-
-        Singleton.Instance.HitblockTiles = _map.GetCollisionRectangles();
-
-        Reset();
+        Reset(); // Call Reset
     }
 
     protected override void Update(GameTime gameTime)
@@ -122,11 +65,11 @@ public class MainScene : Game
         switch (Singleton.Instance.CurrentGameState)
         {
             case Singleton.GameState.Start:
-                if (IsButtonClicked(_menuPlay))
+                if (IsButtonClicked(_drawing.MenuPlay))
                 {
                     Singleton.Instance.CurrentGameState = Singleton.GameState.Cutscene;
                 }
-                else if (IsButtonClicked(_menuExit))
+                else if (IsButtonClicked(_drawing.MenuExit))
                 {
                     Exit();
                 }
@@ -135,11 +78,10 @@ public class MainScene : Game
                 _cutscene.Update(gameTime);
                 break;
             case Singleton.GameState.GamePlaying:
-                // Mouse State
-                // if (Singleton.Instance.CurrentMouse.LeftButton == ButtonState.Pressed &&
-                //     Singleton.Instance.PreviousMouse.LeftButton == ButtonState.Released)
+                
+                // if (IsButtonClicked(_setting))
                 // {
-                //     Singleton.Instance.CurrentGameState = Singleton.GameState.Start;
+                //     Singleton.Instance.CurrentGameState = Singleton.GameState.GamePaused;
                 // }
 
                 if (Singleton.Instance.CurrentKey.IsKeyDown(Keys.Escape) && !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
@@ -152,6 +94,7 @@ public class MainScene : Game
                         _gameObjects[i].Update(gameTime, _gameObjects);
                     }
                 }
+
 
                 for (int i = 0; i < _numOjects; i++)
                 {
@@ -217,10 +160,10 @@ public class MainScene : Game
                 //     Singleton.Instance.player.Velocity = Vector2.Zero;
                 // }
 
-                _healthbar.Update(Singleton.Instance.player.Health);
-                _healthbarAnimated.Update(Singleton.Instance.player.Health, gameTime);
+                 
+                _drawing.HealthbarAnimated.Update(Singleton.Instance.player.Health, gameTime);
 
-                _ultimatebar.Update(Singleton.Instance.player.Ultimate);
+                _drawing.Ultimatebar.Update(Singleton.Instance.player.Ultimate);
                 // _ultimatebarAnimated.Update(Singleton.Instance.player.Ultimate, gameTime);
 
                 break;
@@ -252,7 +195,7 @@ public class MainScene : Game
         {
             case Singleton.GameState.Start:
                 {
-                    _DrawStart();
+                    _drawing._DrawStart(_spriteBatch);
                 }
                 break;
             case Singleton.GameState.Cutscene:
@@ -262,17 +205,17 @@ public class MainScene : Game
                 break;
             case Singleton.GameState.GamePlaying:
                 {
-                    _DrawPlaying();
+                    _drawing._DrawPlaying(_spriteBatch, _gameObjects, _numOjects);
                 }
                 break;
             case Singleton.GameState.GamePaused:
                 {
-                    _DrawPause();
+                    _drawing._DrawPause(_spriteBatch);
                 }
                 break;
             case Singleton.GameState.GameOver:
                 {
-                    _DrawOver();
+                    _drawing._DrawOver(_spriteBatch);
                 }
                 break;
         }
@@ -282,102 +225,11 @@ public class MainScene : Game
         base.Draw(gameTime);
     }
 
-    public void _DrawStart()
-    {
-        // Layer 1: Background
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-        _spriteBatch.Draw(_background, new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
-
-        _spriteBatch.End();
-
-        // Layer 2: Icon and Button
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-        _spriteBatch.Draw(_menuIcon, new Rectangle(394, 0, 492, 427), Color.White); // Icon
-        _spriteBatch.Draw(_menuButton, _menuPlay, new Rectangle(167, 1, 165, 98), Color.White); // Play
-        _spriteBatch.Draw(_menuButton, _menuExit, new Rectangle(0, 0, 165, 98), Color.White); // Exit
-
-        _spriteBatch.End();
-    }
-    public void _DrawPause()
-    {
-        // Layer 1: Background
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-        _spriteBatch.Draw(_background, new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
-
-        _spriteBatch.End();
-
-        // Layer 2: Button UI Pause 
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-        // Code Button (Left Click Press)
-
-        _spriteBatch.End();
-    }
-
-    public void _DrawPlaying()
-    {
-        // Layer 1: Background
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-        _spriteBatch.Draw(_background, new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
-
-        _spriteBatch.End();
-
-        // Layer 2: Map & Camera
-        _spriteBatch.Begin(transformMatrix: _camera.Transform, samplerState: SamplerState.PointClamp);
-
-
-        _map.Draw(_spriteBatch);
-
-        for (int i = 0; i < _numOjects; i++)
-        {
-            _gameObjects[i].Draw(_spriteBatch);
-        }
-
-        _spriteBatch.End();
-
-        // Layer 3: UI
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-        // Setting Menu Button 
-        // วาด HealthBar
-        _healthbar.Draw(_spriteBatch);
-        _healthbarAnimated.Draw(_spriteBatch);
-        _ultimatebar.Draw(_spriteBatch);
-
-        // _ultimatebarAnimated.Draw(_spriteBatch);
-
-
-        _spriteBatch.DrawString(_font, Singleton.Instance.Score.ToString() ,new Vector2(1050, 55), Color.White);
-        _spriteBatch.Draw(coinSheet, new Vector2(1100, 50), new Rectangle(0, 0, 27, 27), Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0); // Background
-
-        _spriteBatch.End();
-    }
-    public void _DrawOver()
-    {
-        // Layer 1: Background
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-        _spriteBatch.Draw(_background, new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
-
-        _spriteBatch.End();
-
-        // Layer 2: Button To Exit
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-        // Code Button To Exit to Main Menu or Restart
-
-        _spriteBatch.End();
-    }
-
     protected void Reset()
     {
         Singleton.Instance.Score = 0;
         Singleton.Instance.Timer = 0;
-        Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
+        Singleton.Instance.CurrentGameState = Singleton.GameState.Cutscene;
 
         _gameObjects.Clear();
 
@@ -445,7 +297,7 @@ public class MainScene : Game
         {
             Name = "SKLT_WR",
             Score = 10,
-            Viewport = new Rectangle(0, 0, 53, 58)
+            Viewport = new Rectangle(0, 0, 53, 58),
         };
 
         MonsterType prototypeSL = new SL(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SL))
@@ -484,13 +336,21 @@ public class MainScene : Game
         };
 
         // // Postion each monster type
-        // List<Vector2> spawnPositionsSL = SL.SpawnPositions;
-        // List<Vector2> spawnPositionsWR = SKLT_WR.SpawnPositions;
-        // List<Vector2> spawnPositionsSM = SKLT_SM.SpawnPositions;
-        // List<Vector2> spawnPositionsAC = SKLT_AC.SpawnPositions;
-        // List<Vector2> spawnPositionsMDS = SKLT_AC.SpawnPositions;
+        List<Vector2> spawnPositionsSL = SL.SpawnPositions;
+        List<Vector2> spawnPositionsWR = SKLT_WR.SpawnPositions;
+        List<Vector2> spawnPositionsSM = SKLT_SM.SpawnPositions;
+        List<Vector2> spawnPositionsAC = SKLT_AC.SpawnPositions;
+        List<Vector2> spawnPositionsMDS = MDS.SpawnPositions;
 
         // // Clone prototype and Set Potion from spawnPositions each Monster Type
+        // foreach (var pos in spawnPositionsSL)
+        // {
+        //     var clone = prototypeSL.Clone();
+        //     clone.Position = pos;
+        //     clone.Name += "_" + pos.ToString();
+        //     _gameObjects.Add(clone);
+        // }
+        
         // foreach (var pos in spawnPositionsWR)
         // {
         //     var clone = prototypeWR.Clone();
@@ -499,21 +359,13 @@ public class MainScene : Game
         //     _gameObjects.Add(clone);
         // }
 
-        // foreach (var pos in spawnPositionsSL)
-        // {
-        //     var clone = prototypeSL.Clone();
-        //     clone.Position = pos;
-        //     clone.Name += "_" + pos.ToString();
-        //     _gameObjects.Add(clone);
-        // }
-
-        // foreach (var pos in spawnPositionsSM)
-        // {
-        //     var clone = prototypeSM.Clone();
-        //     clone.Position = pos;
-        //     clone.Name += "_" + pos.ToString();
-        //     _gameObjects.Add(clone);
-        // }
+        foreach (var pos in spawnPositionsSM)
+        {
+            var clone = prototypeSM.Clone();
+            clone.Position = pos;
+            clone.Name += "_" + pos.ToString();
+            _gameObjects.Add(clone);
+        }
 
         // foreach (var pos in spawnPositionsAC)
         // {
@@ -536,12 +388,12 @@ public class MainScene : Game
     public void ResetObject() // Clone 
     {
         // Chest Instance
-        var _animationsChest = AnimationChest.LoadAnimations(chestSheet);
+        var _animationsChest = AnimationChest.LoadAnimations(_drawing.ChestSheet);
         var goldChestAnimations = _animationsChest[ChestType.GoldChest];
 
-        var _animationCoin = AnimationCoin.LoadAnimations(coinSheet);
+        var _animationCoin = AnimationCoin.LoadAnimations(_drawing.CoinSheet);
 
-        var _animationPotion = AnimationPotion.LoadAnimations(potionSheet);
+        var _animationPotion = AnimationPotion.LoadAnimations(_drawing.PotionSheet);
 
 
         Chest chest = new Chest(goldChestAnimations)

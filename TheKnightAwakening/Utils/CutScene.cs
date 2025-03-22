@@ -1,6 +1,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,76 +12,178 @@ namespace TheKnightAwakening
     {
         private List<string> messages;
         private Dictionary<int, Texture2D> backgrounds;
-        private int currentMessageIndex = 0;
-        private string displayedText = "";
-        private float textSpeed = 0.05f;
-        private float textTimer = 0f;
-        private int charIndex = 0;
-        private bool isTextFullyDisplayed = false;
-        private const int frameWidth = 851;
-        private const int frameHeight = 148;
+        private int currentMessageIndex;
+        private string displayedText;
+        private float textSpeed;
+        private float textTimer;
+        private int charIndex;
+        private bool isTextFullyDisplayed;
+        private const int frameWidth = 630;
         private GraphicsDevice _graphicsDevice;
         private SpriteFont _font;
         private Texture2D _frame;
+        private Texture2D _scene1, _scene2, _scene3, _scene4, _scene5, _scene6, _scene7, _scene8, _scene9, _scene10;
         public enum CutsceneType
         {
             StartGame,
             BossRoom,
-            BossDefeated
+            BossDefeated,
+            BossKilled,
+            BossSpared
         }
         private CutsceneType currentCutscene;
 
         public CutScene(GraphicsDevice graphicsDevice)
         {
             this._graphicsDevice = graphicsDevice;
+            currentCutscene = CutsceneType.BossDefeated;
+            messages = new List<string>();
+            backgrounds = new Dictionary<int, Texture2D>();
+
+            currentMessageIndex = 0;
+            textSpeed = 0.05f;
+            charIndex = 0;
+            isTextFullyDisplayed = false;
+            displayedText = "";
         }
 
-        public void LoadContent(Microsoft.Xna.Framework.Content.ContentManager Content)
+        public void LoadContent(ContentManager Content)
         {
             _font = Content.Load<SpriteFont>("game_font");
             _frame = Content.Load<Texture2D>("message_box");
-            currentCutscene = CutsceneType.StartGame;
+            _scene1 = Content.Load<Texture2D>("Scene1");
+            _scene2 = Content.Load<Texture2D>("Scene2");
+            // _scene3 = Content.Load<Texture2D>("Scene3");
+            // _scene4 = Content.Load<Texture2D>("Scene4");
+            // _scene5 = Content.Load<Texture2D>("Scene5");
+            // _scene6 = Content.Load<Texture2D>("Scene6");
+            // _scene7 = Content.Load<Texture2D>("Scene7");
+            // _scene8 = Content.Load<Texture2D>("Scene8");
+            // _scene9 = Content.Load<Texture2D>("Scene9");
+            // _scene10 = Content.Load<Texture2D>("Scene10");
             LoadSceneData(Content);
         }
 
-        private void LoadSceneData(Microsoft.Xna.Framework.Content.ContentManager Content)
+        private void LoadSceneData(ContentManager Content)
         {
-            messages = new List<string>();
-            backgrounds = new Dictionary<int, Texture2D>();
+            backgrounds.Clear();
+            messages.Clear();
 
             switch (currentCutscene)
             {
                 case CutsceneType.StartGame:
-                    messages.Add("King: My knight, Medusa's curse has spread across our kingdom...");
-                    backgrounds.Add(0, Content.Load<Texture2D>("Scene1"));
+                    messages.Add("King: As you can see, Her curse now coils around our kingdom like a venomous serpent. The plague spreads unchecked, and our people perish by the day. I can no longer remain idle.");
+                    backgrounds.Add(0, _scene1);
 
-                    messages.Add("King: You must vanquish her and end this catastrophe!");
-                    backgrounds.Add(1, Content.Load<Texture2D>("Scene1"));
+                    messages.Add("King: I bid thee, brave knight, venture forth to the Cursed Cavern where the foul creature hides. Medusa, the architect of this dark sorcery... end her reign of terror.");
+                    backgrounds.Add(1, _scene1);
 
-                    messages.Add("Knight: Your Majesty, I shall obey your command...");
-                    backgrounds.Add(2, Content.Load<Texture2D>("Scene2"));
+                    messages.Add("Knight: By your command, Your Majesty. I shall ride into the heart of darkness, and I shall not return until the curse is broken and Medusa is no more!");
+                    backgrounds.Add(2, _scene2);
+
                     break;
 
-                case CutsceneType.BossRoom:
-                    messages.Add("Medusa: Did he send you to 'free' the kingdom from my curse?");
-                    backgrounds.Add(0, Content.Load<Texture2D>("Scene1"));
+                case CutsceneType.BossRoom: // Edit Scene
+                    messages.Add("Medusa: So... the king sends a pawn to sever the chains of my curse.");
+                    backgrounds.Add(0, _scene1);
 
-                    messages.Add("Medusa: This shall be your end!");
-                    backgrounds.Add(1, Content.Load<Texture2D>("Scene1"));
+                    messages.Add("Medusa: And yet.. you have made it this far. Impressive. Few ever do.");
+                    backgrounds.Add(1, _scene1);
 
-                    messages.Add("Knight: Even if it costs me my life, I will stop you!");
-                    backgrounds.Add(2, Content.Load<Texture2D>("Scene1"));
+                    messages.Add("Medusa: But this... is where your tale ends. None escape the web of fate I have spun!"); 
+                    backgrounds.Add(2, _scene1);
+
+                    messages.Add("Knight: Even if it costs me my life, I will strike you down. No power you wield shall sway me. I will not allow your blight to claim another soul! There is no place in this realm for a heartless fiend like you!");
+                    backgrounds.Add(3, _scene1);
+
+                    messages.Add("Medusa: A fiend, you say? Hah... I have worn that title like a crown. I am the bringer of this calamity, yes but know this: every curse is born of sorrow, every monster made, not born.");
+                    backgrounds.Add(4, _scene1);
+
+                    messages.Add("Medusa: Come then, hero. Let fate judge us both!"); 
+                    backgrounds.Add(5, _scene1);
                     break;
 
                 case CutsceneType.BossDefeated:
-                    messages.Add("Medusa: I... I only wanted him to feel my pain...");
-                    backgrounds.Add(0, Content.Load<Texture2D>("Scene1"));
 
-                    messages.Add("Knight: Who do you mean?");
-                    backgrounds.Add(1, Content.Load<Texture2D>("Scene1"));
+                    // Asking
+                    messages.Add("Medusa: I... I only wanted him to feel my pain.");
+                    backgrounds.Add(0, _scene1);
 
-                    messages.Add("Medusa: Your king! He betrayed me...");
-                    backgrounds.Add(2, Content.Load<Texture2D>("Scene1"));
+                    messages.Add("Knight: Him? Who do you speak of?");
+                    backgrounds.Add(1, _scene1);
+
+                    messages.Add("Medusa: Your king! He betrayed me... he deceived me.");
+                    backgrounds.Add(2, _scene1);
+
+                    messages.Add("Medusa: I was once but a simple girl... a loyal handmaid devoted to this very kingdom. But it was your king who laid his eyes upon me, who crossed boundaries best left untouched! And the queen... she cast me aside, offered no hand, no mercy only a curse.");
+                    backgrounds.Add(3, _scene1);
+                    
+                    messages.Add("Medusa: She turned me into this monster.");
+                    backgrounds.Add(4, _scene1);
+
+                    messages.Add("Medusa: I became what they feared most. Hunted. Exiled. Cast into shadows like a plague.");
+                    backgrounds.Add(5, _scene1);
+
+                    messages.Add("Medusa: So let them feel it let them taste the dread they sowed! Let fear consume them as it consumed me!");
+                    backgrounds.Add(6, _scene1);
+
+                    messages.Add("Medusa: But in the end... I was undone. Brought low by the very blade that sought to end me. Your blade.");
+                    backgrounds.Add(7, _scene1);
+
+                    messages.Add("Knight: My king is not the man you speak of. He is a noble ruler a beacon of strength and honor. He would never commit such vile acts.");
+                    backgrounds.Add(8, _scene1);
+
+                    messages.Add("Medusa: And yet... do you truly believe I would curse the world without cause?");
+                    backgrounds.Add(9, _scene1); 
+                    break;
+
+                case CutsceneType.BossKilled:
+                    messages.Add("Knight: No matter the truth... you are still the source of this calamity.");
+                    backgrounds.Add(0, _scene1);
+
+                    messages.Add("Knight: What you have done cannot be forgiven.");
+                    backgrounds.Add(1, _scene1);
+
+                    messages.Add("Medusa: Hmph... Then go on. Be their blade, their obedient tool.");
+                    backgrounds.Add(2, _scene1);
+
+                    messages.Add("Medusa: Strike me down, O knight of the kingdom you so proudly serve!");
+                    backgrounds.Add(3, _scene1);
+
+                    messages.Add("At last, Medusa falls... and with her final breath, the curse is lifted. But there is no triumph in the heart of knight is no joy in the silence that follows. She stands alone amidst the stillness... a single question echoing in her soul.");
+                    backgrounds.Add(4, _scene1);
+
+                    messages.Add("Was this truly the right thing to do...?");
+                    backgrounds.Add(5, _scene1);
+                    break;
+
+                case CutsceneType.BossSpared:
+                    messages.Add("Knight: I do not see a monster before me... only a woman who has suffered under a cruel curse.");
+                    backgrounds.Add(0, _scene1);
+
+                    messages.Add("Knight: And I choose... not to strike you down.");
+                    backgrounds.Add(1, _scene1);
+
+                    messages.Add("Medusa: You are a strange knight indeed...");
+                    backgrounds.Add(2, _scene1);
+
+                    messages.Add("Medusa: Do you truly believe the curse will fade so easily... simply because you spared me?");
+                    backgrounds.Add(3, _scene1);
+
+                    messages.Add("Knight: It is not because I spared you...");
+                    backgrounds.Add(4, _scene1);
+
+                    messages.Add("Knight: It is because I believe you still have a choice. You are not bound by pain forever. You can decide what your life becomes from this moment onward.");
+                    backgrounds.Add(5, _scene1);
+
+                    messages.Add("Knight: I will not judge you. I only hope... that you find a way to release yourself from this sorrow.");
+                    backgrounds.Add(6, _scene1);
+
+                    messages.Add("Medusa: ...Thank you. For still believing... that I am human.");
+                    backgrounds.Add(7, _scene1);
+                    
+                    messages.Add("Medusa: For still believing... that I am human.");
+                    backgrounds.Add(8, _scene1);
                     break;
             }
         }
@@ -121,6 +225,15 @@ namespace TheKnightAwakening
                 }
             }
 
+            foreach (char c in displayedText)  // Debugging missing characters (Error)
+            {
+                if (!_font.Characters.Contains(c))
+                {
+                    Console.WriteLine($"Missing char: {c} ({(int)c})");
+                }
+            }
+
+
             Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
         }
 
@@ -129,7 +242,7 @@ namespace TheKnightAwakening
             spriteBatch.Begin();
             spriteBatch.Draw(backgrounds[currentMessageIndex], new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
             spriteBatch.Draw(_frame, new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
-            spriteBatch.DrawString(_font, WrapText(displayedText, frameWidth), new Vector2(240, 570), Color.White);
+            spriteBatch.DrawString(_font, WrapText(displayedText, frameWidth), new Vector2(320, 540), Color.White);
             spriteBatch.End();
         }
 

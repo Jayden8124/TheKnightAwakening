@@ -139,7 +139,8 @@ namespace TheKnightAwakening
 
         public static List<Vector2> SpawnPositions = new List<Vector2>
         {
-            new Vector2(6740, 4049)
+            new Vector2(100, 0), // Test
+            // new Vector2(6740, 4049)
         };
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_spearman.png</SourceFile>
-  <SourceTime>2025-03-19T18:46:25.5968142+07:00</SourceTime>
-  <DestFile>c:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/skeleton_spearman.xnb</DestFile>
-  <DestTime>2025-03-19T19:08:52.1222034+07:00</DestTime>
+  <SourceFile>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_spearman.png</SourceFile>
+  <SourceTime>2025-03-22T21:03:14.4251172+07:00</SourceTime>
+  <DestFile>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/skeleton_spearman.xnb</DestFile>
+  <DestTime>2025-03-22T21:08:35.6588741+07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

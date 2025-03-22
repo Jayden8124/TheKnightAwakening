@@ -17,6 +17,7 @@ namespace TheKnightAwakening
         protected float runSpeed;
         protected float DistanceMoved;
         protected int moveDirection; // 1: เคลื่อนที่ไปทางขวา, -1: เคลื่อนที่ไปทางซ้าย
+        protected bool isHurt;
         protected float attackTimer;
         protected float attackDelay; // Delay 3 วินาทีระหว่างการโจมตี
         protected bool collidedWithHitblock = false;
@@ -24,6 +25,7 @@ namespace TheKnightAwakening
         public MonsterType(Dictionary<string, Animation> animations)
         {
             Animations = animations;
+            isHurt = false;
             // AnimationManager = new AnimationManager(Animations["Idle"]);  // จำเป็นไหม?
             IsActive = true;
         }
@@ -40,6 +42,7 @@ namespace TheKnightAwakening
                 Velocity.Y += Gravity;
                 Position.Y += Velocity.Y;
             }
+
             if (Health <= 0)
             {
                 Health = 0;

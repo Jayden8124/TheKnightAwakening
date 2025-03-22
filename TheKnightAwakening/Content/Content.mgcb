@@ -133,6 +133,54 @@
 /processorParam:TextureFormat=Color
 /build:CutScreen/Scene2.png;Scene2.png
 
+#begin CutScreen/Scene3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CutScreen/Scene3.png;Scene3.png
+
+#begin CutScreen/Scene4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CutScreen/Scene4.png;Scene4.png
+
+#begin CutScreen/Scene5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CutScreen/Scene5.png;Scene5.png
+
+#begin CutScreen/Scene6.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CutScreen/Scene6.png;Scene6.png
+
 #begin IconDebuff/Petrify.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -181,18 +229,6 @@
 /processorParam:TextureFormat=Color
 /build:Map/bg_menu.png;bg_menu.png
 
-#begin Map/bg_menu.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/bg_menu.png;bg_menu.png
-
 #begin Map/bg.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -204,30 +240,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Map/bg.png;bg.png
-
-#begin Map/bg.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/bg.png;bg.png
-
-#begin Map/Cave.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Cave.png;Cave.png
 
 #begin Map/Cave.png
 /importer:TextureImporter
@@ -253,18 +265,6 @@
 /processorParam:TextureFormat=Color
 /build:Map/hitbox.PNG;hitbox.PNG
 
-#begin Map/hitbox.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/hitbox.PNG;hitbox.PNG
-
 #begin Map/prop.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -276,30 +276,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Map/prop.png;prop.png
-
-#begin Map/prop.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/prop.png;prop.png
-
-#begin Map/TilesetGround.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/TilesetGround.png;TilesetGround.png
 
 #begin Map/TilesetGround.png
 /importer:TextureImporter
@@ -433,6 +409,30 @@
 /processorParam:TextureFormat=Color
 /build:Objects/skeleton_warrior.png;skeleton_warrior.png
 
+#begin UI/Button Ui.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Button Ui.png;Button Ui.png
+
+#begin UI/Button Ui.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Button Ui.png;Button Ui.png
+
 #begin UI/game_font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -476,7 +476,7 @@
 /processorParam:TextureFormat=Color
 /build:UI/icon_game.png;icon_game.png
 
-#begin UI/icon.png
+#begin UI/Icon-sheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -486,9 +486,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UI/icon.png;icon.png
+/build:UI/Icon-sheet.png;Icon-sheet.png
 
-#begin UI/Icon2.png
+#begin UI/Icon-sheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -498,7 +498,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UI/Icon2.png;Icon2.png
+/build:UI/Icon-sheet.png;Icon-sheet.png
 
 #begin UI/menu.png
 /importer:TextureImporter

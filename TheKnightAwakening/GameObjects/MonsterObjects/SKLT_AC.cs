@@ -130,24 +130,25 @@ namespace TheKnightAwakening
 
         public static List<Vector2> SpawnPositions = new List<Vector2>
         {
-            new Vector2(8209, 464),
-            new Vector2(10405, 464),
-            new Vector2(1580, 1040),
-            new Vector2(2717, 1086),
-            new Vector2(4852, 1183),
-            new Vector2(5181, 830),
-            new Vector2(6796, 974),
-            new Vector2(10173, 1184),
-            new Vector2(10375, 927),
-            new Vector2(115, 1487),
-            new Vector2(4024, 1552),
-            new Vector2(6113, 1902),
-            new Vector2(11118, 1902),
-            new Vector2(761, 3343),
-            new Vector2(2431, 3440),
-            new Vector2(3280, 3134),
-            new Vector2(5269, 3343),
-            new Vector2(9015, 3343)
+            new Vector2(100, 0), // Test
+            // new Vector2(8209, 464),
+            // new Vector2(10405, 464),
+            // new Vector2(1580, 1040),
+            // new Vector2(2717, 1086),
+            // new Vector2(4852, 1183),
+            // new Vector2(5181, 830),
+            // new Vector2(6796, 974),
+            // new Vector2(10173, 1184),
+            // new Vector2(10375, 927),
+            // new Vector2(115, 1487),
+            // new Vector2(4024, 1552),
+            // new Vector2(6113, 1902),
+            // new Vector2(11118, 1902),
+            // new Vector2(761, 3343),
+            // new Vector2(2431, 3440),
+            // new Vector2(3280, 3134),
+            // new Vector2(5269, 3343),
+            // new Vector2(9015, 3343)
         };
     }
 }

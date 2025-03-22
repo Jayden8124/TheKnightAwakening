@@ -240,7 +240,7 @@ namespace TheKnightAwakening
                         new Rectangle(224, 270, 77, 34),
                         new Rectangle(320, 273, 121, 31),
                         new Rectangle(458, 274, 50, 30)
-                    }, 0.2f, false)
+                    }, 5f, false)
                 },
                 { "Dead", new Animation(texture, new List<Rectangle>
                     {
