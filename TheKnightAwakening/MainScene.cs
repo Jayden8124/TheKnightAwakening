@@ -37,10 +37,10 @@ public class MainScene : Game
 
         _gameObjects = new List<GameObject>();
 
-        _camera = new Camera(GraphicsDevice.Viewport); 
-        _map = new Map(GraphicsDevice); 
+        _camera = new Camera(GraphicsDevice.Viewport);
+        _map = new Map(GraphicsDevice);
         _cutscene = new CutScene(GraphicsDevice);
-        _drawing = new Drawing(GraphicsDevice, _camera, _map, _cutscene); 
+        _drawing = new Drawing(GraphicsDevice, _camera, _map, _cutscene);
 
         base.Initialize();
     }
@@ -64,7 +64,7 @@ public class MainScene : Game
 
         switch (Singleton.Instance.CurrentGameState)
         {
-            case Singleton.GameState.Start:
+            case Singleton.GameState.GameStart:
                 if (IsButtonClicked(_drawing.MenuPlay))
                 {
                     Singleton.Instance.CurrentGameState = Singleton.GameState.Cutscene;
@@ -78,17 +78,18 @@ public class MainScene : Game
             case Singleton.GameState.Cutscene:
                 _cutscene.Update(gameTime);
                 break;
-                
-            case Singleton.GameState.GamePlaying:
-                
-                // if (IsButtonClicked(_setting))
-                // {
-                //     Singleton.Instance.CurrentGameState = Singleton.GameState.GamePaused;
-                // }
 
+            case Singleton.GameState.GamePlaying:
+                // Pause Game
                 if (Singleton.Instance.CurrentKey.IsKeyDown(Keys.Escape) && !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
                     Singleton.Instance.CurrentGameState = Singleton.GameState.GamePaused;
 
+                if (IsButtonClicked(_drawing.Setting))
+                {
+                    Singleton.Instance.CurrentGameState = Singleton.GameState.GamePaused;
+                }
+
+                // Update GameObjects               
                 for (int i = 0; i < _numOjects; i++)
                 {
                     if (_gameObjects[i].IsActive)
@@ -96,7 +97,6 @@ public class MainScene : Game
                         _gameObjects[i].Update(gameTime, _gameObjects);
                     }
                 }
-
 
                 for (int i = 0; i < _numOjects; i++)
                 {
@@ -108,6 +108,7 @@ public class MainScene : Game
                     }
                 }
 
+                // Update Camera
                 if (Singleton.Instance.player != null)
                 {
                     _camera.Follow(Singleton.Instance.player);
@@ -137,31 +138,6 @@ public class MainScene : Game
                     }
                 }
 
-                // foreach (var obj in _gameObjects)
-                // {
-                //     if (obj is Checkpoint checkpoint)
-                //     {
-                //         if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, checkpoint.Rectangle))
-                //         {
-                //             if (!checkpoint.Activated)
-                //             {
-                //                 checkpoint.Activate();
-                //                 // คุณอาจเพิ่มเสียงหรือเอฟเฟคที่นี่
-                //             }
-                //             // อัปเดต LastCheckpoint ของผู้เล่นให้เป็นตำแหน่งของ checkpoint นี้
-                //             Singleton.Instance.player.LastCheckpoint = checkpoint.Position;
-                //         }
-                //     }
-                // }
-
-                // // ตรวจสอบการตกออกนอกแผนที่ (เช่น ตกลงไปมากกว่า Y = 50000)
-                // if (Singleton.Instance.player.Position.Y > 50000)
-                // {
-                //     // รีเซ็ตตำแหน่งผู้เล่นกลับไปที่ Checkpoint ล่าสุด
-                //     Singleton.Instance.player.Position = Singleton.Instance.player.LastCheckpoint;
-                //     Singleton.Instance.player.Velocity = Vector2.Zero;
-                // }
-                
                 // Paremeters: Health, Ultimate
                 _drawing.Healthbar.Update(Singleton.Instance.player.Health);
                 _drawing.HealthbarAnimated.Update(Singleton.Instance.player.Health, gameTime);
@@ -174,12 +150,24 @@ public class MainScene : Game
             case Singleton.GameState.GamePaused: //Game Paused
                 if (Singleton.Instance.CurrentKey.IsKeyDown(Keys.Escape) && !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
                     Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
+
+                if (IsButtonClicked(_drawing.PauseResume))
+                {
+                    Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
+                }
+                else if (IsButtonClicked(_drawing.PauseExit))
+                {
+                    Singleton.Instance.CurrentGameState = Singleton.GameState.GameStart;
+                }else if ( IsButtonClicked(_drawing.Setting))
+                {
+                    Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
+                }
                 break;
 
             case Singleton.GameState.GameOver:
                 if (Singleton.Instance.CurrentMouse.LeftButton == ButtonState.Pressed && Singleton.Instance.PreviousMouse.LeftButton == ButtonState.Released)
                 {
-                    Singleton.Instance.CurrentGameState = Singleton.GameState.Start;
+                    Singleton.Instance.CurrentGameState = Singleton.GameState.GameStart;
                     Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
                 }
                 break;
@@ -197,7 +185,7 @@ public class MainScene : Game
 
         switch (Singleton.Instance.CurrentGameState)
         {
-            case Singleton.GameState.Start:
+            case Singleton.GameState.GameStart:
                 {
                     _drawing._DrawStart(_spriteBatch);
                 }
@@ -214,7 +202,7 @@ public class MainScene : Game
                 break;
             case Singleton.GameState.GamePaused:
                 {
-                    _drawing._DrawPause(_spriteBatch);
+                    _drawing._DrawPause(_spriteBatch, _gameObjects, _numOjects);
                 }
                 break;
             case Singleton.GameState.GameOver:
@@ -233,7 +221,7 @@ public class MainScene : Game
     {
         Singleton.Instance.Score = 0;
         Singleton.Instance.Timer = 0;
-        Singleton.Instance.CurrentGameState = Singleton.GameState.Cutscene;
+        Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
 
         _gameObjects.Clear();
 
@@ -256,6 +244,7 @@ public class MainScene : Game
         // Player Instance
         var _animationsPlayer = AnimationPlayer.LoadAnimations(knightSheet);
         var _animationsBullet = AnimationUlitmate.LoadAnimations(bulletSheet);
+
         Singleton.Instance.player = new Player(_animationsPlayer)
         {
             Name = "Player",
@@ -276,6 +265,8 @@ public class MainScene : Game
                 Viewport = new Rectangle(25, 6, 54, 65),
             }
         };
+
+        Singleton.Instance.player.LoadDebufIcons(Content);
 
         _gameObjects.Add(Singleton.Instance.player);
     }
@@ -301,7 +292,7 @@ public class MainScene : Game
         {
             Name = "SKLT_WR",
             Score = 10,
-            Viewport = new Rectangle(0, 0, 53, 58),
+            Viewport = new Rectangle(0, 0, 53, 58)
         };
 
         MonsterType prototypeSL = new SL(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SL))
@@ -323,11 +314,10 @@ public class MainScene : Game
             Name = "SKLT_AC",
             Score = 40,
             Viewport = new Rectangle(0, 0, 37, 64),
-            Bullet = new Bullet(Content.Load<Texture2D>("skeleton_archer"))
+            bullet = new Bullet(monsterTextures[AnimationMonster.AnimationMonsterType.SKLT_AC])
             {
                 Name = "BulletEnemy",
-                Viewport = new Rectangle(384, 65, 45, 3),
-                Velocity = new Vector2(0, 600f)
+                Viewport = new Rectangle(384, 65, 45, 3)
             }
         };
 
@@ -336,7 +326,12 @@ public class MainScene : Game
             Name = "MDS",
             Score = 50,
             Viewport = new Rectangle(0, 0, 65, 77),
-            Position = new Vector2(6740, 4049)
+            Position = new Vector2(6740, 4049),
+            bullet = new Bullet(Content.Load<Texture2D>("skeleton_archer"))
+            {
+                Name = "BulletEnemy",
+                Viewport = new Rectangle(384, 65, 45, 3)
+            }
         };
 
         // // Postion each monster type
@@ -351,41 +346,36 @@ public class MainScene : Game
         // {
         //     var clone = prototypeSL.Clone();
         //     clone.Position = pos;
-        //     clone.Name += "_" + pos.ToString();
         //     _gameObjects.Add(clone);
         // }
-        
+
         // foreach (var pos in spawnPositionsWR)
         // {
         //     var clone = prototypeWR.Clone();
         //     clone.Position = pos;
-        //     clone.Name += "_" + pos.ToString();
         //     _gameObjects.Add(clone);
         // }
 
-        foreach (var pos in spawnPositionsSM)
-        {
-            var clone = prototypeSM.Clone();
-            clone.Position = pos;
-            clone.Name += "_" + pos.ToString();
-            _gameObjects.Add(clone);
-        }
+        // foreach (var pos in spawnPositionsSM)
+        // {
+        //     var clone = prototypeSM.Clone();
+        //     clone.Position = pos;
+        //     _gameObjects.Add(clone);
+        // }
 
         // foreach (var pos in spawnPositionsAC)
         // {
         //     var clone = prototypeAC.Clone();
         //     clone.Position = pos;
-        //     clone.Name += "_" + pos.ToString();
         //     _gameObjects.Add(clone);
         // }
 
-        // foreach (var pos in spawnPositionsMDS)
-        // {
-        //     var clone = prototypeMDS.Clone();
-        //     clone.Position = pos;
-        //     clone.Name += "_" + pos.ToString();
-        //     _gameObjects.Add(clone);
-        // }
+        foreach (var pos in spawnPositionsMDS)
+        {
+            var clone = prototypeMDS.Clone();
+            clone.Position = pos;
+            _gameObjects.Add(clone);
+        }
     }
 
 
@@ -396,7 +386,7 @@ public class MainScene : Game
         var goldChestAnimations = _animationsChest[ChestType.GoldChest];
         var _animationCoin = AnimationCoin.LoadAnimations(_drawing.CoinSheet);
         var _animationPotion = AnimationPotion.LoadAnimations(_drawing.PotionSheet);
-        
+
         Chest prototypeChest = new Chest(goldChestAnimations)
         {
             Name = "Chest",
@@ -420,7 +410,7 @@ public class MainScene : Game
             clone.Name += "_" + pos.ToString();
             _gameObjects.Add(clone);
         }
-        
+
 
         // Flag Instance & Texture
         var _animationFlag = AnimationFlag.LoadAnimations(_drawing.FlagSheet);

@@ -34,24 +34,24 @@ namespace TheKnightAwakening
 
                 { "Run", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(2,   163, 48, 61),
-                        new Rectangle(69,  165, 54, 59),
-                        new Rectangle(142, 162, 49, 62),
-                        new Rectangle(210, 161, 51, 63),
-                        new Rectangle(280, 164, 48, 60),
-                        new Rectangle(347, 165, 54, 59),
-                        new Rectangle(420, 162, 48, 62)
+                        new Rectangle(2,   161, 48, 64),
+                        new Rectangle(69,  163, 54, 64),
+                        new Rectangle(142, 160, 49, 64),
+                        new Rectangle(210, 163, 51, 64),
+                        new Rectangle(280, 162, 48, 64),
+                        new Rectangle(347, 163, 54, 64),
+                        new Rectangle(420, 160, 48, 64)
                     }, 0.10f, true)
                 },
 
                 { "Jump", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(2,   247, 49, 57),
+                        new Rectangle(2,   247, 49, 64),
                         new Rectangle(81,  240, 49, 64),
                         new Rectangle(153, 240, 46, 64),
-                        new Rectangle(229, 239, 69, 65),
-                        new Rectangle(305, 246, 64, 58),
-                        new Rectangle(385, 247, 61, 57)
+                        new Rectangle(229, 239, 69, 64),
+                        new Rectangle(305, 246, 64, 64),
+                        new Rectangle(385, 247, 61, 64)
                     }, 0.12f, false)
                 },
 
@@ -67,10 +67,10 @@ namespace TheKnightAwakening
 
                 { "Attack2", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(6,   405, 42, 75),
-                        new Rectangle(101, 409, 43, 71),
-                        new Rectangle(198, 412, 88, 68),
-                        new Rectangle(299, 416, 66, 64)
+                        new Rectangle(6,   417, 42, 75),
+                        new Rectangle(101, 421, 43, 75),
+                        new Rectangle(198, 412, 88, 75),
+                        new Rectangle(299, 416, 66, 75)
                     }, 0.10f, false)
                 },
 
@@ -78,31 +78,31 @@ namespace TheKnightAwakening
                     {
                         new Rectangle(9,   496, 48, 64),
                         new Rectangle(113, 496, 49, 64),
-                        new Rectangle(217, 498, 85, 62),
-                        new Rectangle(315, 501, 80, 59)
+                        new Rectangle(217, 496, 85, 64),
+                        new Rectangle(315, 496, 80, 64)
                     }, 0.10f, false)
                 },
 
 
                 { "Dead", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(5,   583, 43, 58),
-                        new Rectangle(78,  596, 47, 45),
-                        new Rectangle(160, 607, 45, 34),
-                        new Rectangle(239, 608, 50, 33),
-                        new Rectangle(316, 608, 54, 33),                            
-                        new Rectangle(392, 608, 54, 33)
+                        new Rectangle(5,   578, 43, 64),
+                        new Rectangle(78,  578, 47, 64),
+                        new Rectangle(160, 578, 45, 64),
+                        new Rectangle(239, 578, 50, 64),
+                        new Rectangle(316, 578, 54, 64),                            
+                        new Rectangle(392, 578, 54, 64)
                     }, 0.10f, false)
                 },
 
 
                 { "Defend", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(7,   660, 43, 60),
-                        new Rectangle(83,  659, 43, 61),
-                        new Rectangle(159, 659, 43, 61),
-                        new Rectangle(235, 659, 43, 61),
-                        new Rectangle(311, 660, 43, 60)
+                        new Rectangle(7,   657, 43, 64),
+                        new Rectangle(83,  657, 43, 64),
+                        new Rectangle(159, 657, 43, 64),
+                        new Rectangle(235, 657, 43, 64),
+                        new Rectangle(311, 657, 43, 64)
                     }, 0.10f, false)
                 }
             };

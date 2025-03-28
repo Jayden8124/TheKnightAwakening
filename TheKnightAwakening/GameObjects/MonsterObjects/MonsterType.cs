@@ -65,11 +65,33 @@ namespace TheKnightAwakening
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // Draw Monster Animation
-            AnimationManager.Position = Position;
-            AnimationManager.Draw(spriteBatch);
+            {
+                // Draw Monster Animation
+                AnimationManager.Position = Position;
+                AnimationManager.Draw(spriteBatch);
+                if (this is SL)
+                {
+                    Rectangle healthBar = new Rectangle(Rectangle.X, Rectangle.Bottom + 10, (int)(Rectangle.Width * (Health / 100f)), 5);
+                    spriteBatch.Draw(Singleton.Instance._rect, healthBar, Color.Red);
+                }
+                else if (this is SKLT_AC)
+                {
+                    Rectangle healthBar = new Rectangle(Rectangle.X, Rectangle.Bottom + 10, (int)(Rectangle.Width * (Health / 100f)), 5);
+                    spriteBatch.Draw(Singleton.Instance._rect, healthBar, Color.Red);
+                }
+                else if (this is SKLT_SM)
+                {
+                    Rectangle healthBar = new Rectangle(Rectangle.X, Rectangle.Bottom + 10, (int)(Rectangle.Width * (Health / 150f)), 5);
+                    spriteBatch.Draw(Singleton.Instance._rect, healthBar, Color.Red);
+                }
+                else if (this is SKLT_WR)
+                {
+                    Rectangle healthBar = new Rectangle(Rectangle.X, Rectangle.Bottom + 10, (int)(Rectangle.Width * (Health / 200f)), 5);
+                    spriteBatch.Draw(Singleton.Instance._rect, healthBar, Color.Red);
+                }
 
-            base.Draw(spriteBatch);
+                base.Draw(spriteBatch);
+            }
         }
 
         public override void Reset()

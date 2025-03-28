@@ -25,10 +25,10 @@
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/Petrify.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/Slow.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/Weakness.png</File>
-    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/bg_menu.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/bg.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/Cave.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/hitbox.PNG</File>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/House.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/prop.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/TilesetGround.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Objects/blue_slime.png</File>
@@ -41,15 +41,19 @@
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_archer.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_spearman.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Objects/skeleton_warrior.png</File>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/bg_menu.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/Button Ui.png</File>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/defeat.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/game_font.spritefont</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/health_bar.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/hitbox.PNG</File>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/how_to_play.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/icon_game.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/Icon-sheet.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/menu.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/message_box.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/ultimate.png</File>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/victory.png</File>
   </SourceFiles>
   <DestFiles>
     <File>Bgm.mp3</File>
@@ -73,10 +77,10 @@
     <File>Petrify.png</File>
     <File>Slow.png</File>
     <File>Weakness.png</File>
-    <File>bg_menu.png</File>
     <File>bg.png</File>
     <File>Cave.png</File>
     <File>hitbox.PNG</File>
+    <File>House.png</File>
     <File>prop.png</File>
     <File>TilesetGround.png</File>
     <File>blue_slime.png</File>
@@ -89,14 +93,18 @@
     <File>skeleton_archer.png</File>
     <File>skeleton_spearman.png</File>
     <File>skeleton_warrior.png</File>
+    <File>bg_menu.png</File>
     <File>Button Ui.png</File>
+    <File>defeat.png</File>
     <File>game_font.spritefont</File>
     <File>health_bar.png</File>
     <File>hitbox.PNG</File>
+    <File>how_to_play.png</File>
     <File>icon_game.png</File>
     <File>Icon-sheet.png</File>
     <File>menu.png</File>
     <File>message_box.png</File>
     <File>ultimate.png</File>
+    <File>victory.png</File>
   </DestFiles>
 </SourceFileCollection>

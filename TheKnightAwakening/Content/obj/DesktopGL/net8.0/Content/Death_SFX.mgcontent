@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Death_SFX.mp3</SourceFile>
-  <SourceTime>2025-03-22T21:14:14.778459+07:00</SourceTime>
+  <SourceTime>2025-03-28T23:10:29.9584603+07:00</SourceTime>
   <DestFile>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Content/Death_SFX.xnb</DestFile>
-  <DestTime>2025-03-22T21:14:32.4116519+07:00</DestTime>
+  <DestTime>2025-03-28T23:10:37.8446778+07:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
-  <Processor>SongProcessor</Processor>
+  <Processor>SoundEffectProcessor</Processor>
   <ProcessorTime>2024-08-17T00:05:56+07:00</ProcessorTime>
   <Parameters>
     <Key>Quality</Key>
@@ -14,7 +14,5 @@
   </Parameters>
   <Dependencies />
   <BuildAsset />
-  <BuildOutput>
-    <string>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Content/Death_SFX.ogg</string>
-  </BuildOutput>
+  <BuildOutput />
 </PipelineBuildEvent>

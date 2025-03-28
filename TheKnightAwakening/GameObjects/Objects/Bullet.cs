@@ -35,7 +35,7 @@ namespace TheKnightAwakening
             {
                 SpriteEffects spriteEffect = (Velocity.X > 0) ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
-                spriteBatch.Draw(_texture, Position, null, Color.White, 0f, Vector2.Zero, 1f, spriteEffect, 0f);
+                spriteBatch.Draw(_texture, Position, Viewport, Color.White, 0f, Vector2.Zero, 1f, spriteEffect, 0f);
 
                 base.Draw(spriteBatch);
             }

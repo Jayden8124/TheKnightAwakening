@@ -27,7 +27,7 @@ namespace TheKnightAwakening
         // Game state
         public enum GameState
         {
-            Start,
+            GameStart,
             Cutscene,
             GamePlaying,
             GamePaused,

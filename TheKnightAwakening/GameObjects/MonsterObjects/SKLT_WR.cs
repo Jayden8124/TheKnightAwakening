@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace TheKnightAwakening
@@ -12,22 +13,33 @@ namespace TheKnightAwakening
 
         public override void Update(GameTime gameTime, List<GameObject> _gameObjects)
         {
-            // รีเซ็ต flag ของ hitblock ในแต่ละเฟรม
             collidedWithHitblock = false;
+            HandleHitblockCollision();
 
-            // สร้าง front rectangle เพื่อตรวจสอบว่ากำแพง (hitblock) อยู่ด้านหน้าหรือไม่
-            int offset = 5; // ระยะที่ใช้ตรวจสอบด้านหน้า
-            Rectangle frontRect;
-            if (AnimationManager.FacingRight)
+            if (gameTime.TotalGameTime.TotalSeconds > 1)
             {
-                frontRect = new Rectangle(this.Rectangle.Right, this.Rectangle.Y, offset, this.Rectangle.Height);
-            }
-            else
-            {
-                frontRect = new Rectangle(this.Rectangle.X - offset, this.Rectangle.Y, offset, this.Rectangle.Height);
+                if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, this.Rectangle))
+                {
+                    HandleMeleeAttack(gameTime);
+                }
+                else
+                {
+                    attackTimer = 0f;
+                    HandleMovement();
+                }
             }
 
-            // ตรวจสอบ collision กับ hitblock เฉพาะส่วนด้านหน้า (เพื่อไม่ให้ตรวจจับพื้น)
+            AnimationManager.Update(gameTime);
+            base.Update(gameTime, _gameObjects);
+        }
+
+        private void HandleHitblockCollision()
+        {
+            const int frontOffset = 5;
+            Rectangle frontRect = AnimationManager.FacingRight ?
+                new Rectangle(this.Rectangle.Right, this.Rectangle.Y, frontOffset, this.Rectangle.Height) :
+                new Rectangle(this.Rectangle.X - frontOffset, this.Rectangle.Y, frontOffset, this.Rectangle.Height);
+
             if (Singleton.Instance.HitblockTiles != null)
             {
                 foreach (var tile in Singleton.Instance.HitblockTiles)
@@ -40,114 +52,70 @@ namespace TheKnightAwakening
                 }
             }
 
-            // ถ้าชนกับกำแพงที่ด้านหน้า ให้เปลี่ยนทิศทาง
             if (collidedWithHitblock)
             {
                 moveDirection *= -1;
                 AnimationManager.FacingRight = moveDirection > 0;
             }
+        }
 
-            // ส่วนการเคลื่อนที่และโจมตี
-            if (gameTime.TotalGameTime.TotalSeconds > 1)
+        private void HandleMeleeAttack(GameTime gameTime)
+        {
+            bool isFacingEnemy = (Singleton.Instance.player.Position.X < Position.X && AnimationManager.FacingRight) ||
+                                 (Singleton.Instance.player.Position.X > Position.X && !AnimationManager.FacingRight);
+            if (isFacingEnemy)
             {
-                if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, this.Rectangle))
+                AnimationManager.FacingRight = !AnimationManager.FacingRight;
+            }
+            float attackAnimDuration = Animations["Attack"].FrameSpeed * Animations["Attack"].FrameCount;
+            attackTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (attackTimer <= -0.4f)
+            {
+                AnimationManager.Play(Animations["Attack"]);
+                Singleton.Instance.player.TakeDamage(this.Damage, this.Position);
+                attackTimer = attackDelay;
+            }
+            else
+            {
+                if (attackTimer > attackDelay - attackAnimDuration)
                 {
-                    // คำนวณระยะเวลาของแอนิเมชัน Attack
-                    float attackAnimDuration = Animations["Attack"].FrameSpeed * Animations["Attack"].FrameCount;
-                    attackTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    if (attackTimer <= -0.4f) // adjust animation when collision for attack
-                    {
-                        // เมื่อ delay หมดแล้ว ให้เล่นแอนิเมชัน Attack และโจมตี Player แล้วรีเซ็ต timer
-                        AnimationManager.Play(Animations["Attack"]);
-                        Singleton.Instance.player.TakeDamage(this.Damage, this.Position);
-                        attackTimer = attackDelay;
-                    }
-                    else
-                    {
-                        // ถ้า attackTimer ยังอยู่ในช่วงแรกของ delay (แสดงการโจมตี)
-                        if (attackTimer > attackDelay - attackAnimDuration)
-                        {
-                            AnimationManager.Play(Animations["Attack"]);
-                        }
-                        else
-                        {
-                            // ช่วงเวลาที่เหลือให้แสดงแอนิเมชัน Idle
-                            AnimationManager.Play(Animations["Idle"]);
-                        }
-                    }
+                    AnimationManager.Play(Animations["Attack"]);
                 }
                 else
                 {
-                    // เมื่อไม่ชนกับ Player ให้รีเซ็ต timer และเคลื่อนที่ตามปกติ
-                    attackTimer = 0f;
-                    // if (DistanceMoved <= 150) 
-                    // {
-                    //     // เมื่อ Player ใกล้ (≤150) และอยู่ในแนวเดียวกัน ให้วิ่งเข้าหา
-                    //     if (Singleton.Instance.player.Position.X < Position.X)
-                    //     {
-                    //         Position = new Vector2(Position.X - runSpeed, Position.Y);
-                    //         moveDirection = -1;
-                    //         AnimationManager.FacingRight = false;
-                    //     }
-                    //     else
-                    //     {
-                    //         Position = new Vector2(Position.X + runSpeed, Position.Y);
-                    //         moveDirection = 1;
-                    //         AnimationManager.FacingRight = true;
-                    //     }
-                    //     AnimationManager.Play(Animations["Run"]);
-                    // }
-                    // else
-                    // {
-                    //     // หากระยะห่าง > 150 ให้เดินตามทิศทางที่กำหนด
-                    //     Position = new Vector2(Position.X + walkSpeed * moveDirection, Position.Y);
-                    //     AnimationManager.FacingRight = moveDirection > 0;
-                    //     AnimationManager.Play(Animations["Walk"]);
-                    // }
-                    if (DistanceMoved <= 150 && this.Position.Y == Singleton.Instance.player.Position.Y)
-                    {
-                        bool isFacingEnemy = (Singleton.Instance.player.Position.X < Position.X && AnimationManager.FacingRight) ||
-                                     (Singleton.Instance.player.Position.X > Position.X && !AnimationManager.FacingRight);
-
-                        if (isFacingEnemy)
-                        {
-                            AnimationManager.FacingRight = !AnimationManager.FacingRight;
-                        }
-
-                        attackTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds; // ลด attackTimer ทุกเฟรม
-
-                        if (attackTimer < -attackDelay) // ตรวจสอบว่าเวลาถึงการโจมตีหรือยัง
-                        {
-                            attackTimer = 0;
-                        }
-                        else
-                        {
-                            AnimationManager.Play(Animations["Attack"]);
-                        }
-                    }
-                    else
-                    {
-                        attackTimer = 0f;
-                        // เมื่อ Player ใกล้ (≤150) และอยู่ในแนวเดียวกัน ให้วิ่งเข้าหา
-                        if (Singleton.Instance.player.Position.X < Position.X)
-                        {
-                            Position = new Vector2(Position.X - runSpeed, Position.Y);
-                            moveDirection = -1;
-                            AnimationManager.FacingRight = false;
-                        }
-                        else
-                        {
-                            Position = new Vector2(Position.X + runSpeed, Position.Y);
-                            moveDirection = 1;
-                            AnimationManager.FacingRight = true;
-                        }
-                        AnimationManager.Play(Animations["Walk"]);
-                    }
+                    AnimationManager.Play(Animations["Idle"]);
                 }
             }
+        }
 
-            AnimationManager.Update(gameTime);
-            base.Update(gameTime, _gameObjects);
+        private void HandleMovement()
+        {
+            const int chaseDistance = 150;
+
+            if (DistanceMoved <= chaseDistance)
+            {
+                if (Singleton.Instance.player.Position.X < Position.X)
+                {
+                    Position = new Vector2(Position.X - runSpeed, Position.Y);
+                    moveDirection = -1;
+                    AnimationManager.FacingRight = false;
+                }
+                else
+                {
+                    Position = new Vector2(Position.X + runSpeed, Position.Y);
+                    moveDirection = 1;
+                    AnimationManager.FacingRight = true;
+                }
+                AnimationManager.Play(Animations["Run"]);
+            }
+            else
+            {
+                // หากระยะห่าง > 150 ให้เดินตามทิศทางที่กำหนด
+                Position = new Vector2(Position.X + walkSpeed * moveDirection, Position.Y);
+                AnimationManager.FacingRight = moveDirection > 0;
+                AnimationManager.Play(Animations["Walk"]);
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -161,17 +129,17 @@ namespace TheKnightAwakening
         {
             Health = 200;
             Damage = 15;
-            walkSpeed = 3f;
-            runSpeed = 7f;
+            walkSpeed = 2f;
+            runSpeed = 5f;
             moveDirection = -1;
             attackTimer = 0f;
-            attackDelay = 3.0f;
+            attackDelay = 4.0f;
             base.Reset();
         }
 
         public static List<Vector2> SpawnPositions = new List<Vector2>
         {
-            new Vector2(100, 0), // Test
+            new Vector2(100, 0) // Test
             // new Vector2(6780, 470),
             // new Vector2(9303, 470),
             // new Vector2(1190, 1108),

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/UI/message_box.png</SourceFile>
-  <SourceTime>2025-03-22T21:03:14.5854026+07:00</SourceTime>
-  <DestFile>c:/Study-Comsci/Y3T2/COMGAME/Final/I/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/message_box.xnb</DestFile>
-  <DestTime>2025-03-22T21:08:35.8908387+07:00</DestTime>
+  <SourceFile>c:/Study-Comsci/Y3T2/COMGAME/Final/K/TheKnightAwakening/TheKnightAwakening/Content/UI/message_box.png</SourceFile>
+  <SourceTime>2025-03-26T20:16:14.107881+07:00</SourceTime>
+  <DestFile>c:/Study-Comsci/Y3T2/COMGAME/Final/K/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/message_box.xnb</DestFile>
+  <DestTime>2025-03-27T02:22:53.8503449+07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -18,7 +19,7 @@ namespace TheKnightAwakening
         public Vector2 LastCheckpoint { get; set; }
 
         // Properties
-        private int maxHealth = 100;
+        private int maxHealth = 200;
         public int Ultimate { get; private set; }
         private float speed;
         private bool isAttacking;
@@ -29,10 +30,14 @@ namespace TheKnightAwakening
         private bool isDefending;
         private bool isVisible = true;
         private float time = 5f;
+
         // Movement
         public Keys Left, Right, Up, Down, Fire, Defend, Attack2, Attack3, UltimateAttack;
+
         // Debuff
         public enum DebuffType { Slow, Stun, Poison, Weak }
+        public Dictionary<DebuffType, Texture2D> debuffIcons;
+
         private Dictionary<DebuffType, float> activeDebuffs = new();
 
 
@@ -46,8 +51,8 @@ namespace TheKnightAwakening
 
         public override void Reset()
         {
-            Health = 100;
-            Damage = 20;
+            Health = maxHealth;
+            Damage = 50;
             Ultimate = 0;
             isDead = false;
             Position = LastCheckpoint;
@@ -189,14 +194,13 @@ namespace TheKnightAwakening
                 !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
             {
                 TriggerAttack("Attack1", _gameObjects);
-                Ultimate++;
             }
             else if (Singleton.Instance.CurrentKey.IsKeyDown(Attack2) &&
             !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
             {
                 TriggerAttack("Attack2", _gameObjects);
             }
-            else if (Ultimate >= 0 && Singleton.Instance.CurrentKey.IsKeyDown(Attack3) &&
+            else if (Ultimate == 5 && Singleton.Instance.CurrentKey.IsKeyDown(Attack3) &&
             !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
             {
                 TriggerAttack("Attack3", _gameObjects);
@@ -224,6 +228,7 @@ namespace TheKnightAwakening
                     if (Player.CheckAABBCollision(this.Rectangle, monster.Rectangle))
                     {
                         monster.TakeDamage(this.Damage, this.Position);
+                        Ultimate++; // Test Befor Edit
                         Console.WriteLine("Monster taken damage: " + this.Damage);
                     }
                 }
@@ -287,7 +292,8 @@ namespace TheKnightAwakening
                     }
                 }
             }
-            else {
+            else
+            {
                 Console.WriteLine("Debuff already applied");
             }
         }
@@ -298,8 +304,19 @@ namespace TheKnightAwakening
             if (this.Health > maxHealth) this.Health = maxHealth;
         }
 
+        public void LoadDebufIcons(ContentManager Content)
+        {
+            debuffIcons = new Dictionary<DebuffType, Texture2D>{
+                { DebuffType.Slow, Content.Load<Texture2D>("Slow") },
+                { DebuffType.Stun, Content.Load<Texture2D>("Petrify") },
+                // { DebuffType.Poison, Content.Load<Texture2D>("poison") },
+                { DebuffType.Weak, Content.Load<Texture2D>("Weakness") }
+            };
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
+            // วาดตัวละครตามปกติ
             Color playerColor = Color.White;
             if (activeDebuffs.ContainsKey(DebuffType.Stun))
             {
@@ -313,12 +330,31 @@ namespace TheKnightAwakening
             {
                 playerColor = Color.Green;
             }
-
             if (isVisible)
             {
                 AnimationManager.Position = Position;
                 AnimationManager.Draw(spriteBatch, playerColor);
             }
+
+            // วาดไอคอน debuff ตามจำนวนวินาทีที่เหลือ
+            // ตัวอย่างนี้ใช้ activeDebuffs ที่เก็บ (DebuffType, float) โดย float คือเวลาที่เหลือในหน่วยวินาที
+            foreach (var debuff in activeDebuffs)
+            {
+                if (debuffIcons != null && debuffIcons.TryGetValue(debuff.Key, out Texture2D icon))
+                {
+                    // คำนวณจำนวนไอคอนที่จะวาด (หนึ่งไอคอนต่อวินาทีที่เหลือ)
+                    int secondsRemaining = (int)Math.Ceiling(debuff.Value);
+                    // TODO: กำหนดตำแหน่งเริ่มต้นสำหรับไอคอน debuff
+                    int startX = (int)Position.X + 100; // เปลี่ยนค่าให้เหมาะสมกับตำแหน่งที่คุณต้องการ
+                    int startY = (int)Position.Y + 100; // เปลี่ยนค่าให้เหมาะสมกับตำแหน่งที่คุณต้องการ
+                    int spacing = 10; // ระยะห่างระหว่างไอคอนแต่ละอัน
+                    for (int i = 0; i < secondsRemaining; i++)
+                    {
+                        spriteBatch.Draw(icon, new Rectangle(startX + i * (icon.Width + spacing), startY, icon.Width, icon.Height), Color.White);
+                    }
+                }
+            }
         }
+
     }
 }

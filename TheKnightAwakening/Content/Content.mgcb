@@ -33,7 +33,7 @@
 
 #begin Audio/SFX/Death_SFX.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/SFX/Death_SFX.mp3;Death_SFX.mp3
 
@@ -217,18 +217,6 @@
 /processorParam:TextureFormat=Color
 /build:IconDebuff/Weakness.png;Weakness.png
 
-#begin Map/bg_menu.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/bg_menu.png;bg_menu.png
-
 #begin Map/bg.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -264,6 +252,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Map/hitbox.PNG;hitbox.PNG
+
+#begin Map/House.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/House.png;House.png
 
 #begin Map/prop.png
 /importer:TextureImporter
@@ -409,7 +409,7 @@
 /processorParam:TextureFormat=Color
 /build:Objects/skeleton_warrior.png;skeleton_warrior.png
 
-#begin UI/Button Ui.png
+#begin UI/bg_menu.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -419,7 +419,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UI/Button Ui.png;Button Ui.png
+/build:UI/bg_menu.png;bg_menu.png
 
 #begin UI/Button Ui.png
 /importer:TextureImporter
@@ -432,6 +432,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/Button Ui.png;Button Ui.png
+
+#begin UI/defeat.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/defeat.png;defeat.png
 
 #begin UI/game_font.spritefont
 /importer:FontDescriptionImporter
@@ -464,6 +476,18 @@
 /processorParam:TextureFormat=Color
 /build:UI/hitbox.PNG;hitbox.PNG
 
+#begin UI/how_to_play.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/how_to_play.png;how_to_play.png
+
 #begin UI/icon_game.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -475,18 +499,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/icon_game.png;icon_game.png
-
-#begin UI/Icon-sheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Icon-sheet.png;Icon-sheet.png
 
 #begin UI/Icon-sheet.png
 /importer:TextureImporter
@@ -535,4 +547,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/ultimate.png;ultimate.png
+
+#begin UI/victory.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/victory.png;victory.png
 

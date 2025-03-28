@@ -15,7 +15,9 @@ namespace TheKnightAwakening
         private Dictionary<Vector2, int> fg;
         private Dictionary<Vector2, int> cave;
         private Dictionary<Vector2, int> collisions;
-        private Dictionary<Vector2, int> prop;
+        private Dictionary<Vector2, int> prop_1;
+        private Dictionary<Vector2, int> prop_2;
+        private Dictionary<Vector2, int> prop_3;
         public Rectangle hitbox;
         private GraphicsDevice _graphicsDevice;
 
@@ -37,10 +39,12 @@ namespace TheKnightAwakening
             textureMapCave = Content.Load<Texture2D>("Cave");
             hitboxTexture = Content.Load<Texture2D>("hitbox");
             propTexture = Content.Load<Texture2D>("prop"); 
-            fg = LoadMap("../../../TileMap/Real_Map_ground.csv");
-            cave = LoadMap("../../../TileMap/Real_Map_cave.csv");
-            collisions = LoadMap("../../../TileMap/Real_Map_hitblock.csv");
-            // prop = LoadMap("../../../TileMap/2Map1_full_prop.csv");
+            fg = LoadMap("../../../TileMap/Map_G_ground.csv");
+            cave = LoadMap("../../../TileMap/Map_G_cave.csv");
+            collisions = LoadMap("../../../TileMap/Map_M_hitblock.csv");
+            prop_1 = LoadMap("../../../TileMap/Map_P_t-prop.csv");
+            prop_2 = LoadMap("../../../TileMap/Map_P_m-prop.csv");
+            prop_3 = LoadMap("../../../TileMap/Map_P_b-prop.csv");
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -113,6 +117,90 @@ namespace TheKnightAwakening
                 );
                 this.hitbox = hitbox;
                 spriteBatch.Draw(hitboxTexture, drest, src, Color.White);
+            }
+
+            foreach (var item in prop_1)
+            {
+                Rectangle drest = new(
+                    (int)item.Key.X * TILESIZE,
+                    (int)item.Key.Y * TILESIZE,
+                    TILESIZE,
+                    TILESIZE
+                );
+                Rectangle hitbox = new Rectangle(
+                    (int)item.Key.X * TILESIZE,
+                    (int)item.Key.Y * TILESIZE,
+                    TILESIZE,
+                    TILESIZE
+                );
+
+                int x = item.Value % num_tile_per_row_prop;
+                int y = item.Value / num_tile_per_row_prop;
+
+                Rectangle src = new(
+                    x * pixel_tilesize,
+                    y * pixel_tilesize,
+                    pixel_tilesize,
+                    pixel_tilesize
+                );
+                this.hitbox = hitbox;
+                spriteBatch.Draw(propTexture, drest, src, Color.White);
+            }
+            
+            foreach (var item in prop_2)
+            {
+                Rectangle drest = new(
+                    (int)item.Key.X * TILESIZE,
+                    (int)item.Key.Y * TILESIZE,
+                    TILESIZE,
+                    TILESIZE
+                );
+                Rectangle hitbox = new Rectangle(
+                    (int)item.Key.X * TILESIZE,
+                    (int)item.Key.Y * TILESIZE,
+                    TILESIZE,
+                    TILESIZE
+                );
+
+                int x = item.Value % num_tile_per_row_prop;
+                int y = item.Value / num_tile_per_row_prop;
+
+                Rectangle src = new(
+                    x * pixel_tilesize,
+                    y * pixel_tilesize,
+                    pixel_tilesize,
+                    pixel_tilesize
+                );
+                this.hitbox = hitbox;
+                spriteBatch.Draw(propTexture, drest, src, Color.White);
+            }
+            
+            foreach (var item in prop_3)
+            {
+                Rectangle drest = new(
+                    (int)item.Key.X * TILESIZE,
+                    (int)item.Key.Y * TILESIZE,
+                    TILESIZE,
+                    TILESIZE
+                );
+                Rectangle hitbox = new Rectangle(
+                    (int)item.Key.X * TILESIZE,
+                    (int)item.Key.Y * TILESIZE,
+                    TILESIZE,
+                    TILESIZE
+                );
+
+                int x = item.Value % num_tile_per_row_prop;
+                int y = item.Value / num_tile_per_row_prop;
+
+                Rectangle src = new(
+                    x * pixel_tilesize,
+                    y * pixel_tilesize,
+                    pixel_tilesize,
+                    pixel_tilesize
+                );
+                this.hitbox = hitbox;
+                spriteBatch.Draw(propTexture, drest, src, Color.White);
             }
             
         }
