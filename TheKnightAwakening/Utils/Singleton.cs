@@ -35,6 +35,8 @@ namespace TheKnightAwakening
         }
         public GameState CurrentGameState;
 
+        public Audio AudioManager;
+
         // Input State
         public KeyboardState PreviousKey, CurrentKey;
         public MouseState PreviousMouse, CurrentMouse;

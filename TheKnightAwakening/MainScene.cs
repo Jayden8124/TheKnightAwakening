@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace TheKnightAwakening;
 
@@ -42,6 +42,8 @@ public class MainScene : Game
         _cutscene = new CutScene(GraphicsDevice);
         _drawing = new Drawing(GraphicsDevice, _camera, _map, _cutscene);
 
+        Singleton.Instance.AudioManager = new Audio();
+
         base.Initialize();
     }
 
@@ -49,9 +51,13 @@ public class MainScene : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+        // Load Sound for Class Audio 
+        Singleton.Instance.AudioManager.LoadSounds(Content);
+        Singleton.Instance.AudioManager.PlayMusic("Bgm", 0.5f);
+
         // Drawing
         _drawing.LoadContent(Content);
-
+        
         Reset(); // Call Reset
     }
 
@@ -291,8 +297,8 @@ public class MainScene : Game
         MonsterType prototypeWR = new SKLT_WR(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_WR))
         {
             Name = "SKLT_WR",
-            Score = 10,
-            Viewport = new Rectangle(0, 0, 53, 58)
+            Score = 40,
+            Viewport = new Rectangle(0, 0, 53, 65)
         };
 
         MonsterType prototypeSL = new SL(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SL))
@@ -305,15 +311,15 @@ public class MainScene : Game
         MonsterType prototypeSM = new SKLT_SM(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_SM))
         {
             Name = "SKLT_SM",
-            Score = 30,
-            Viewport = new Rectangle(0, 0, 30, 80)
+            Score = 40,
+            Viewport = new Rectangle(0, 0, 30, 90)
         };
 
         MonsterType prototypeAC = new SKLT_AC(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_AC))
         {
             Name = "SKLT_AC",
-            Score = 40,
-            Viewport = new Rectangle(0, 0, 37, 64),
+            Score = 30,
+            Viewport = new Rectangle(0, 0, 37, 68),
             bullet = new Bullet(monsterTextures[AnimationMonster.AnimationMonsterType.SKLT_AC])
             {
                 Name = "BulletEnemy",
@@ -324,9 +330,8 @@ public class MainScene : Game
         MonsterType prototypeMDS = new MDS(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.MDS))
         {
             Name = "MDS",
-            Score = 50,
-            Viewport = new Rectangle(0, 0, 65, 77),
-            Position = new Vector2(6740, 4049),
+            Score = 500,
+            Viewport = new Rectangle(0, 0, 68, 89),
             bullet = new Bullet(Content.Load<Texture2D>("skeleton_archer"))
             {
                 Name = "BulletEnemy",
@@ -349,12 +354,12 @@ public class MainScene : Game
         //     _gameObjects.Add(clone);
         // }
 
-        // foreach (var pos in spawnPositionsWR)
-        // {
-        //     var clone = prototypeWR.Clone();
-        //     clone.Position = pos;
-        //     _gameObjects.Add(clone);
-        // }
+        foreach (var pos in spawnPositionsWR)
+        {
+            var clone = prototypeWR.Clone();
+            clone.Position = pos;
+            _gameObjects.Add(clone);
+        }
 
         // foreach (var pos in spawnPositionsSM)
         // {
@@ -370,12 +375,12 @@ public class MainScene : Game
         //     _gameObjects.Add(clone);
         // }
 
-        foreach (var pos in spawnPositionsMDS)
-        {
-            var clone = prototypeMDS.Clone();
-            clone.Position = pos;
-            _gameObjects.Add(clone);
-        }
+        // foreach (var pos in spawnPositionsMDS)
+        // {
+        //     var clone = prototypeMDS.Clone();
+        //     clone.Position = pos;
+        //     _gameObjects.Add(clone);
+        // }
     }
 
 
@@ -407,7 +412,6 @@ public class MainScene : Game
         {
             var clone = (Chest)prototypeChest.Clone();
             clone.Position = pos;
-            clone.Name += "_" + pos.ToString();
             _gameObjects.Add(clone);
         }
 

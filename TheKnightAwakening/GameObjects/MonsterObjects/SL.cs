@@ -9,10 +9,12 @@ namespace TheKnightAwakening
     {
         public SL(Texture2D texture) : base(texture)
         {
+
         }
 
         public SL(Dictionary<string, Animation> animations) : base(animations)
         {
+            
         }
 
         public override void Update(GameTime gameTime, List<GameObject> _gameObjects)

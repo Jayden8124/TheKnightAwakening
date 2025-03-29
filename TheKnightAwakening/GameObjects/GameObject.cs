@@ -66,7 +66,7 @@ namespace TheKnightAwakening
 
         }
 
-        public object Clone()
+        public virtual object Clone()
         {
             return this.MemberwiseClone();
         }

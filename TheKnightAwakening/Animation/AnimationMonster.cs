@@ -54,8 +54,8 @@ namespace TheKnightAwakening
             {
                 { "Idle", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(16, 22, 53, 70),
-                        new Rectangle(112, 22, 53, 70)
+                        new Rectangle(16, 15, 53, 70),
+                        new Rectangle(112, 15, 53, 70)
                     }, 0.15f, true)
                 },
                 { "Projectile", new Animation(texture, new List<Rectangle>
@@ -65,31 +65,31 @@ namespace TheKnightAwakening
                 },
                 { "Walk", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(16, 118, 36, 70),
-                        new Rectangle(96, 118, 36, 70),
-                        new Rectangle(160, 118, 52, 70),
-                        new Rectangle(256, 118, 59, 70),
-                        new Rectangle(352, 118, 52, 70),
-                        new Rectangle(443, 118, 36, 70),
-                        new Rectangle(512, 118, 36, 70)
+                        new Rectangle(16, 111, 36, 70),
+                        new Rectangle(96, 111, 36, 70),
+                        new Rectangle(160, 111, 52, 70),
+                        new Rectangle(256, 111, 59, 70),
+                        new Rectangle(352, 111, 52, 70),
+                        new Rectangle(443, 111, 36, 70),
+                        new Rectangle(512, 111, 36, 70)
                     }, 0.3f, true)
                 },
                 { "Run", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(16, 363, 63, 64),
-                        new Rectangle(112, 360, 59, 64),
-                        new Rectangle(208, 358, 51, 64),
-                        new Rectangle(304, 359, 53, 64),
-                        new Rectangle(400, 359, 61, 64)
+                        new Rectangle(16, 353, 63, 66),
+                        new Rectangle(112, 350, 59, 66),
+                        new Rectangle(208, 349, 51, 66),
+                        new Rectangle(304, 348, 53, 66),
+                        new Rectangle(400, 348, 61, 66)
                     }, 0.25f, true)
                 },
                 { "Attack", new Animation(texture, new List<Rectangle> 
                     {
-                        new Rectangle(13, 196, 47, 64),
-                        new Rectangle(94, 196, 53, 64),
-                        new Rectangle(189, 198, 42, 64),
-                        new Rectangle(269, 198, 86, 64),
-                        new Rectangle(397, 198, 48, 64)
+                        new Rectangle(13, 189, 47, 64),
+                        new Rectangle(94, 189, 53, 64),
+                        new Rectangle(189, 190, 42, 64),
+                        new Rectangle(269, 190, 86, 64),
+                        new Rectangle(397, 190, 48, 64)
                     }, 0.15f, false)
                 },
                 { "Dead", new Animation(texture, new List<Rectangle>
@@ -112,8 +112,8 @@ namespace TheKnightAwakening
             {
                 { "Idle", new Animation(texture, new List<Rectangle> 
                     {
-                        new Rectangle(17, 32, 37, 64),
-                        new Rectangle(145, 32, 37, 64)
+                        new Rectangle(17, 34, 37, 64),
+                        new Rectangle(145, 34, 37, 64)
                     }, 0.3f, true)
                 },
                 { "Projectile", new Animation(texture, new List<Rectangle>
@@ -123,40 +123,40 @@ namespace TheKnightAwakening
                 },
                 { "Walk", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(16, 128, 35, 64),
-                        new Rectangle(145, 128, 35, 64),
-                        new Rectangle(273, 128, 35, 64),
-                        new Rectangle(400, 128, 35, 64),
-                        new Rectangle(527, 128, 35, 64),
-                        new Rectangle(654, 128, 35, 64),
-                        new Rectangle(789, 128, 35, 64)
+                        new Rectangle(16, 123, 35, 68),
+                        new Rectangle(145, 123, 35, 68),
+                        new Rectangle(273, 123, 35, 68),
+                        new Rectangle(400, 123, 35, 68),
+                        new Rectangle(527, 123, 35, 68),
+                        new Rectangle(654, 123, 35, 68),
+                        new Rectangle(789, 123, 35, 68)
                     }, 0.30f, true)
                 },
                 { "Attack", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(16, 224, 35, 74),
-                        new Rectangle(144, 222, 35, 74),
-                        new Rectangle(263, 225, 47, 74),
+                        new Rectangle(16, 220, 35, 74),
+                        new Rectangle(144, 220, 35, 74),
+                        new Rectangle(263, 220, 47, 74),
                         new Rectangle(387, 220, 70, 74),
                         new Rectangle(512, 220, 58, 74),
-                        new Rectangle(15, 325, 39, 74),
-                        new Rectangle(144, 325, 45, 74),
-                        new Rectangle(272, 327, 47, 74),
-                        new Rectangle(397, 327, 50, 74),
-                        new Rectangle(520, 327, 55, 74),
-                        new Rectangle(642, 327, 61, 74),
-                        new Rectangle(780, 327, 51, 74),
-                        new Rectangle(917, 327, 48, 74),
-                        new Rectangle(1046, 327, 58, 74),
-                        new Rectangle(1173, 327, 58, 74)
-                    }, 0.20f, true)
+                        new Rectangle(15, 332, 39, 74),
+                        new Rectangle(144, 332, 45, 74),
+                        new Rectangle(272, 332, 47, 74),
+                        new Rectangle(397, 332, 50, 74),
+                        new Rectangle(520, 332, 55, 74),
+                        new Rectangle(642, 332, 61, 74),
+                        new Rectangle(780, 332, 51, 74),
+                        new Rectangle(917, 332, 48, 74),
+                        new Rectangle(1046, 332, 58, 74),
+                        new Rectangle(1173, 332, 58, 74)
+                    }, 0.2f, true)
                 },
                 { "Shot", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(16, 435, 51, 74),
-                        new Rectangle(143, 435, 51, 74),
-                        new Rectangle(271, 435, 51, 74)
-                    }, 0.3f, false)
+                        new Rectangle(16, 410, 51, 74),
+                        new Rectangle(143, 410, 51, 74),
+                        new Rectangle(271, 410, 51, 74)
+                    }, 0.15f, false)
                 },
                 { "Hurt", new Animation(texture, new List<Rectangle>
                     {
@@ -183,18 +183,18 @@ namespace TheKnightAwakening
             {
                 { "Idle", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(16, 16, 47, 32),
-                        new Rectangle(80, 16, 47, 32),
-                        new Rectangle(144, 16, 47, 32),
-                        new Rectangle(208, 16, 47, 32)
+                        new Rectangle(16, 8, 47, 33),
+                        new Rectangle(80, 8, 47, 33),
+                        new Rectangle(144, 8, 47, 33),
+                        new Rectangle(208, 8, 47, 33)
                     }, 0.35f, true)
                 },
                 { "Walk", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(15, 64, 54, 35),
-                        new Rectangle(80, 64, 53, 35),
-                        new Rectangle(144, 64, 52, 35),
-                        new Rectangle(208, 64, 50, 35)
+                        new Rectangle(15, 63, 54, 35),
+                        new Rectangle(80, 63, 53, 35),
+                        new Rectangle(144, 63, 52, 35),
+                        new Rectangle(208, 63, 50, 35)
                     }, 0.35f, true)
                 },
                 { "Jump", new Animation(texture, new List<Rectangle>
@@ -209,21 +209,21 @@ namespace TheKnightAwakening
                 },
                 { "Attack", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(16, 168, 49, 34),
-                        new Rectangle(80, 168, 50, 34),
-                        new Rectangle(144, 173, 49, 34),
-                        new Rectangle(208, 173, 61, 33)
+                        new Rectangle(16, 163, 49, 33),
+                        new Rectangle(80, 163, 50, 33),
+                        new Rectangle(144, 168, 49, 33),
+                        new Rectangle(208, 168, 61, 33)
                     }, 0.3f, true)
                 },
                 { "Run", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(16, 211, 52, 34),
-                        new Rectangle(80, 213, 56, 34),
-                        new Rectangle(144, 218, 59, 32),
-                        new Rectangle(208, 222, 59, 32),
-                        new Rectangle(272, 218, 56, 32),
-                        new Rectangle(336, 211, 51, 34),
-                        new Rectangle(400, 211, 48, 34)
+                        new Rectangle(16, 223, 52, 35),
+                        new Rectangle(80, 223, 56, 35),
+                        new Rectangle(144, 223, 59, 35),
+                        new Rectangle(208, 223, 59, 35),
+                        new Rectangle(272, 223, 56, 35),
+                        new Rectangle(336, 223, 51, 35),
+                        new Rectangle(400, 223, 48, 35)
                     }, 0.25f, true)
                 },
                 { "Hurt", new Animation(texture, new List<Rectangle>

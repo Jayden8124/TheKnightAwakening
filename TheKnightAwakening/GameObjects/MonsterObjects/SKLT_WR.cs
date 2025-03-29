@@ -9,6 +9,7 @@ namespace TheKnightAwakening
     {
         public SKLT_WR(Dictionary<string, Animation> animations) : base(animations)
         {
+            
         }
 
         public override void Update(GameTime gameTime, List<GameObject> _gameObjects)

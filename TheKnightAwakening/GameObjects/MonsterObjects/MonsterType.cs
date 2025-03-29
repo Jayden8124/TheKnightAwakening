@@ -43,7 +43,7 @@ namespace TheKnightAwakening
                 Position.Y += Velocity.Y;
             }
 
-            if (Health <= 0)
+            if (Health <= 0) // Debug IsActive Immediately
             {
                 Health = 0;
                 isDead = true;
@@ -53,8 +53,28 @@ namespace TheKnightAwakening
                     Singleton.Instance.player.Health += 10;
                 }
                 AnimationManager.Play(Animations["Dead"]);
+
+                switch (this)
+                {
+                    case SL:
+                        Singleton.Instance.AudioManager.PlayEffect("Slime_Die");
+                        break;
+                    case SKLT_AC:
+                    case SKLT_SM:
+                    case SKLT_WR:
+                        Singleton.Instance.AudioManager.PlayEffect("Skeleton_Dead");
+                        break;
+                    case MDS:
+                        Singleton.Instance.AudioManager.PlayEffect("Slime_Die");
+                        break;
+                }
+
                 Console.WriteLine(Singleton.Instance.Score);
-                IsActive = false;
+
+                if (true)
+                {
+                    IsActive = false;
+                }
             }
 
             DistanceMoved = Math.Abs(Position.X - Singleton.Instance.player.Position.X);
@@ -66,7 +86,7 @@ namespace TheKnightAwakening
         public override void Draw(SpriteBatch spriteBatch)
         {
             {
-                // Draw Monster Animation
+                // Draw Monster Animation (Health Underfeet)
                 AnimationManager.Position = Position;
                 AnimationManager.Draw(spriteBatch);
                 if (this is SL)

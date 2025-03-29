@@ -13,10 +13,12 @@ namespace TheKnightAwakening
         private float weakDebuffTimer;
         public MDS(Texture2D texture) : base(texture)
         {
+
         }
 
         public MDS(Dictionary<string, Animation> animations) : base(animations)
         {
+
         }
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects)
@@ -176,15 +178,15 @@ namespace TheKnightAwakening
 
         public override void Reset()
         {
-            Health = 5;
+            Health = 1250;
             Damage = 20;
-            walkSpeed = 1f;
-            runSpeed = 2f;
+            walkSpeed = 3f;
+            runSpeed = 6f;
             moveDirection = -1;
             attackTimer = 0f;
-            attackDelay = Animations["Attack"].FrameSpeed * Animations["Attack"].FrameCount / 2;
-            bulletSpawnTimer = 10f;
-            weakDebuffTimer = 5f;
+            attackDelay = Animations["Attack"].FrameSpeed * Animations["Attack"].FrameCount / 2; // or 3.5f
+            bulletSpawnTimer = 8f;
+            weakDebuffTimer = 5f; //Cooldown ร้อง Debuff = 24 Sec(จาก /2 เป็น หาร 1.4 พอ) 7 Sec Duration 
             base.Reset();
         }
 

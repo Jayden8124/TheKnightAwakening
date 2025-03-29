@@ -71,6 +71,7 @@ namespace TheKnightAwakening
             {
                 AnimationManager.Play(Animations["Dead"]);
                 AnimationManager.Update(gameTime);
+                Singleton.Instance.AudioManager.PlayEffect("Death_SFX");
                 return;
             }
             if (activeDebuffs.ContainsKey(DebuffType.Poison))
@@ -221,6 +222,9 @@ namespace TheKnightAwakening
             attackTimer = 0f;
             if (activeDebuffs.ContainsKey(DebuffType.Weak))
                 this.Damage /= 2;
+
+            Singleton.Instance.AudioManager.PlayEffect("Sword_SFX"); 
+
             foreach (var gameObject in gameObjects)
             {
                 if (gameObject is MonsterType monster)
@@ -309,7 +313,7 @@ namespace TheKnightAwakening
             debuffIcons = new Dictionary<DebuffType, Texture2D>{
                 { DebuffType.Slow, Content.Load<Texture2D>("Slow") },
                 { DebuffType.Stun, Content.Load<Texture2D>("Petrify") },
-                // { DebuffType.Poison, Content.Load<Texture2D>("poison") },
+                { DebuffType.Poison, Content.Load<Texture2D>("poison") },
                 { DebuffType.Weak, Content.Load<Texture2D>("Weakness") }
             };
         }
@@ -336,8 +340,7 @@ namespace TheKnightAwakening
                 AnimationManager.Draw(spriteBatch, playerColor);
             }
 
-            // วาดไอคอน debuff ตามจำนวนวินาทีที่เหลือ
-            // ตัวอย่างนี้ใช้ activeDebuffs ที่เก็บ (DebuffType, float) โดย float คือเวลาที่เหลือในหน่วยวินาที
+            // Icon Debuff
             foreach (var debuff in activeDebuffs)
             {
                 if (debuffIcons != null && debuffIcons.TryGetValue(debuff.Key, out Texture2D icon))

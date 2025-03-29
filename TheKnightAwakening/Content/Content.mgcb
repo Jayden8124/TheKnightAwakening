@@ -193,6 +193,18 @@
 /processorParam:TextureFormat=Color
 /build:IconDebuff/Petrify.png;Petrify.png
 
+#begin IconDebuff/poison.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:IconDebuff/poison.png;poison.png
+
 #begin IconDebuff/Slow.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -217,6 +229,30 @@
 /processorParam:TextureFormat=Color
 /build:IconDebuff/Weakness.png;Weakness.png
 
+#begin Map/bg_f2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/bg_f2.png;bg_f2.png
+
+#begin Map/bg_f3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/bg_f3.png;bg_f3.png
+
 #begin Map/bg.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -228,6 +264,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Map/bg.png;bg.png
+
+#begin Map/cave-bg2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/cave-bg2.png;cave-bg2.png
 
 #begin Map/Cave.png
 /importer:TextureImporter

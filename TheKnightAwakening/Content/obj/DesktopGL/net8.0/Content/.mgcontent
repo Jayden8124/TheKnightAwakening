@@ -23,9 +23,13 @@
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/Scene5.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/CutScreen/Scene6.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/Petrify.png</File>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/poison.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/Slow.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/IconDebuff/Weakness.png</File>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/bg_f2.png</File>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/bg_f3.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/bg.png</File>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/cave-bg2.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/Cave.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/hitbox.PNG</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Map/House.png</File>
@@ -75,9 +79,13 @@
     <File>Scene5.png</File>
     <File>Scene6.png</File>
     <File>Petrify.png</File>
+    <File>poison.png</File>
     <File>Slow.png</File>
     <File>Weakness.png</File>
+    <File>bg_f2.png</File>
+    <File>bg_f3.png</File>
     <File>bg.png</File>
+    <File>cave-bg2.png</File>
     <File>Cave.png</File>
     <File>hitbox.PNG</File>
     <File>House.png</File>

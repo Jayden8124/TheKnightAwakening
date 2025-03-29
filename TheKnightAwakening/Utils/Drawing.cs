@@ -35,6 +35,8 @@ namespace TheKnightAwakening
         public Texture2D FlagSheet { get; private set; }
         public Texture2D House { get; private set; }
         public Texture2D HowToPlay { get; private set; }
+        public Texture2D HealthBarTexture { get; private set; }
+        public Texture2D UltimateTexture { get; private set; }
 
         // Button Rectangles
         public Rectangle MenuPlay { get; private set; }
@@ -42,6 +44,10 @@ namespace TheKnightAwakening
         public Rectangle Setting { get; private set; }
         public Rectangle PauseExit { get; private set; }
         public Rectangle PauseResume { get; private set; }
+        public Rectangle BackgroundSourceHealthBar { get; private set; }
+        public Rectangle ForegroundSourceHealthBar { get; private set; }
+        public Rectangle BackgroundSourceUltimate { get; private set; }
+        public Rectangle ForegroundSourceUltimate { get; private set; }
 
         // Health Bar
         public Healthbar Healthbar { get; private set; }
@@ -64,59 +70,69 @@ namespace TheKnightAwakening
             Setting = new Rectangle(1175, 53, 35, 35);
             PauseExit = new Rectangle(565, 364, 167, 100);
             PauseResume = new Rectangle(565, 250, 167, 100);
+
+            // Health Bar Source Rectangles
+            BackgroundSourceHealthBar = new Rectangle(0, 0, 163, 23);
+            ForegroundSourceHealthBar = new Rectangle(21, 36, 140, 7);
+
+            // Ultimate Bar Source Rectangles
+            BackgroundSourceUltimate = new Rectangle(25, 0, 41, 44);
+            ForegroundSourceUltimate = new Rectangle(0, 12, 17, 19);
         }
 
         public void LoadContent(ContentManager Content)
         {
-            // Background Game
-            Background = Content.Load<Texture2D>("bg");
-            House = Content.Load<Texture2D>("House");
-            HowToPlay = Content.Load<Texture2D>("how_to_play");
+            {   // Background Game
+                Background = Content.Load<Texture2D>("bg");
+                House = Content.Load<Texture2D>("House");
+                HowToPlay = Content.Load<Texture2D>("how_to_play");
+            }
 
-            // Main Menu
-            MenuBackground = Content.Load<Texture2D>("bg_menu");
-            MenuIcon = Content.Load<Texture2D>("icon_game");
-            MenuButton = Content.Load<Texture2D>("menu");
+            {   // Main Menu
+                MenuBackground = Content.Load<Texture2D>("bg_menu");
+                MenuIcon = Content.Load<Texture2D>("icon_game");
+                MenuButton = Content.Load<Texture2D>("menu");
+            }
 
-            // Font
-            Font = Content.Load<SpriteFont>("game_font");
+            {   // Font
+                Font = Content.Load<SpriteFont>("game_font");
+            }
 
-            // Objects
-            ButtonUI = Content.Load<Texture2D>("Button Ui");
-            ChestSheet = Content.Load<Texture2D>("chest");
-            CoinSheet = Content.Load<Texture2D>("gold_coin");
-            PotionSheet = Content.Load<Texture2D>("health_potion");
-            IconSheet = Content.Load<Texture2D>("Icon-sheet");
-            FlagSheet = Content.Load<Texture2D>("Flag_Raise");
+            {    // Objects
+                ButtonUI = Content.Load<Texture2D>("Button Ui");
+                ChestSheet = Content.Load<Texture2D>("chest");
+                CoinSheet = Content.Load<Texture2D>("gold_coin");
+                PotionSheet = Content.Load<Texture2D>("health_potion");
+                IconSheet = Content.Load<Texture2D>("Icon-sheet");
+                FlagSheet = Content.Load<Texture2D>("Flag_Raise");
+            }
 
-            // Health Bar
-            Texture2D healthbarTexture = Content.Load<Texture2D>("health_bar");
-            Rectangle bgSource = new Rectangle(0, 0, 163, 23);
-            Rectangle fgSource = new Rectangle(21, 36, 140, 7);
+            {   // Health Bar
+                HealthBarTexture = Content.Load<Texture2D>("health_bar");
+                Healthbar = new Healthbar(HealthBarTexture, BackgroundSourceHealthBar, ForegroundSourceHealthBar, 100);
+                HealthbarAnimated = new HealthbarAnimated(HealthBarTexture, BackgroundSourceHealthBar, ForegroundSourceHealthBar, 100);
+            }
 
-            Healthbar = new Healthbar(healthbarTexture, bgSource, fgSource, 100);
-            HealthbarAnimated = new HealthbarAnimated(healthbarTexture, bgSource, fgSource, 100);
+            {   // Ultimate Bar
+                UltimateTexture = Content.Load<Texture2D>("ultimate");
+                Ultimatebar = new Ultimatebar(UltimateTexture, BackgroundSourceUltimate, ForegroundSourceUltimate, 5);
+                UltimatebarAnimated = new UltimatebarAnimated(UltimateTexture, BackgroundSourceUltimate, ForegroundSourceUltimate, 5);
+            }
 
-            // Ultimate Bar
-            Texture2D ultimateTexture = Content.Load<Texture2D>("ultimate");
-            Rectangle bgSourceUltimate = new Rectangle(25, 0, 41, 44);
-            Rectangle fgSourceUltimate = new Rectangle(0, 12, 17, 19);
+            {   // Load Content
+                Singleton.Instance._rect = new Texture2D(this.GraphicsDevice, 20, 20);
+                Color[] data = new Color[20 * 20];
+                for (int i = 0; i < data.Length; i++) data[i] = Color.White;
+                Singleton.Instance._rect.SetData(data);
+            }
 
-            Ultimatebar = new Ultimatebar(ultimateTexture, bgSourceUltimate, fgSourceUltimate, 5);
-            UltimatebarAnimated = new UltimatebarAnimated(ultimateTexture, bgSourceUltimate, fgSourceUltimate, 5);
+            {   // Map
+                Map.LoadContent(Content);
+                Singleton.Instance.HitblockTiles = Map.GetCollisionRectangles();
 
-            // Load Content
-            Singleton.Instance._rect = new Texture2D(this.GraphicsDevice, 20, 20);
-            Color[] data = new Color[20 * 20];
-            for (int i = 0; i < data.Length; i++) data[i] = Color.White;
-            Singleton.Instance._rect.SetData(data);
-
-            // Map
-            Map.LoadContent(Content);
-            Singleton.Instance.HitblockTiles = Map.GetCollisionRectangles();
-
-            // Cutscene
-            Cutscene.LoadContent(Content);
+                // Cutscene
+                Cutscene.LoadContent(Content);
+            }
         }
 
         public void _DrawStart(SpriteBatch _spriteBatch)

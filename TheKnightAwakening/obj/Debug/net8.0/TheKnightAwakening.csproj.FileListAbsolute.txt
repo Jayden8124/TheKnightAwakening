@@ -248,3 +248,7 @@ C:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/obj/D
 /Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/victory.xnb
 /Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/House.xnb
 /Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/how_to_play.xnb
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/bg_f2.xnb
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/bg_f3.xnb
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/cave-bg2.xnb
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/poison.xnb

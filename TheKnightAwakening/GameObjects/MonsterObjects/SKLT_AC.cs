@@ -133,12 +133,12 @@ namespace TheKnightAwakening
 
         public override void Reset()
         {
-            Health = 100;
-            Damage = 25;
-            walkSpeed = 3f;
+            Health = 200;
+            Damage = 20;
+            walkSpeed = 2f;
             moveDirection = -1;
             attackTimer = 0f;
-            attackDelay = Animations["Attack"].FrameSpeed * Animations["Attack"].FrameCount / 2;
+            attackDelay = Animations["Attack"].FrameSpeed * Animations["Attack"].FrameCount / 2; // or 3.5f
             base.Reset();
         }
 

@@ -112,6 +112,14 @@ namespace TheKnightAwakening
             return ItemType.None; // Default fallback
         }
 
+        public override object Clone()
+        {
+            Chest clone = (Chest)base.Clone();
+            // สร้าง AnimationManager ใหม่จาก animations ที่ต้องการ
+            clone.AnimationManager = new AnimationManager(this.Animations["Closed"]);
+            return clone;
+        }
+
         public static List<Vector2> SpawnChestPosition = new List<Vector2>
         {
             new Vector2(11136, 197),

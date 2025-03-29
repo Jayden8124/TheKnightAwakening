@@ -46,6 +46,13 @@ namespace TheKnightAwakening
             base.Update(gameTime, _gameObjects);
         }
 
+        public override object Clone()
+        {
+            Flag clone = (Flag)base.Clone();
+            clone.AnimationManager = new AnimationManager(this.Animations["0"]);
+            return clone;
+        }
+
         public static List<Vector2> SpawnFlagPosition = new List<Vector2>
         {
             new Vector2(100, 0), // Test

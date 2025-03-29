@@ -9,7 +9,7 @@ namespace TheKnightAwakening
     {
         public SKLT_SM(Texture2D texture) : base(texture)
         {
-            // Initialize specific properties if needed
+            
         }
 
         public SKLT_SM(Dictionary<string, Animation> animations) : base(animations)
