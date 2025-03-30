@@ -345,17 +345,7 @@ namespace TheKnightAwakening
         private Texture2D _frame;
         private Texture2D _scene1, _scene2, _scene3, _scene4, _scene5, _scene6;
 
-        public enum CutsceneType
-        {
-            StartGame,
-            BossRoom,
-            BossDefeated,
-            BossKilled,
-            BossSpared,
-            EndCredits  // เพิ่ม EndCredits เพื่อแสดงฉากเครดิต
-        }
-        private CutsceneType currentCutscene;
-
+        
         // สำหรับระบบ choice แบบปุ่ม
         Rectangle btnKill;
         Rectangle btnSpare;
@@ -367,7 +357,7 @@ namespace TheKnightAwakening
         public CutScene(GraphicsDevice graphicsDevice)
         {
             this._graphicsDevice = graphicsDevice;
-            currentCutscene = CutsceneType.BossDefeated; // ค่าเริ่มต้นสำหรับทดลอง (คุณสามารถเปลี่ยนได้)
+            Singleton.Instance.currentCutscene = Singleton.CutsceneType.StartGame; // ค่าเริ่มต้นสำหรับทดลอง (คุณสามารถเปลี่ยนได้)
             messages = new List<string>();
             backgrounds = new Dictionary<int, Texture2D>();
 
@@ -393,15 +383,13 @@ namespace TheKnightAwakening
             _scene4 = Content.Load<Texture2D>("Scene4");
             _scene5 = Content.Load<Texture2D>("Scene5");
             _scene6 = Content.Load<Texture2D>("Scene6");
-            
-            LoadSceneData();
         }
 
-        private void LoadSceneData()
+        public void LoadSceneData()
         {
             backgrounds.Clear();
             messages.Clear();
-            
+
             currentMessageIndex = 0;
             displayedText = "";
             charIndex = 0;
@@ -409,14 +397,14 @@ namespace TheKnightAwakening
             isChoiceActive = false;
 
             // ถ้ากำลังโหลด EndCredits ให้รีเซ็ตตำแหน่งเครดิตใหม่
-            if (currentCutscene == CutsceneType.EndCredits)
+            if (Singleton.Instance.currentCutscene == Singleton.CutsceneType.EndCredits)
             {
                 creditsYPosition = 600;
             }
 
-            switch (currentCutscene)
+            switch (Singleton.Instance.currentCutscene)
             {
-                case CutsceneType.StartGame:
+                case Singleton.CutsceneType.StartGame:
                     messages.Add("King: As you can see, Her curse now coils around our kingdom like a venomous serpent. The plague spreads unchecked, and our people perish by the day. I can no longer remain idle.");
                     backgrounds.Add(0, _scene1);
 
@@ -427,7 +415,8 @@ namespace TheKnightAwakening
                     backgrounds.Add(2, _scene2);
                     break;
 
-                case CutsceneType.BossRoom:
+                case Singleton.CutsceneType.BossRoom:
+                    Singleton.Instance.AudioManager.PlayMusic("Boss_Bgm", 0.3f);
                     messages.Add("Medusa: So... the king sends a pawn to sever the chains of my curse.");
                     backgrounds.Add(0, _scene4);
 
@@ -447,7 +436,7 @@ namespace TheKnightAwakening
                     backgrounds.Add(5, _scene4);
                     break;
 
-                case CutsceneType.BossDefeated:
+                case Singleton.CutsceneType.BossDefeated:
                     messages.Add("Medusa: I... I only wanted him to feel my pain.");
                     backgrounds.Add(0, _scene5);
 
@@ -479,7 +468,7 @@ namespace TheKnightAwakening
                     backgrounds.Add(9, _scene5);
                     break;
 
-                case CutsceneType.BossKilled:
+                case Singleton.CutsceneType.BossKilled:
                     messages.Add("Knight: No matter the truth... you are still the source of this calamity.");
                     backgrounds.Add(0, _scene3);
 
@@ -499,7 +488,7 @@ namespace TheKnightAwakening
                     backgrounds.Add(5, _scene3);
                     break;
 
-                case CutsceneType.BossSpared:
+                case Singleton.CutsceneType.BossSpared:
                     messages.Add("Knight: I do not see a monster before me... only a woman who has suffered under a cruel curse.");
                     backgrounds.Add(0, _scene6);
 
@@ -528,7 +517,7 @@ namespace TheKnightAwakening
                     backgrounds.Add(8, _scene6);
                     break;
 
-                case CutsceneType.EndCredits:
+                case Singleton.CutsceneType.EndCredits:
                     messages.Add("Thank you for playing 'The Knight Awakening'.");
                     messages.Add("A game developed by [Your Team Name].");
                     messages.Add("Lead Programmer: [Your Name].");
@@ -552,18 +541,18 @@ namespace TheKnightAwakening
             {
                 if (IsButtonClicked(btnKill))
                 {
-                    currentCutscene = CutsceneType.BossKilled;
+                    Singleton.Instance.currentCutscene = Singleton.CutsceneType.BossKilled;
                     LoadSceneData();
                 }
                 else if (IsButtonClicked(btnSpare))
                 {
-                    currentCutscene = CutsceneType.BossSpared;
+                    Singleton.Instance.currentCutscene = Singleton.CutsceneType.BossSpared;
                     LoadSceneData();
                 }
             }
 
             // ถ้าไม่ใช่ EndCredits ให้ Update การแสดงข้อความแบบตัวอักษรทีละตัว
-            if (currentCutscene != CutsceneType.EndCredits)
+            if (Singleton.Instance.currentCutscene != Singleton.CutsceneType.EndCredits)
             {
                 if (!isTextFullyDisplayed)
                 {
@@ -594,15 +583,15 @@ namespace TheKnightAwakening
                     else
                     {
                         // เมื่อจบข้อความใน cutscene
-                        if (currentCutscene == CutsceneType.BossDefeated)
+                        if (Singleton.Instance.currentCutscene == Singleton.CutsceneType.BossDefeated)
                         {
                             displayedText = "           Do you want to kill or spare Medusa?";
                             isChoiceActive = true;
                         }
-                        else if (currentCutscene == CutsceneType.BossSpared || currentCutscene == CutsceneType.BossKilled)
+                        else if (Singleton.Instance.currentCutscene == Singleton.CutsceneType.BossSpared || Singleton.Instance.currentCutscene == Singleton.CutsceneType.BossKilled)
                         {
                             // เปลี่ยนเป็น EndCredits เมื่อจบข้อความของ BossSpared หรือ BossKilled
-                            currentCutscene = CutsceneType.EndCredits;
+                            Singleton.Instance.currentCutscene = Singleton.CutsceneType.EndCredits;
                             LoadSceneData();
                         }
                         else
@@ -632,7 +621,7 @@ namespace TheKnightAwakening
         public void Draw(SpriteBatch spriteBatch)
         {
             // ถ้าไม่ใช่ EndCredits ให้วาด cutscene ปกติ
-            if (currentCutscene != CutsceneType.EndCredits)
+            if (Singleton.Instance.currentCutscene != Singleton.CutsceneType.EndCredits)
             {
                 spriteBatch.Begin();
                 spriteBatch.Draw(backgrounds[currentMessageIndex], new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);

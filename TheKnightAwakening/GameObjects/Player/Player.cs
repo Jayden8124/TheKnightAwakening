@@ -38,7 +38,7 @@ namespace TheKnightAwakening
         public enum DebuffType { Slow, Stun, Poison, Weak }
         public Dictionary<DebuffType, Texture2D> debuffIcons;
 
-        private Dictionary<DebuffType, float> activeDebuffs = new();
+        public Dictionary<DebuffType, float> activeDebuffs = new();
 
 
         public Player(Dictionary<string, Animation> animations)
@@ -201,7 +201,7 @@ namespace TheKnightAwakening
             {
                 TriggerAttack("Attack2", _gameObjects);
             }
-            else if (Ultimate == 5 && Singleton.Instance.CurrentKey.IsKeyDown(Attack3) &&
+            else if (Ultimate >= 5 && Singleton.Instance.CurrentKey.IsKeyDown(Attack3) &&
             !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
             {
                 TriggerAttack("Attack3", _gameObjects);
@@ -339,25 +339,6 @@ namespace TheKnightAwakening
                 AnimationManager.Position = Position;
                 AnimationManager.Draw(spriteBatch, playerColor);
             }
-
-            // Icon Debuff
-            foreach (var debuff in activeDebuffs)
-            {
-                if (debuffIcons != null && debuffIcons.TryGetValue(debuff.Key, out Texture2D icon))
-                {
-                    // คำนวณจำนวนไอคอนที่จะวาด (หนึ่งไอคอนต่อวินาทีที่เหลือ)
-                    int secondsRemaining = (int)Math.Ceiling(debuff.Value);
-                    // TODO: กำหนดตำแหน่งเริ่มต้นสำหรับไอคอน debuff
-                    int startX = (int)Position.X + 100; // เปลี่ยนค่าให้เหมาะสมกับตำแหน่งที่คุณต้องการ
-                    int startY = (int)Position.Y + 100; // เปลี่ยนค่าให้เหมาะสมกับตำแหน่งที่คุณต้องการ
-                    int spacing = 10; // ระยะห่างระหว่างไอคอนแต่ละอัน
-                    for (int i = 0; i < secondsRemaining; i++)
-                    {
-                        spriteBatch.Draw(icon, new Rectangle(startX + i * (icon.Width + spacing), startY, icon.Width, icon.Height), Color.White);
-                    }
-                }
-            }
         }
-
     }
 }

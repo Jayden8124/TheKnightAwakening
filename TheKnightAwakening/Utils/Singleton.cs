@@ -35,6 +35,19 @@ namespace TheKnightAwakening
         }
         public GameState CurrentGameState;
 
+        // Cutscene state
+        public enum CutsceneType
+        {
+            StartGame,
+            BossRoom,
+            BossDefeated,
+            BossKilled,
+            BossSpared,
+            EndCredits
+        }
+        public CutsceneType currentCutscene;
+
+
         public Audio AudioManager;
 
         // Input State

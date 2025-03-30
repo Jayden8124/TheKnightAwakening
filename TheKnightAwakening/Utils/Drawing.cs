@@ -250,6 +250,8 @@ namespace TheKnightAwakening
             Ultimatebar.Draw(_spriteBatch);
             // UltimatebarAnimated.Draw(_spriteBatch);
 
+            DrawDebuffIcons(_spriteBatch);
+
             _spriteBatch.DrawString(Font, Singleton.Instance.Score.ToString(), new Vector2(1050, 55), Color.White);
             _spriteBatch.Draw(CoinSheet, new Vector2(1100, 50), new Rectangle(0, 0, 27, 27), Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0); // Coin Score
             _spriteBatch.Draw(IconSheet, Setting, new Rectangle(16, 128, 14, 14), Color.White); // Setting Icon
@@ -268,9 +270,22 @@ namespace TheKnightAwakening
             _spriteBatch.End();
         }
 
+        public void DrawDebuffIcons(SpriteBatch _spriteBatch)
+        {
+            int offsetX = 0; 
+            foreach (var debuff in Singleton.Instance.player.activeDebuffs)
+            {
+                if (Singleton.Instance.player.debuffIcons.TryGetValue(debuff.Key, out Texture2D icon))
+                {
+                    _spriteBatch.Draw(icon, new Vector2(50 + offsetX, 90), null, Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0f);
+                    offsetX += (icon.Width / 2) + 5; 
+                }
+            }
+        }
+
         public void Update(GameTime gameTime)
         {
-            // Update Logic
+
         }
     }
 }

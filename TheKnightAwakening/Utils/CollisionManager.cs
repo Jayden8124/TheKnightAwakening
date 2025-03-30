@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace TheKnightAwakening
@@ -33,17 +34,39 @@ namespace TheKnightAwakening
                 }
                 else
                 {
-                    // เลื่อนในแกน Y (แบ่งครึ่งให้ทั้งสองฝ่าย)
-                    float displacement = intersection.Height / 4f;
+                    // // เลื่อนในแกน Y (แบ่งครึ่งให้ทั้งสองฝ่าย)
+                    // float displacement = intersection.Height / 2f;
+                    // if (rectA.Center.Y < rectB.Center.Y)
+                    // {
+                    //     a.Position = new Vector2(a.Position.X, a.Position.Y - displacement);
+                    //     b.Position = new Vector2(b.Position.X, b.Position.Y + displacement);
+                    // }
+                    // else
+                    // {
+                    //     a.Position = new Vector2(a.Position.X, a.Position.Y + displacement);
+                    //     b.Position = new Vector2(b.Position.X, b.Position.Y - displacement);
+                    // }
                     if (rectA.Center.Y < rectB.Center.Y)
                     {
-                        a.Position = new Vector2(a.Position.X, a.Position.Y - displacement);
-                        b.Position = new Vector2(b.Position.X, b.Position.Y + displacement);
+                        // A is above B
+                        a.Position = new Vector2(a.Position.X, a.Position.Y - intersection.Height);
+                        
+                        // If A is falling down, stop its velocity and mark as on ground
+                        if (a.Velocity.Y > 0)
+                        {
+                            a.OnGround = true; // Mark as on ground when landing on another character
+                        }
                     }
                     else
                     {
-                        a.Position = new Vector2(a.Position.X, a.Position.Y + displacement);
-                        b.Position = new Vector2(b.Position.X, b.Position.Y - displacement);
+                        // B is above A
+                        b.Position = new Vector2(b.Position.X, b.Position.Y - intersection.Height);
+                        
+                        // If B is falling down, stop its velocity and mark as on ground
+                        if (b.Velocity.Y > 0)
+                        {
+                            b.OnGround = true; // Mark as on ground when landing on another character
+                        }
                     }
                 }
             }
@@ -88,7 +111,7 @@ namespace TheKnightAwakening
         {
             Rectangle objRect = obj.Rectangle;
             // สร้าง rectangle เล็ก ๆ ที่ด้านล่างของวัตถุ (ความสูง 5 พิกเซล)
-            Rectangle footRect = new Rectangle(objRect.X, objRect.Bottom, objRect.Width, 5);
+            Rectangle footRect = new Rectangle(objRect.X, objRect.Bottom, objRect.Width, 1);
             bool onGround = false;
             foreach (var tile in collisionTiles)
             {

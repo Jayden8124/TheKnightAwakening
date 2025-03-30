@@ -252,3 +252,12 @@ C:/Study-Comsci/Y3T2/COMGAME/Final/H/TheKnightAwakening/TheKnightAwakening/obj/D
 /Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/bg_f3.xnb
 /Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/cave-bg2.xnb
 /Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/poison.xnb
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/Medusa_Dead.ogg
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/Medusa_Dead.xnb
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/Medusa_Scream.ogg
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/Medusa_Scream.xnb
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/Save_SFX.ogg
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/Save_SFX.xnb
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/Sword_SFX.ogg
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/Victory_SFX.ogg
+/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/bin/Debug/net8.0/Content/Victory_SFX.xnb

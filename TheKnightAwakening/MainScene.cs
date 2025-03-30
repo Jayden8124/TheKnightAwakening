@@ -57,7 +57,7 @@ public class MainScene : Game
 
         // Drawing
         _drawing.LoadContent(Content);
-        
+
         Reset(); // Call Reset
     }
 
@@ -144,6 +144,57 @@ public class MainScene : Game
                     }
                 }
 
+                foreach (var obj in _gameObjects)
+                {
+                    if (obj is Flag flag)
+                    {
+                        if (flag.Name == "Flag_{X:100 Y:0}" && !flag.Checked)
+                        {
+                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
+                            {
+                                flag.Collected();
+                                Singleton.Instance.currentCutscene = Singleton.CutsceneType.BossRoom;
+                                _cutscene.LoadSceneData();
+                                Singleton.Instance.CurrentGameState = Singleton.GameState.Cutscene;
+                            }
+                        }
+                        if (flag.Name == "Flag_{X:10400 Y:164}" && !flag.Checked)
+                        {
+                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
+                            {
+                                flag.Collected();
+                            }
+                        }
+                        if (flag.Name == "Flag_{X:4097 Y:932}" && !flag.Checked)
+                        {
+                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
+                            {
+                                flag.Collected();
+                            }
+                        }
+                        if (flag.Name == "Flag_{X:7971 Y:3013}" && !flag.Checked)
+                        {
+                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
+                            {
+                                flag.Collected();
+                            }
+                        }
+                        if (flag.Name == "Flag_{X:4000 Y:3847}" && !flag.Checked)
+                        {
+                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
+                            {
+                                flag.Collected();
+                            }
+                        }
+                    }
+                }
+                /*
+                Flag name: Flag_{X:100 Y:0}
+                Flag name: Flag_{X:10400 Y:164}
+                Flag name: Flag_{X:4097 Y:932}
+                Flag name: Flag_{X:7971 Y:3013}
+                Flag name: Flag_{X:4000 Y:3847}
+                */
                 // Paremeters: Health, Ultimate
                 _drawing.Healthbar.Update(Singleton.Instance.player.Health);
                 _drawing.HealthbarAnimated.Update(Singleton.Instance.player.Health, gameTime);
@@ -164,7 +215,8 @@ public class MainScene : Game
                 else if (IsButtonClicked(_drawing.PauseExit))
                 {
                     Singleton.Instance.CurrentGameState = Singleton.GameState.GameStart;
-                }else if ( IsButtonClicked(_drawing.Setting))
+                }
+                else if (IsButtonClicked(_drawing.Setting))
                 {
                     Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
                 }
@@ -292,6 +344,9 @@ public class MainScene : Game
         // Load Animation Monster
         AnimationMonster _animationMonster = new AnimationMonster();
         _animationMonster.LoadAllAnimations(monsterTextures);
+        Texture2D skillmedusa = Content.Load<Texture2D>("Fire_ball");
+        var _animationsBullet = AnimationUlitmate.LoadAnimations(skillmedusa);
+
 
         // Prototype each Monster Type
         MonsterType prototypeWR = new SKLT_WR(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_WR))
@@ -330,11 +385,12 @@ public class MainScene : Game
         MonsterType prototypeMDS = new MDS(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.MDS))
         {
             Name = "MDS",
-            Score = 500,
-            Viewport = new Rectangle(0, 0, 68, 89),
-            bullet = new Bullet(Content.Load<Texture2D>("skeleton_archer"))
+            Score = 50,
+            Viewport = new Rectangle(0, 0, 65, 77),
+            Position = new Vector2(6740, 4049),
+            bullet = new Bullet(_animationsBullet)
             {
-                Name = "BulletEnemy",
+                Name = "Skill_medusa",
                 Viewport = new Rectangle(384, 65, 45, 3)
             }
         };
@@ -354,12 +410,12 @@ public class MainScene : Game
         //     _gameObjects.Add(clone);
         // }
 
-        foreach (var pos in spawnPositionsWR)
-        {
-            var clone = prototypeWR.Clone();
-            clone.Position = pos;
-            _gameObjects.Add(clone);
-        }
+        // foreach (var pos in spawnPositionsWR)
+        // {
+        //     var clone = prototypeWR.Clone();
+        //     clone.Position = pos;
+        //     _gameObjects.Add(clone);
+        // }
 
         // foreach (var pos in spawnPositionsSM)
         // {
@@ -375,12 +431,12 @@ public class MainScene : Game
         //     _gameObjects.Add(clone);
         // }
 
-        // foreach (var pos in spawnPositionsMDS)
-        // {
-        //     var clone = prototypeMDS.Clone();
-        //     clone.Position = pos;
-        //     _gameObjects.Add(clone);
-        // }
+        foreach (var pos in spawnPositionsMDS)
+        {
+            var clone = prototypeMDS.Clone();
+            clone.Position = pos;
+            _gameObjects.Add(clone);
+        }
     }
 
 

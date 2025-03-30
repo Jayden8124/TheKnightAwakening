@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/Music/Bgm.mp3</SourceFile>
-  <SourceTime>2025-03-29T23:12:09.9891179+07:00</SourceTime>
+  <SourceTime>2025-03-30T23:27:10.1849094+07:00</SourceTime>
   <DestFile>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Content/Bgm.xnb</DestFile>
-  <DestTime>2025-03-29T23:12:16.9033623+07:00</DestTime>
+  <DestTime>2025-03-30T23:28:30.6409837+07:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>SongProcessor</Processor>

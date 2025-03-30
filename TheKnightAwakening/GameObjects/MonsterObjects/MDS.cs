@@ -40,6 +40,7 @@ namespace TheKnightAwakening
 
                 if (Vector2.Distance(Singleton.Instance.player.Position, Position) <=  500)
                 {
+                    Singleton.Instance.AudioManager.PlayEffect("Medusa_Scream");
                     Singleton.Instance.player.TakeDebuff(Player.DebuffType.Weak, 5.0f, Position);
                     Singleton.Instance.player.TakeDebuff(Player.DebuffType.Stun, 1f, Position);
                     Console.WriteLine("Applied Weak Debuff to Player");
@@ -149,10 +150,7 @@ namespace TheKnightAwakening
             {
                 new Vector2(1, 0),   // Right
                 new Vector2(-1, 0),  // Left
-                new Vector2(0, 1),   // Down
                 new Vector2(0, -1),  // Up
-                new Vector2(1, 1),   // Bottom Right
-                new Vector2(-1, 1),  // Bottom Left
                 new Vector2(1, -1),  // Top Right
                 new Vector2(-1, -1)  // Top Left
             };
@@ -161,8 +159,9 @@ namespace TheKnightAwakening
             {
                 var newBullet = bullet.Clone() as Bullet;
                 // กำหนดตำแหน่งเริ่มต้นของกระสุนให้รอบตัวบอส โดยปรับตำแหน่งออกไปจากแกนหลักเล็กน้อย
-                newBullet.Position = new Vector2(Rectangle.Center.X + (dir.X * 10), Rectangle.Center.Y + (dir.Y * 10));
+                newBullet.Position = new Vector2(Rectangle.Center.X + (dir.X * 10), Rectangle.Center.Y + (dir.Y * 10)); 
                 newBullet.Velocity = Vector2.Normalize(dir) * 300;
+                newBullet.Rotation = (float) Math.Atan2(dir.X, dir.Y);
                 newBullet.Reset();
                 gameObjects.Add(newBullet);
             }

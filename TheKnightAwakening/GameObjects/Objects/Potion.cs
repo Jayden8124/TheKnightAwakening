@@ -21,8 +21,10 @@ namespace TheKnightAwakening
         public void Collected()
         {
             Console.WriteLine("Potion Collected");
+            Singleton.Instance.AudioManager.PlayEffect("Item_Obtain");
             IsActive = false;
         }
+
 
         public override void Draw(SpriteBatch spriteBatch)
         {

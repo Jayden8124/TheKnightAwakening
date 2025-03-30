@@ -49,7 +49,7 @@ namespace TheKnightAwakening
                 {
                     IsOpen = true;
                     AnimationManager.Play(Animations["Opening"]);
-
+                    Singleton.Instance.AudioManager.PlayEffect("Item_Obtain");
                     SpawnRandomItems(_gameObjects, numberOfItemsToSpawn);
                 }
             }

@@ -4,14 +4,18 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Save_SFX.mp3</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/Music/Bgm.mp3</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/Music/Boss_Bgm.mp3</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Coin_Collect.mp3</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Death_SFX.mp3</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Item_Obtain.mp3</File>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Medusa_Dead.mp3</File>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Medusa_Scream.mp3</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Skeleton_Dead.mp3</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Slime_Die.mp3</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Sword_SFX.mp3</File>
+    <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Victory_SFX.mp3</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/bulletObject/Contract_Fire_Ball.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/bulletObject/Energy_Ball.png</File>
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/bulletObject/Fire_Ball.png</File>
@@ -60,14 +64,18 @@
     <File>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/Content/UI/victory.png</File>
   </SourceFiles>
   <DestFiles>
+    <File>Save_SFX.mp3</File>
     <File>Bgm.mp3</File>
     <File>Boss_Bgm.mp3</File>
     <File>Coin_Collect.mp3</File>
     <File>Death_SFX.mp3</File>
     <File>Item_Obtain.mp3</File>
+    <File>Medusa_Dead.mp3</File>
+    <File>Medusa_Scream.mp3</File>
     <File>Skeleton_Dead.mp3</File>
     <File>Slime_Die.mp3</File>
     <File>Sword_SFX.mp3</File>
+    <File>Victory_SFX.mp3</File>
     <File>Contract_Fire_Ball.png</File>
     <File>Energy_Ball.png</File>
     <File>Fire_Ball.png</File>

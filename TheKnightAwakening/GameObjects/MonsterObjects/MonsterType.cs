@@ -65,7 +65,7 @@ namespace TheKnightAwakening
                         Singleton.Instance.AudioManager.PlayEffect("Skeleton_Dead");
                         break;
                     case MDS:
-                        Singleton.Instance.AudioManager.PlayEffect("Slime_Die");
+                        Singleton.Instance.AudioManager.PlayEffect("Medusa_Dead");
                         break;
                 }
 

@@ -7,7 +7,7 @@ namespace TheKnightAwakening
 {
     public class Flag : GameObject
     {
-        private bool Checked;
+        public bool Checked;
         // Animation
         private AnimationManager AnimationManager;
         private Dictionary<string, Animation> Animations;
@@ -24,6 +24,7 @@ namespace TheKnightAwakening
         {
             Console.WriteLine("Flag Collected");
             Singleton.Instance.player.LastCheckpoint = Position;
+            Singleton.Instance.AudioManager.PlayEffect("Save_SFX");
             Checked = true;
             AnimationManager.Play(Animations["Raise"]);
         }
@@ -36,12 +37,6 @@ namespace TheKnightAwakening
 
         public override void Update(GameTime gameTime, List<GameObject> _gameObjects)
         {
-            if (CheckAABBCollision(Rectangle, Singleton.Instance.player.Rectangle))
-            {
-                if (!Checked)
-                    Collected();
-            }
-
             AnimationManager.Update(gameTime);
             base.Update(gameTime, _gameObjects);
         }

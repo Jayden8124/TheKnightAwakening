@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/SFX/Save_SFX.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Save_SFX.mp3;Save_SFX.mp3
+
 #begin Audio/Music/Bgm.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
@@ -43,6 +49,18 @@
 /processorParam:Quality=Best
 /build:Audio/SFX/Item_Obtain.mp3;Item_Obtain.mp3
 
+#begin Audio/SFX/Medusa_Dead.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Medusa_Dead.mp3;Medusa_Dead.mp3
+
+#begin Audio/SFX/Medusa_Scream.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Medusa_Scream.mp3;Medusa_Scream.mp3
+
 #begin Audio/SFX/Skeleton_Dead.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -60,6 +78,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/SFX/Sword_SFX.mp3;Sword_SFX.mp3
+
+#begin Audio/SFX/Victory_SFX.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Victory_SFX.mp3;Victory_SFX.mp3
 
 #begin bulletObject/Contract_Fire_Ball.png
 /importer:TextureImporter

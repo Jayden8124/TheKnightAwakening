@@ -24,18 +24,32 @@ namespace TheKnightAwakening
         currentForegroundSource = new Rectangle(Foreground.X, Foreground.Y, Foreground.Width, 0);
     }
 
-    public void Update(float value)
-    {
-        // ปรับความสูงของ foreground ให้สัมพันธ์กับค่า ultimate
-        currentForegroundSource.Height = (int)(value / maxValue * Foreground.Height);
-        
-    }
+public void Update(float value)
+{
+    currentValue = MathHelper.Clamp(value, 0, maxValue);
 
-    public virtual void Draw(SpriteBatch spriteBatch)
-    {
-        spriteBatch.Draw(texture, new Vector2(300, 37), Background, Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0); // Background
-        spriteBatch.Draw(texture, new Vector2(313, 50), currentForegroundSource, Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0); // Foreground
-    }
+    // ปรับความสูงให้หลอดเติมจากล่างขึ้นบน
+    int height = (int)(currentValue / maxValue * Foreground.Height);
+
+    currentForegroundSource = new Rectangle(
+        Foreground.X,
+        Foreground.Y + Foreground.Height - height, // Y เริ่มจากล่าง
+        Foreground.Width,
+        height);
+}
+
+public virtual void Draw(SpriteBatch spriteBatch)
+{
+    spriteBatch.Draw(texture, new Vector2(300, 37), Background, Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0);
+
+    Vector2 fgPosition = new Vector2(
+        313,
+        50 + (Foreground.Height - currentForegroundSource.Height) * 2f // คำนวณ Y ให้ขยายจากล่างขึ้นบน
+    );
+
+    spriteBatch.Draw(texture, fgPosition, currentForegroundSource, Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0);
+}
+
 }
 
 public class UltimatebarAnimated : Ultimatebar
