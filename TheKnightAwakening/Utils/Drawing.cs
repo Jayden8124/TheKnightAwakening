@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
+using System;
 
 namespace TheKnightAwakening
 {
@@ -24,7 +25,9 @@ namespace TheKnightAwakening
 
         // Textures
         public Texture2D ButtonUI { get; private set; }
-        public Texture2D Background { get; private set; }
+        public Texture2D Background1 { get; private set; }
+        public Texture2D Background2 { get; private set; }
+
         public Texture2D MenuBackground { get; private set; }
         public Texture2D MenuIcon { get; private set; }
         public Texture2D MenuButton { get; private set; }
@@ -38,6 +41,8 @@ namespace TheKnightAwakening
         public Texture2D HealthBarTexture { get; private set; }
         public Texture2D UltimateTexture { get; private set; }
         public Texture2D ButtonUISONG { get; private set; }
+        public Texture2D Defeat { get; private set; }
+
 
         // Button Rectangles
         public Rectangle MenuPlay { get; private set; }
@@ -96,7 +101,9 @@ namespace TheKnightAwakening
         public void LoadContent(ContentManager Content)
         {
             {   // Background Game
-                Background = Content.Load<Texture2D>("bg");
+                Background1 = Content.Load<Texture2D>("bg");
+                Background2 = Content.Load<Texture2D>("cave-bg2");
+
                 House = Content.Load<Texture2D>("House");
                 HowToPlay = Content.Load<Texture2D>("how_to_play");
             }
@@ -146,6 +153,10 @@ namespace TheKnightAwakening
 
                 // Cutscene
                 Cutscene.LoadContent(Content);
+            }
+
+            {   // Defeat
+                Defeat = Content.Load<Texture2D>("Defeat");
             }
         }
 
@@ -222,13 +233,13 @@ namespace TheKnightAwakening
                 _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
                 // Background Texture
-                _spriteBatch.Draw(Background, new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
+                _spriteBatch.Draw(GetCurrentBackground(), new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
 
                 _spriteBatch.End();
 
                 // Layer 2: Map & Camera
                 _spriteBatch.Begin(transformMatrix: Camera.Transform, samplerState: SamplerState.PointClamp);
-                Map.Draw(_spriteBatch);
+                Map.Draw(_spriteBatch, Camera);
 
 
                 // How To Play Texture
@@ -243,9 +254,12 @@ namespace TheKnightAwakening
                 _spriteBatch.Draw(House, new Rectangle(8063, 395, 155, 133), new Rectangle(0, 0, 155, 133), Color.White); // House 3
 
                 for (int i = 0; i < _numOjects; i++)
+            {
+                if (Camera.IsVisible(_gameObjects[i].Rectangle))
                 {
                     _gameObjects[i].Draw(_spriteBatch);
                 }
+            }
                 _spriteBatch.End();
 
                 // Layer 3: Button UI Pause
@@ -275,13 +289,13 @@ namespace TheKnightAwakening
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // Background Texture
-            _spriteBatch.Draw(Background, new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
+            _spriteBatch.Draw(GetCurrentBackground(), new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
 
             _spriteBatch.End();
 
             // Layer 2: Map & Camera
             _spriteBatch.Begin(transformMatrix: Camera.Transform, samplerState: SamplerState.PointClamp);
-            Map.Draw(_spriteBatch);
+            Map.Draw(_spriteBatch, Camera);
 
 
             // How To Play Texture
@@ -294,38 +308,39 @@ namespace TheKnightAwakening
             _spriteBatch.Draw(House, new Rectangle(1277, 394, 155, 133), new Rectangle(0, 0, 155, 133), Color.White); // House 1
             _spriteBatch.Draw(House, new Rectangle(3602, 394, 155, 133), new Rectangle(0, 0, 155, 133), Color.White); // House 2 
             _spriteBatch.Draw(House, new Rectangle(8063, 395, 155, 133), new Rectangle(0, 0, 155, 133), Color.White); // House 3
-
+            
+            int drawnObjects = 0;
             for (int i = 0; i < _numOjects; i++)
             {
-                _gameObjects[i].Draw(_spriteBatch);
+                if (Camera.IsVisible(_gameObjects[i].Rectangle))
+                {
+                    _gameObjects[i].Draw(_spriteBatch);
+                    drawnObjects++;
+                }
             }
-            
+
             _spriteBatch.End();
+            Console.WriteLine($"Drawn Objects: {drawnObjects}/{_gameObjects.Count}");
+
 
             // Layer 3: UI
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             Healthbar.Draw(_spriteBatch);
             HealthbarAnimated.Draw(_spriteBatch);
             Ultimatebar.Draw(_spriteBatch);
-            // UltimatebarAnimated.Draw(_spriteBatch);
+            UltimatebarAnimated.Draw(_spriteBatch);
 
             DrawDebuffIcons(_spriteBatch);
 
             _spriteBatch.DrawString(Font, Singleton.Instance.Score.ToString(), new Vector2(1050, 55), Color.White);
             _spriteBatch.Draw(CoinSheet, new Vector2(1100, 50), new Rectangle(0, 0, 27, 27), Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0); // Coin Score
             _spriteBatch.Draw(IconSheet, Setting, new Rectangle(16, 128, 14, 14), Color.White); // Setting Icon
-            _spriteBatch.End();
-        }
 
-        public void _DrawOver(SpriteBatch _spriteBatch)
-        {
-            // Layer 1: Background
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-            _spriteBatch.Draw(Background, new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
-            _spriteBatch.End();
+            if (Singleton.Instance.player.isDead)
+            {
+                _spriteBatch.Draw(Defeat, new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2), new Rectangle(42, 27, 420, 458), Color.White, 0f, new Vector2(Defeat.Width / 2, Defeat.Height / 2), 0.5f, SpriteEffects.None, 0); // Defeat
+            }
 
-            // Layer 2: Button To Exit
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             _spriteBatch.End();
         }
 
@@ -346,5 +361,17 @@ namespace TheKnightAwakening
         {
 
         }
+
+        private Texture2D GetCurrentBackground()
+        {
+            float x = Singleton.Instance.player?.Position.X ?? 0;
+            float y = Singleton.Instance.player?.Position.Y ?? 0;
+
+            if (y > 720 && x < 3890 || y > 1440)
+                return Background2;
+            else
+                return Background1;
+        }
+
     }
 }

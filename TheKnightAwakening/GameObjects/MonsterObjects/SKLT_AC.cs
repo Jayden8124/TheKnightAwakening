@@ -130,7 +130,6 @@ namespace TheKnightAwakening
 
             { 3, new List<Vector2> { 
                 new Vector2(1286, 1040),
-
             } },
 
             { 4, new List<Vector2> { 
@@ -149,7 +148,6 @@ namespace TheKnightAwakening
 
             { 6, new List<Vector2> { 
                 new Vector2(5460, 3950),
-
             } },
         };
 

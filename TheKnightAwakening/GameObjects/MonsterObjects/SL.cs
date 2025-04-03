@@ -37,8 +37,6 @@ namespace TheKnightAwakening
                     HandleMovement();
                 }
             }
-            Console.WriteLine($"SL Position: {Position.Y}");
-            Console.WriteLine($"Player Position: {Singleton.Instance.player.Position.Y}");
             AnimationManager.Update(gameTime);
             base.Update(gameTime, _gameObjects);
         }

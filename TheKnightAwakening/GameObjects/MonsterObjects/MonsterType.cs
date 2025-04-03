@@ -114,7 +114,7 @@ namespace TheKnightAwakening
             spriteBatch.Draw(Singleton.Instance._rect, healthBar, Color.Red);
             AnimationManager.Position = Position;
             AnimationManager.Draw(spriteBatch);
-            
+
             base.Draw(spriteBatch);
         }
 
@@ -129,8 +129,12 @@ namespace TheKnightAwakening
             bool isFacingEnemy = (enemyPosition.X > Position.X && AnimationManager.FacingRight) ||
                                 (enemyPosition.X < Position.X && !AnimationManager.FacingRight);
 
-            if (isFacingEnemy)
+            if (isFacingEnemy && Math.Abs(Position.Y - Singleton.Instance.player.Position.Y) <= 35)
             {
+                // Apply knockback effect
+                Velocity.X = (enemyPosition.X - Position.X) * 0.5f; // Adjust the knockback strength as needed
+                Velocity.Y = -10f; // Adjust the vertical knockback strength as needed
+                Position += Velocity;
                 Health -= damage;
                 Console.WriteLine("Monster Health: " + Health);
             }

@@ -19,35 +19,21 @@ namespace TheKnightAwakening
         Background = bgSource;
         Foreground = fgSource;
         maxValue = max;
-        currentValue = 0; // เริ่มต้น ultimate ที่ 0
-        // กำหนด source rectangle สำหรับ foreground ให้เริ่มจาก 0 (ไม่แสดงเลย)
+        currentValue = 0; 
         currentForegroundSource = new Rectangle(Foreground.X, Foreground.Y, Foreground.Width, 0);
     }
 
 public void Update(float value)
 {
     currentValue = MathHelper.Clamp(value, 0, maxValue);
-
-    // ปรับความสูงให้หลอดเติมจากล่างขึ้นบน
     int height = (int)(currentValue / maxValue * Foreground.Height);
-
-    currentForegroundSource = new Rectangle(
-        Foreground.X,
-        Foreground.Y + Foreground.Height - height, // Y เริ่มจากล่าง
-        Foreground.Width,
-        height);
+    currentForegroundSource = new Rectangle(Foreground.X, Foreground.Y + Foreground.Height - height, Foreground.Width, height);
 }
 
 public virtual void Draw(SpriteBatch spriteBatch)
 {
     spriteBatch.Draw(texture, new Vector2(300, 37), Background, Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0);
-
-    Vector2 fgPosition = new Vector2(
-        313,
-        50 + (Foreground.Height - currentForegroundSource.Height) * 2f // คำนวณ Y ให้ขยายจากล่างขึ้นบน
-    );
-
-    spriteBatch.Draw(texture, fgPosition, currentForegroundSource, Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0);
+    spriteBatch.Draw(texture, new Vector2(310.5f, 47 + (Foreground.Height - currentForegroundSource.Height) * 2f), currentForegroundSource, Color.White, 0f, Vector2.Zero, 2.35f, SpriteEffects.None, 0);
 }
 
 }
@@ -63,9 +49,7 @@ public class UltimatebarAnimated : Ultimatebar
     public UltimatebarAnimated(Texture2D tex, Rectangle bgSource, Rectangle fgSource, float max)
         : base(tex, bgSource, fgSource, max)
     {
-        // เริ่มต้นค่า ultimate animation ให้สอดคล้องกับ ultimate bar ที่เริ่มที่ 0
         _targetValue = 0;
-        // _animationSource เริ่มที่ตำแหน่งสุดท้ายของ Foreground โดยมีความกว้าง 0
         _animationSource = new Rectangle(Foreground.X + Foreground.Width, Foreground.Y, 0, Foreground.Height);
         _animationPosition = new Vector2(313, 50);
         _animationShade = Color.DarkGray;
@@ -73,10 +57,9 @@ public class UltimatebarAnimated : Ultimatebar
 
     public void Update(float value, GameTime gameTime)
     {
-        // หากค่า value เท่ากับ currentValue ให้ล้างส่วนแอนิเมชันแล้ว return
         if (value == currentValue)
         {
-            _animationSource.Width = 0; // ลบแถบแอนิเมชันออก
+            _animationSource.Width = 0; 
             return;
         }
 
@@ -100,19 +83,16 @@ public class UltimatebarAnimated : Ultimatebar
             _animationShade = Color.DarkGray * 0.5f;
         }
 
-        // ปรับความกว้างของส่วน Foreground ตามค่า ultimate ที่อัปเดท
         currentForegroundSource.Width = x;
-        // ปรับ _animationSource ให้เริ่มจากตำแหน่งที่ต่อจาก Foreground ที่แสดงปัจจุบัน
         _animationSource.X = Foreground.X + x;
         _animationSource.Width = (int)(Math.Abs(currentValue - _targetValue) / maxValue * Foreground.Width);
-        // ปรับตำแหน่งวาดของแอนิเมชัน ให้สอดคล้องกับตำแหน่งสุดท้ายของ Foreground
-        _animationPosition.X = 313 + currentForegroundSource.Width * 2f;
+        _animationPosition.Y = 47 + (Foreground.Height - currentForegroundSource.Height) * 2f;
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
         base.Draw(spriteBatch);
-        spriteBatch.Draw(texture, _animationPosition, _animationSource, _animationShade, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0);
+        spriteBatch.Draw(texture, _animationPosition, _animationSource, _animationShade, 0f, Vector2.Zero, 2.05f, SpriteEffects.None, 0);
     }
 }
 

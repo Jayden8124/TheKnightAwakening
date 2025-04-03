@@ -40,6 +40,16 @@ namespace TheKnightAwakening
             // Apply the transformation matrix
             Transform = Matrix.CreateTranslation(new Vector3(-Position, 0));
         }
+        public bool IsVisible(Rectangle boundingBox)
+        {
+            Rectangle cameraView = new Rectangle(
+                (int)this.Position.X - 100,
+                (int)this.Position.Y - 100,
+                Singleton.SCREENWIDTH + 200,
+                Singleton.SCREENHEIGHT + 200
+            );
 
+            return cameraView.Intersects(boundingBox);
+        }
     }
 }

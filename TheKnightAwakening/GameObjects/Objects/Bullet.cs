@@ -35,7 +35,7 @@ namespace TheKnightAwakening
         {
             if (_texture == null)
             {
-                AnimationManager.Scale = 0.7f;
+                AnimationManager.Scale = 0.5f;
                 AnimationManager.FacingRight = Velocity.X > 0;
                 AnimationManager.Position = Position;
                 AnimationManager.Draw(spriteBatch);
@@ -91,7 +91,7 @@ namespace TheKnightAwakening
                     if (CheckAABBCollision(s.Rectangle, Rectangle) && s.Name == "Player")
                     {
                         IsActive = false;
-                        Singleton.Instance.player.TakeDamage(10, Position);
+                        Singleton.Instance.player.TakeDamage(20, Position);
                     }
                 }
                 else if (Name == "Skill_medusa")
@@ -99,7 +99,7 @@ namespace TheKnightAwakening
                     if (CheckAABBCollision(s.Rectangle, Rectangle) && s.Name == "Player")
                     {
                         IsActive = false;
-                        Singleton.Instance.player.TakeDamage(10, Position);
+                        Singleton.Instance.player.TakeDamage(50, Position);
                     }
                     if (gameTime.ElapsedGameTime.TotalSeconds > 5)
                     {

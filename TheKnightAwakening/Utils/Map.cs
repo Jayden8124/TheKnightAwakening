@@ -38,7 +38,7 @@ namespace TheKnightAwakening
             textureMap = Content.Load<Texture2D>("TilesetGround");
             textureMapCave = Content.Load<Texture2D>("Cave");
             hitboxTexture = Content.Load<Texture2D>("hitbox");
-            propTexture = Content.Load<Texture2D>("prop"); 
+            propTexture = Content.Load<Texture2D>("prop");
             fg = LoadMap("../../../TileMap/Map_G_ground.csv");
             cave = LoadMap("../../../TileMap/Map_G_cave.csv");
             collisions = LoadMap("../../../TileMap/Map_M_hitblock.csv");
@@ -47,9 +47,8 @@ namespace TheKnightAwakening
             prop_3 = LoadMap("../../../TileMap/Map_P_b-prop.csv");
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Camera camera)
         {
-
             foreach (var item in fg)
             {
                 Rectangle drest = new(
@@ -58,6 +57,8 @@ namespace TheKnightAwakening
                     TILESIZE,
                     TILESIZE
                 );
+
+                if (!camera.IsVisible(drest)) continue;
 
                 int x = item.Value % num_tile_per_row;
                 int y = item.Value / num_tile_per_row;
@@ -70,7 +71,7 @@ namespace TheKnightAwakening
                 );
                 spriteBatch.Draw(textureMap, drest, src, Color.White);
             }
-             foreach (var item in cave)
+            foreach (var item in cave)
             {
                 Rectangle drest = new(
                     (int)item.Key.X * TILESIZE,
@@ -79,6 +80,7 @@ namespace TheKnightAwakening
                     TILESIZE
                 );
 
+                if (!camera.IsVisible(drest)) continue;
                 int x = item.Value % num_tile_per_row_cave;
                 int y = item.Value / num_tile_per_row_cave;
 
@@ -90,7 +92,7 @@ namespace TheKnightAwakening
                 );
                 spriteBatch.Draw(textureMapCave, drest, src, Color.White);
             }
-            
+
             foreach (var item in collisions)
             {
                 Rectangle drest = new(
@@ -105,6 +107,7 @@ namespace TheKnightAwakening
                     TILESIZE,
                     TILESIZE
                 );
+                if (!camera.IsVisible(drest)) continue;
 
                 int x = item.Value % num_tile_per_row;
                 int y = item.Value / num_tile_per_row;
@@ -133,6 +136,7 @@ namespace TheKnightAwakening
                     TILESIZE,
                     TILESIZE
                 );
+                if (!camera.IsVisible(drest)) continue;
 
                 int x = item.Value % num_tile_per_row_prop;
                 int y = item.Value / num_tile_per_row_prop;
@@ -146,7 +150,7 @@ namespace TheKnightAwakening
                 this.hitbox = hitbox;
                 spriteBatch.Draw(propTexture, drest, src, Color.White);
             }
-            
+
             foreach (var item in prop_2)
             {
                 Rectangle drest = new(
@@ -161,6 +165,7 @@ namespace TheKnightAwakening
                     TILESIZE,
                     TILESIZE
                 );
+                if (!camera.IsVisible(drest)) continue;
 
                 int x = item.Value % num_tile_per_row_prop;
                 int y = item.Value / num_tile_per_row_prop;
@@ -174,7 +179,7 @@ namespace TheKnightAwakening
                 this.hitbox = hitbox;
                 spriteBatch.Draw(propTexture, drest, src, Color.White);
             }
-            
+
             foreach (var item in prop_3)
             {
                 Rectangle drest = new(
@@ -189,7 +194,8 @@ namespace TheKnightAwakening
                     TILESIZE,
                     TILESIZE
                 );
-
+                if (!camera.IsVisible(drest)) continue;
+                
                 int x = item.Value % num_tile_per_row_prop;
                 int y = item.Value / num_tile_per_row_prop;
 
@@ -202,7 +208,7 @@ namespace TheKnightAwakening
                 this.hitbox = hitbox;
                 spriteBatch.Draw(propTexture, drest, src, Color.White);
             }
-            
+
         }
 
         private Dictionary<Vector2, int> LoadMap(string filepath)

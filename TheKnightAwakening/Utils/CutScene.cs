@@ -26,9 +26,6 @@ namespace TheKnightAwakening
         private Texture2D _scene1, _scene2, _scene3, _scene4, _scene5, _scene6;
         private Texture2D _btnYes, _btnNo;
 
-        public bool hasCutsceneBeenPlayed = false;
-        public bool hasGameBeenCompleted = false;
-
         // สำหรับระบบ choice แบบปุ่ม
         Rectangle btnKill;
         Rectangle btnSpare;
@@ -39,8 +36,7 @@ namespace TheKnightAwakening
 
         public void ResetGame()
         {
-            hasCutsceneBeenPlayed = false;
-            hasGameBeenCompleted = false;
+            LoadSceneData();
         }
 
         public CutScene(GraphicsDevice graphicsDevice)
@@ -318,7 +314,6 @@ namespace TheKnightAwakening
                         LoadSceneData();
                     }
                     break;
-
                 case Singleton.CutsceneType.StartGame:
                     // ในกรณีของ cutscene เริ่มเกมให้ปรับสถานะว่าได้เล่น cutscene แล้ว
                     UpdateRegularCutscene(gameTime);
@@ -373,27 +368,20 @@ namespace TheKnightAwakening
 
                         case Singleton.CutsceneType.BossSpared:
                         case Singleton.CutsceneType.BossKilled:
-                            // เปลี่ยนเป็น EndCredits เมื่อจบข้อความ
                             Singleton.Instance.currentCutscene = Singleton.CutsceneType.EndCredits;
                             backgrounds.Clear();
                             messages.Clear();
                             LoadSceneData();
 
-                            // ตั้งค่าว่าเกมจบแล้ว
-                            hasGameBeenCompleted = true;
                             break;
 
                         case Singleton.CutsceneType.StartGame:
-                            // เมื่อเล่น cutscene เริ่มเกมจบแล้ว ให้ตั้งค่าว่าได้เล่น cutscene แล้ว
-                            hasCutsceneBeenPlayed = true;
-
                             backgrounds.Clear();
                             messages.Clear();
                             Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
                             break;
 
                         default:
-                            // กลับไปที่ GamePlaying state สำหรับ cutscene อื่นๆ
                             backgrounds.Clear();
                             messages.Clear();
                             Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
