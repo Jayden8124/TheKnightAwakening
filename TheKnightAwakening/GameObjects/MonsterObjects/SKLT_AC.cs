@@ -19,9 +19,11 @@ namespace TheKnightAwakening
 
         public override void Update(GameTime gameTime, List<GameObject> _gameObjects)
         {
-            collidedWithHitblock = false;
-            
-            HandleHitblockCollision();
+            if (Health <= 0)
+            {
+                base.Update(gameTime, _gameObjects);
+                return;
+            }
 
             if (gameTime.TotalGameTime.TotalSeconds > 1)
             {
@@ -31,47 +33,21 @@ namespace TheKnightAwakening
                 }
                 else
                 {
-                    ResetAttackTimer();
-                    HandleMovement();
+                    attackTimer = 0f;
+                    // HandleMovement();
+                    AnimationManager.Play(Animations["Idle"]);
                 }
             }
 
             AnimationManager.Update(gameTime);
             base.Update(gameTime, _gameObjects);
         }
-
-        private void HandleHitblockCollision()
-        {
-            const int frontOffset = 5;
-            Rectangle frontRect = AnimationManager.FacingRight ?
-                new Rectangle(Rectangle.Right, Rectangle.Y, frontOffset, Rectangle.Height) :
-                new Rectangle(Rectangle.X - frontOffset, Rectangle.Y, frontOffset, Rectangle.Height);
-
-            if (Singleton.Instance.HitblockTiles != null)
-            {
-                foreach (var tile in Singleton.Instance.HitblockTiles)
-                {
-                    if (frontRect.Intersects(tile))
-                    {
-                        collidedWithHitblock = true;
-                        break;
-                    }
-                }
-            }
-
-            if (collidedWithHitblock)
-            {
-                moveDirection *= -1;
-                AnimationManager.FacingRight = moveDirection > 0;
-            }
-        }
-
         private bool ShouldPerformMeleeAttack()
         {
-            const int meleeDistanceLimit = 2000;
+            const int meleeDistanceLimit = 500;
             const int verticalTolerance = 5;
 
-            return DistanceMoved <= meleeDistanceLimit && Math.Abs(Position.Y - Singleton.Instance.player.Position.Y) <= verticalTolerance;
+            return DistanceMoved <= meleeDistanceLimit && Math.Abs(this.Position.Y - Singleton.Instance.player.Position.Y) <= verticalTolerance;
         }
 
         private void HandleMeleeAttack(GameTime gameTime, List<GameObject> _gameObjects)
@@ -101,11 +77,6 @@ namespace TheKnightAwakening
             }
         }
 
-        private void ResetAttackTimer()
-        {
-            attackTimer = 0f;
-        }
-
         private void HandleMovement()
         {
             if (Singleton.Instance.player.Position.X < Position.X)
@@ -133,7 +104,8 @@ namespace TheKnightAwakening
 
         public override void Reset()
         {
-            Health = 200;
+            MaxHealth = 200f;
+            Health = MaxHealth;
             Damage = 20;
             walkSpeed = 2f;
             moveDirection = -1;
@@ -142,27 +114,44 @@ namespace TheKnightAwakening
             base.Reset();
         }
 
-        public static List<Vector2> SpawnPositions = new List<Vector2>
+        public static Dictionary<int, List<Vector2>> SpawnPositions = new Dictionary<int, List<Vector2>>()
         {
-            new Vector2(100, 0) // Test
-            // new Vector2(8209, 464),
-            // new Vector2(10405, 464),
-            // new Vector2(1580, 1040),
-            // new Vector2(2717, 1086),
-            // new Vector2(4852, 1183),
-            // new Vector2(5181, 830),
-            // new Vector2(6796, 974),
-            // new Vector2(10173, 1184),
-            // new Vector2(10375, 927),
-            // new Vector2(115, 1487),
-            // new Vector2(4024, 1552),
-            // new Vector2(6113, 1902),
-            // new Vector2(11118, 1902),
-            // new Vector2(761, 3343),
-            // new Vector2(2431, 3440),
-            // new Vector2(3280, 3134),
-            // new Vector2(5269, 3343),
-            // new Vector2(9015, 3343)
+            { 1, new List<Vector2> { 
+                new Vector2(8304, 496),
+            } },
+
+            { 2, new List<Vector2> { 
+                new Vector2(864, 1136), 
+                new Vector2(1286, 1040),  
+                new Vector2(10335, 928),
+                new Vector2(6962, 1010),  
+                new Vector2(4784, 850),
+            } },
+
+            { 3, new List<Vector2> { 
+                new Vector2(1286, 1040),
+
+            } },
+
+            { 4, new List<Vector2> { 
+                new Vector2(3974, 1755),
+                new Vector2(6400, 1600),
+                new Vector2(8634, 1925),
+            } },
+
+            { 5, new List<Vector2> { 
+                new Vector2(6171, 3050),
+                new Vector2(5460, 3170),
+                new Vector2(3274, 3135),
+                new Vector2(168, 4085),
+                new Vector2(3516, 4085),
+            } },
+
+            { 6, new List<Vector2> { 
+                new Vector2(5460, 3950),
+
+            } },
         };
+
     }
 }

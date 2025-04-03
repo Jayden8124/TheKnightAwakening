@@ -21,6 +21,9 @@ namespace TheKnightAwakening
         protected float attackTimer;
         protected float attackDelay; // Delay 3 วินาทีระหว่างการโจมตี
         protected bool collidedWithHitblock = false;
+        protected float deadDelay;
+        public int Section { get; set; } = -1;
+
 
         public MonsterType(Dictionary<string, Animation> animations)
         {
@@ -37,6 +40,8 @@ namespace TheKnightAwakening
 
         public override void Update(GameTime gameTime, List<GameObject> _gameObjects)
         {
+            collidedWithHitblock = false;
+            HandleHitblockCollision();
             if (!OnGround)
             {
                 Velocity.Y += Gravity;
@@ -46,35 +51,55 @@ namespace TheKnightAwakening
             if (Health <= 0) // Debug IsActive Immediately
             {
                 Health = 0;
-                isDead = true;
-                Singleton.Instance.Score += Score;
-                if (Singleton.Instance.player.Health <= 50)
+
+                // Only add score and heal player once when the monster first dies
+                if (!isDead)
                 {
-                    Singleton.Instance.player.Health += 10;
+                    isDead = true;
+                    Singleton.Instance.Score += Score;
+                    Console.WriteLine(Singleton.Instance.Score);
+
+                    // Heal player if needed (only once)
+                    if (Singleton.Instance.player.Health <= 50)
+                    {
+                        Singleton.Instance.player.Health += 10;
+                    }
+
+                    // Play death animation only once when the monster first dies
+                    AnimationManager.Play(Animations["Dead"]);
+
+                    // Play sound effect only once
+                    switch (this)
+                    {
+                        case SL:
+                            Singleton.Instance.AudioManager.PlayEffect("Slime_Die");
+                            break;
+                        case SKLT_AC:
+                        case SKLT_SM:
+                        case SKLT_WR:
+                            Singleton.Instance.AudioManager.PlayEffect("Skeleton_Dead");
+                            break;
+                        case MDS:
+                            Singleton.Instance.AudioManager.PlayEffect("Medusa_Dead");
+                            break;
+                    }
                 }
-                AnimationManager.Play(Animations["Dead"]);
 
-                switch (this)
+                // Increment death delay timer
+                deadDelay += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (deadDelay > 3f)
                 {
-                    case SL:
-                        Singleton.Instance.AudioManager.PlayEffect("Slime_Die");
-                        break;
-                    case SKLT_AC:
-                    case SKLT_SM:
-                    case SKLT_WR:
-                        Singleton.Instance.AudioManager.PlayEffect("Skeleton_Dead");
-                        break;
-                    case MDS:
-                        Singleton.Instance.AudioManager.PlayEffect("Medusa_Dead");
-                        break;
-                }
-
-                Console.WriteLine(Singleton.Instance.Score);
-
-                if (true)
-                {
+                    if (this is MDS)
+                    {
+                        Singleton.Instance.currentCutscene = Singleton.CutsceneType.BossDefeated;
+                        Singleton.Instance.CurrentGameState = Singleton.GameState.Cutscene;
+                    }
                     IsActive = false;
                 }
+
+                // Update animation but skip other logic
+                AnimationManager.Update(gameTime);
+                return;
             }
 
             DistanceMoved = Math.Abs(Position.X - Singleton.Instance.player.Position.X);
@@ -85,54 +110,64 @@ namespace TheKnightAwakening
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            {
-                // Draw Monster Animation (Health Underfeet)
-                AnimationManager.Position = Position;
-                AnimationManager.Draw(spriteBatch);
-                if (this is SL)
-                {
-                    Rectangle healthBar = new Rectangle(Rectangle.X, Rectangle.Bottom + 10, (int)(Rectangle.Width * (Health / 100f)), 5);
-                    spriteBatch.Draw(Singleton.Instance._rect, healthBar, Color.Red);
-                }
-                else if (this is SKLT_AC)
-                {
-                    Rectangle healthBar = new Rectangle(Rectangle.X, Rectangle.Bottom + 10, (int)(Rectangle.Width * (Health / 100f)), 5);
-                    spriteBatch.Draw(Singleton.Instance._rect, healthBar, Color.Red);
-                }
-                else if (this is SKLT_SM)
-                {
-                    Rectangle healthBar = new Rectangle(Rectangle.X, Rectangle.Bottom + 10, (int)(Rectangle.Width * (Health / 150f)), 5);
-                    spriteBatch.Draw(Singleton.Instance._rect, healthBar, Color.Red);
-                }
-                else if (this is SKLT_WR)
-                {
-                    Rectangle healthBar = new Rectangle(Rectangle.X, Rectangle.Bottom + 10, (int)(Rectangle.Width * (Health / 200f)), 5);
-                    spriteBatch.Draw(Singleton.Instance._rect, healthBar, Color.Red);
-                }
-
-                base.Draw(spriteBatch);
-            }
+            Rectangle healthBar = new Rectangle(Rectangle.X, Rectangle.Bottom + 10, (int)(Rectangle.Width * (Health / MaxHealth)), 5);
+            spriteBatch.Draw(Singleton.Instance._rect, healthBar, Color.Red);
+            AnimationManager.Position = Position;
+            AnimationManager.Draw(spriteBatch);
+            
+            base.Draw(spriteBatch);
         }
 
         public override void Reset()
         {
+            deadDelay = 0f;
             base.Reset();
         }
 
         public void TakeDamage(int damage, Vector2 enemyPosition)
         {
-            // ถ้ากันแต่หันผิดด้าน -> โดนดาเมจ
-            Health -= damage;
-            Console.WriteLine("Monster Health: " + Health);
+            bool isFacingEnemy = (enemyPosition.X > Position.X && AnimationManager.FacingRight) ||
+                                (enemyPosition.X < Position.X && !AnimationManager.FacingRight);
 
+            if (isFacingEnemy)
+            {
+                Health -= damage;
+                Console.WriteLine("Monster Health: " + Health);
+            }
+        }
+
+        private void HandleHitblockCollision()
+        {
+            const int frontOffset = 5;
+            Rectangle frontRect = AnimationManager.FacingRight ?
+                new Rectangle(this.Rectangle.Right, this.Rectangle.Y, frontOffset, this.Rectangle.Height) :
+                new Rectangle(this.Rectangle.X - frontOffset, this.Rectangle.Y, frontOffset, this.Rectangle.Height);
+
+            if (Singleton.Instance.HitblockTiles != null)
+            {
+                foreach (var tile in Singleton.Instance.HitblockTiles)
+                {
+                    if (frontRect.Intersects(tile))
+                    {
+                        collidedWithHitblock = true;
+                        break;
+                    }
+                }
+            }
+
+            if (collidedWithHitblock)
+            {
+                moveDirection *= -1;
+                AnimationManager.FacingRight = moveDirection > 0;
+            }
         }
 
         public new virtual MonsterType Clone()
         {
             MonsterType clone = (MonsterType)this.MemberwiseClone();
             clone.AnimationManager = new AnimationManager(this.Animations["Idle"]);
+            clone.Reset();
             return clone;
         }
     }
 }
-

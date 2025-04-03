@@ -122,19 +122,17 @@ namespace TheKnightAwakening
 
         public static List<Vector2> SpawnChestPosition = new List<Vector2>
         {
-            new Vector2(11136, 197),
-            new Vector2(125, 1013),
-            new Vector2(3102, 1141),
-            new Vector2(10016, 1220),
-            new Vector2(3902, 1588),
-            new Vector2(7599, 1941),
-            new Vector2(11376, 1891),
-            new Vector2(3997, 3380),
-            new Vector2(6254, 3045),
-            new Vector2(9327, 2917),
-            new Vector2(61, 4101),
-            new Vector2(5054, 3923),
-            new Vector2(7023, 4100)
+            new Vector2(11136, 186),
+            new Vector2(130, 1002),
+            new Vector2(3102, 1161),
+            new Vector2(10016, 1209),
+            new Vector2(3902, 1754),
+            new Vector2(7574, 1930),
+            new Vector2(11376, 1880),
+            new Vector2(3925, 3369),
+            new Vector2(6254, 3065),
+            new Vector2(9395, 2906),
+            new Vector2(61, 4089)
         };
     }
 }

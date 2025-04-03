@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>d:/Kmitl Work/Y3T2/Computer Game/Final proj/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Medusa_Scream.mp3</SourceFile>
-  <SourceTime>2025-03-29T23:16:34.8583357+07:00</SourceTime>
-  <DestFile>d:/Kmitl Work/Y3T2/Computer Game/Final proj/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Medusa_Scream.xnb</DestFile>
-  <DestTime>2025-03-30T22:02:15.2057262+07:00</DestTime>
+  <SourceFile>c:/Study-Comsci/Y3T2/COMGAME/Final/P/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Medusa_Scream.mp3</SourceFile>
+  <SourceTime>2025-03-31T22:46:31.2192014+07:00</SourceTime>
+  <DestFile>c:/Study-Comsci/Y3T2/COMGAME/Final/P/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Medusa_Scream.xnb</DestFile>
+  <DestTime>2025-04-03T13:56:30.4825887+07:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

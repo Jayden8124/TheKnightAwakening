@@ -19,9 +19,11 @@ namespace TheKnightAwakening
 
         public override void Update(GameTime gameTime, List<GameObject> _gameObjects)
         {
-            // รีเซ็ต flag ของ hitblock ในแต่ละเฟรม
-            collidedWithHitblock = false;
-            HandleHitblockCollision();
+            if (Health <= 0)
+            {
+                base.Update(gameTime, _gameObjects);
+                return;
+            }
 
             if (gameTime.TotalGameTime.TotalSeconds > 1)
             {
@@ -35,35 +37,10 @@ namespace TheKnightAwakening
                     HandleMovement();
                 }
             }
-
+            Console.WriteLine($"SL Position: {Position.Y}");
+            Console.WriteLine($"Player Position: {Singleton.Instance.player.Position.Y}");
             AnimationManager.Update(gameTime);
             base.Update(gameTime, _gameObjects);
-        }
-
-        private void HandleHitblockCollision()
-        {
-            const int frontOffset = 5;
-            Rectangle frontRect = AnimationManager.FacingRight ?
-                new Rectangle(this.Rectangle.Right, this.Rectangle.Y, frontOffset, this.Rectangle.Height) :
-                new Rectangle(this.Rectangle.X - frontOffset, this.Rectangle.Y, frontOffset, this.Rectangle.Height);
-
-            if (Singleton.Instance.HitblockTiles != null)
-            {
-                foreach (var tile in Singleton.Instance.HitblockTiles)
-                {
-                    if (frontRect.Intersects(tile))
-                    {
-                        collidedWithHitblock = true;
-                        break;
-                    }
-                }
-            }
-
-            if (collidedWithHitblock)
-            {
-                moveDirection *= -1;
-                AnimationManager.FacingRight = moveDirection > 0;
-            }
         }
 
         private void HandleMeleeAttack(GameTime gameTime)
@@ -97,7 +74,7 @@ namespace TheKnightAwakening
         {
             const int closeRangeDistance = 150;
 
-            if (DistanceMoved <= closeRangeDistance)
+            if (DistanceMoved <= closeRangeDistance && Math.Abs(this.Position.Y - Singleton.Instance.player.Position.Y) <= 35)
             {
                 // เมื่อ Player ใกล้ (≤150) ให้วิ่งเข้าหา
                 if (Singleton.Instance.player.Position.X < Position.X)
@@ -132,7 +109,8 @@ namespace TheKnightAwakening
 
         public override void Reset()
         {
-            Health = 100;
+            MaxHealth = 100f;
+            Health = MaxHealth;
             walkSpeed = 1.5f;
             runSpeed = 4f;
             moveDirection = -1;
@@ -141,66 +119,52 @@ namespace TheKnightAwakening
             base.Reset();
         }
 
-        public static List<Vector2> SpawnPositions = new List<Vector2>
+        public static Dictionary<int, List<Vector2>> SpawnPositions = new Dictionary<int, List<Vector2>>()
         {
-            new Vector2(100, 0), // Test
-            // new Vector2(6636, 496),
-            // new Vector2(6945, 496),
-            // new Vector2(7698, 496),
-            // new Vector2(8304, 496),
-            // new Vector2(8913, 496),
-            // new Vector2(9699, 496),
-            // new Vector2(11343, 496),
-            // new Vector2(864, 1136),
-            // new Vector2(1286, 1040),
-            // new Vector2(2027, 1136),
-            // new Vector2(3261, 1136),
-            // new Vector2(4209, 1071),
-            // new Vector2(4575, 1215),
-            // new Vector2(4955, 865),
-            // new Vector2(5584, 1215),
-            // new Vector2(7059, 1215),
-            // new Vector2(7633, 959),
-            // new Vector2(9089, 1215),
-            // new Vector2(11343, 1247),
-            // new Vector2(12074, 1215),
-            // new Vector2(1479, 1936),
-            // new Vector2(2561, 1840),
-            // new Vector2(3565, 1919),
-            // new Vector2(4563, 1919),
-            // new Vector2(5606, 1937),
-            // new Vector2(5718, 1615),
-            // new Vector2(7025, 1950),
-            // new Vector2(7741, 1728),
-            // new Vector2(7875, 1934),
-            // new Vector2(9066, 1935),
-            // new Vector2(10445, 1935),
-            // new Vector2(9674, 2207),
-            // new Vector2(9805, 2766),
-            // new Vector2(979, 3375),
-            // new Vector2(2513, 3056),
-            // new Vector2(2092, 3472),
-            // new Vector2(1423, 3328),
-            // new Vector2(3771, 3375),
-            // new Vector2(3307, 3472),
-            // new Vector2(3432, 3166),
-            // new Vector2(4075, 3166),
-            // new Vector2(4816, 3278),
-            // new Vector2(5578, 3166),
-            // new Vector2(6353, 3038),
-            // new Vector2(6048, 3375),
-            // new Vector2(6791, 3375),
-            // new Vector2(7524, 3375),
-            // new Vector2(8368, 3375),
-            // new Vector2(8719, 3375),
-            // new Vector2(9362, 3375),
-            // new Vector2(9539, 3056),
-            // new Vector2(405, 4094),
-            // new Vector2(1085, 3760),
-            // new Vector2(1936, 3760),
-            // new Vector2(2499, 4094),
-            // new Vector2(2903, 4094),
-            // new Vector2(3176, 4094)
+            { 1, new List<Vector2> { 
+                new Vector2(7144, 465),
+                new Vector2(8304, 500),
+                new Vector2(7698, 500),
+                new Vector2(8913, 500),
+                new Vector2(9699, 500),
+            } },
+
+            { 2, new List<Vector2> { 
+                new Vector2(11343, 500), 
+                new Vector2(12074, 1220),
+                new Vector2(12074, 1250),
+                new Vector2(9089, 1220),
+                new Vector2(5584, 1220),
+                new Vector2(4575, 1220),
+            } },
+
+            { 3, new List<Vector2> { 
+                new Vector2(2027, 1145), 
+                new Vector2(1479, 1950), 
+                new Vector2(2561, 1850),
+            } },
+
+            { 4, new List<Vector2> { 
+                new Vector2(5606, 1940), 
+                new Vector2(1479, 1950), 
+                new Vector2(7371, 1755),
+                new Vector2(10445, 1940),
+                new Vector2(9920, 2770),
+                new Vector2(8705, 3395),
+            } },
+
+            { 5, new List<Vector2> { 
+                new Vector2(6791, 3395), 
+                new Vector2(6591, 3060),  
+                new Vector2(4794, 3255),
+                new Vector2(3307, 3475),
+                new Vector2(2903, 4100),
+            } },
+
+            { 6, new List<Vector2> { 
+                new Vector2(4879, 4078),
+                new Vector2(6489, 4078),
+            } },
         };
     }
 }

@@ -17,8 +17,9 @@ namespace TheKnightAwakening
         public Rectangle Viewport; // View of the object
         protected float Gravity; 
         public bool isDead;
-        public int Health;
+        public float Health;
         protected int Damage;
+        protected float MaxHealth;
         protected bool isJumping;
 
         // Properties Other

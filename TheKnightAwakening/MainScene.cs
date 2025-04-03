@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -15,6 +16,8 @@ public class MainScene : Game
     // GameObjects
     List<GameObject> _gameObjects;
     public int _numOjects;
+    private Dictionary<string, MonsterType> monsterPrototypes;
+
 
     // Camera & Map & Cutscene & Drawing
     private Camera _camera;
@@ -36,6 +39,7 @@ public class MainScene : Game
         _graphics.ApplyChanges();
 
         _gameObjects = new List<GameObject>();
+        monsterPrototypes = new();
 
         _camera = new Camera(GraphicsDevice.Viewport);
         _map = new Map(GraphicsDevice);
@@ -73,7 +77,15 @@ public class MainScene : Game
             case Singleton.GameState.GameStart:
                 if (IsButtonClicked(_drawing.MenuPlay))
                 {
-                    Singleton.Instance.CurrentGameState = Singleton.GameState.Cutscene;
+                    if (!_cutscene.hasCutsceneBeenPlayed || _cutscene.hasGameBeenCompleted)
+                    {
+                        Singleton.Instance.CurrentGameState = Singleton.GameState.Cutscene;
+                        Singleton.Instance.currentCutscene = Singleton.CutsceneType.StartGame;
+                    }
+                    else
+                    {
+                        Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
+                    }
                 }
                 else if (IsButtonClicked(_drawing.MenuExit))
                 {
@@ -94,7 +106,18 @@ public class MainScene : Game
                 {
                     Singleton.Instance.CurrentGameState = Singleton.GameState.GamePaused;
                 }
-
+                // Audio
+                if (Singleton.Instance.CurrentKey.IsKeyDown(Keys.M) && !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
+                {
+                    if (Singleton.Instance.AudioManager.IsMuted())
+                    {
+                        Singleton.Instance.AudioManager.UnmuteAll();
+                    }
+                    else
+                    {
+                        Singleton.Instance.AudioManager.MuteAll();
+                    }
+                }
                 // Update GameObjects               
                 for (int i = 0; i < _numOjects; i++)
                 {
@@ -111,9 +134,9 @@ public class MainScene : Game
                         _gameObjects.RemoveAt(i);
                         i--;
                         _numOjects--;
+                        _numOjects = _gameObjects.Count;
                     }
                 }
-
                 // Update Camera
                 if (Singleton.Instance.player != null)
                 {
@@ -144,63 +167,84 @@ public class MainScene : Game
                     }
                 }
 
-                foreach (var obj in _gameObjects)
+                for (int i = 0; i < _gameObjects.Count; i++)
                 {
-                    if (obj is Flag flag)
+                    if (_gameObjects[i] is Flag flag && !flag.Checked)
                     {
-                        if (flag.Name == "Flag_{X:100 Y:0}" && !flag.Checked)
+                        if (flag.Name == "Flag_{X:5940 Y:71}")
                         {
                             if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
                             {
                                 flag.Collected();
+
+                                Singleton.Instance.CurrentSection = 1;
+                                SpawnMonstersForSection(Singleton.Instance.CurrentSection);
+                            }
+                        }
+                        if (flag.Name == "Flag_{X:10400 Y:164}")
+                        {
+                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
+                            {
+                                flag.Collected();
+
+                                Singleton.Instance.CurrentSection = 2;
+                                SpawnMonstersForSection(Singleton.Instance.CurrentSection);
+                            }
+                        }
+                        if (flag.Name == "Flag_{X:4097 Y:932}")
+                        {
+                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
+                            {
+                                flag.Collected();
+
+                                Singleton.Instance.CurrentSection = 3;
+                                SpawnMonstersForSection(Singleton.Instance.CurrentSection);
+                            }
+                        }
+                        
+                        if (flag.Name == "Flag_{X:3070 Y:1509}")
+                        {
+                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
+                            {
+                                flag.Collected();
+
+                                Singleton.Instance.CurrentSection = 4;
+                                SpawnMonstersForSection(Singleton.Instance.CurrentSection);
+                            }
+                        }
+                        if (flag.Name == "Flag_{X:7971 Y:3013}")
+                        {
+                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
+                            {
+                                flag.Collected();
+
+                                Singleton.Instance.CurrentSection = 5;
+                                SpawnMonstersForSection(Singleton.Instance.CurrentSection);
+                            }
+                        }
+                        if (flag.Name == "Flag_{X:4000 Y:3847}")
+                        {
+                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
+                            {
+                                flag.Collected();
+
                                 Singleton.Instance.currentCutscene = Singleton.CutsceneType.BossRoom;
                                 _cutscene.LoadSceneData();
                                 Singleton.Instance.CurrentGameState = Singleton.GameState.Cutscene;
-                            }
-                        }
-                        if (flag.Name == "Flag_{X:10400 Y:164}" && !flag.Checked)
-                        {
-                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
-                            {
-                                flag.Collected();
-                            }
-                        }
-                        if (flag.Name == "Flag_{X:4097 Y:932}" && !flag.Checked)
-                        {
-                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
-                            {
-                                flag.Collected();
-                            }
-                        }
-                        if (flag.Name == "Flag_{X:7971 Y:3013}" && !flag.Checked)
-                        {
-                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
-                            {
-                                flag.Collected();
-                            }
-                        }
-                        if (flag.Name == "Flag_{X:4000 Y:3847}" && !flag.Checked)
-                        {
-                            if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, flag.Rectangle))
-                            {
-                                flag.Collected();
+
+                                Singleton.Instance.CurrentSection = 6;
+                                SpawnMonstersForSection(Singleton.Instance.CurrentSection);
                             }
                         }
                     }
                 }
-                /*
-                Flag name: Flag_{X:100 Y:0}
-                Flag name: Flag_{X:10400 Y:164}
-                Flag name: Flag_{X:4097 Y:932}
-                Flag name: Flag_{X:7971 Y:3013}
-                Flag name: Flag_{X:4000 Y:3847}
-                */
+
                 // Paremeters: Health, Ultimate
                 _drawing.Healthbar.Update(Singleton.Instance.player.Health);
                 _drawing.HealthbarAnimated.Update(Singleton.Instance.player.Health, gameTime);
 
                 _drawing.Ultimatebar.Update(Singleton.Instance.player.Ultimate);
-                // _ultimatebarAnimated.Update(Singleton.Instance.player.Ultimate, gameTime);
+                _drawing.UltimatebarAnimated.Update(Singleton.Instance.player.Ultimate);
 
                 break;
 
@@ -220,6 +264,27 @@ public class MainScene : Game
                 {
                     Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
                 }
+                else if (IsButtonClicked(_drawing.SettingsButtonDOWN))
+                {
+                    float currentVolume = Singleton.Instance.AudioManager.GetCurrentVolume();
+                    Singleton.Instance.AudioManager.SetVolume(MathHelper.Clamp(currentVolume - 0.25f, 0f, 2f));
+                }
+                else if (IsButtonClicked(_drawing.SettingsButtonUP))
+                {
+                    float newVolume = MathHelper.Clamp(Singleton.Instance.AudioManager.GetCurrentVolume() + 0.25f, 0f, 2f);
+                    Singleton.Instance.AudioManager.SetVolume(newVolume);  
+                }
+                else if (IsButtonClicked(_drawing.SettingsButtonMute))
+                {
+                    if (Singleton.Instance.AudioManager.IsMuted()) 
+                    {
+                        Singleton.Instance.AudioManager.UnmuteAll(); 
+                    }
+                    else
+                    {
+                        Singleton.Instance.AudioManager.MuteAll(); 
+                    }
+                }
                 break;
 
             case Singleton.GameState.GameOver:
@@ -231,6 +296,7 @@ public class MainScene : Game
                 break;
         }
 
+        Console.WriteLine("Count Game Objects : " + _numOjects);
         Singleton.Instance.PreviousMouse = Singleton.Instance.CurrentMouse;
         Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
 
@@ -261,6 +327,7 @@ public class MainScene : Game
             case Singleton.GameState.GamePaused:
                 {
                     _drawing._DrawPause(_spriteBatch, _gameObjects, _numOjects);
+                    _drawing.DrawVolumeBar(_spriteBatch);
                 }
                 break;
             case Singleton.GameState.GameOver:
@@ -284,7 +351,7 @@ public class MainScene : Game
         _gameObjects.Clear();
 
         ResetPlayer(); // Call PLayer Object
-        ResetMonster(); // Call Monster Object
+        MonsterProtype(); // Call Monster Object
         ResetObject(); // Call Object
 
         foreach (GameObject s in _gameObjects)
@@ -308,7 +375,9 @@ public class MainScene : Game
             Name = "Player",
             Viewport = new Rectangle(5, 0, 43, 64),
             // Position = new Vector2(200, 100),
-            LastCheckpoint = new Vector2(200, 0),
+            // LastCheckpoint = new Vector2(720, 470),
+            // LastCheckpoint = new Vector2(5490, 71),
+            LastCheckpoint = new Vector2(3800, 3847),
             Left = Keys.Left,
             Right = Keys.Right,
             Up = Keys.Up,
@@ -329,7 +398,7 @@ public class MainScene : Game
         _gameObjects.Add(Singleton.Instance.player);
     }
 
-    public void ResetMonster()
+    public void MonsterProtype()
     {
         // Load Texture each Monster Type
         var monsterTextures = new Dictionary<AnimationMonster.AnimationMonsterType, Texture2D>
@@ -395,49 +464,59 @@ public class MainScene : Game
             }
         };
 
-        // // Postion each monster type
-        List<Vector2> spawnPositionsSL = SL.SpawnPositions;
-        List<Vector2> spawnPositionsWR = SKLT_WR.SpawnPositions;
-        List<Vector2> spawnPositionsSM = SKLT_SM.SpawnPositions;
-        List<Vector2> spawnPositionsAC = SKLT_AC.SpawnPositions;
-        List<Vector2> spawnPositionsMDS = MDS.SpawnPositions;
+        monsterPrototypes["SKLT_AC"] = prototypeAC;
+        monsterPrototypes["SKLT_SM"] = prototypeSM;
+        monsterPrototypes["SKLT_WR"] = prototypeWR;
+        monsterPrototypes["SL"] = prototypeSL;
+        monsterPrototypes["MDS"] = prototypeMDS;
 
-        // // Clone prototype and Set Potion from spawnPositions each Monster Type
-        // foreach (var pos in spawnPositionsSL)
+
+        // foreach (var pos in spawnPositionsMDS)
         // {
-        //     var clone = prototypeSL.Clone();
+        //     var clone = prototypeMDS.Clone();
         //     clone.Position = pos;
         //     _gameObjects.Add(clone);
         // }
-
-        // foreach (var pos in spawnPositionsWR)
-        // {
-        //     var clone = prototypeWR.Clone();
-        //     clone.Position = pos;
-        //     _gameObjects.Add(clone);
-        // }
-
-        // foreach (var pos in spawnPositionsSM)
-        // {
-        //     var clone = prototypeSM.Clone();
-        //     clone.Position = pos;
-        //     _gameObjects.Add(clone);
-        // }
-
-        // foreach (var pos in spawnPositionsAC)
-        // {
-        //     var clone = prototypeAC.Clone();
-        //     clone.Position = pos;
-        //     _gameObjects.Add(clone);
-        // }
-
-        foreach (var pos in spawnPositionsMDS)
-        {
-            var clone = prototypeMDS.Clone();
-            clone.Position = pos;
-            _gameObjects.Add(clone);
-        }
     }
+
+    private void SpawnMonstersForSection(int section)
+    {
+        // ลบมอนสเตอร์ของ section ก่อนหน้าออก
+        _gameObjects.RemoveAll(obj =>
+            obj is MonsterType monster &&
+            monster.Section == Singleton.Instance.PreviousSection);
+
+        // Spawn มอนสเตอร์ใหม่ของทุกประเภท
+        foreach (var pair in monsterPrototypes)
+        {
+            string type = pair.Key;
+            MonsterType prototype = pair.Value;
+
+            Dictionary<int, List<Vector2>> spawnPositions = type switch
+            {
+                "SKLT_AC" => SKLT_AC.SpawnPositions,
+                "SKLT_SM" => SKLT_SM.SpawnPositions,
+                "SKLT_WR" => SKLT_WR.SpawnPositions,
+                "SL" => SL.SpawnPositions,
+                "MDS" => MDS.SpawnPositions,
+                _ => null
+            };
+
+            if (spawnPositions != null && spawnPositions.TryGetValue(section, out var positions))
+            {
+                foreach (var pos in positions)
+                {
+                    MonsterType clone = prototype.Clone();
+                    clone.Position = pos;
+                    clone.Section = section; // กำหนด Section ให้ตัว clone
+                    _gameObjects.Add(clone);
+                }
+            }
+        }
+
+        Singleton.Instance.PreviousSection = Singleton.Instance.CurrentSection;
+    }
+
 
 
     public void ResetObject() // Clone 

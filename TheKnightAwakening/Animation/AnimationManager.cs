@@ -65,6 +65,11 @@ namespace TheKnightAwakening
             SpriteEffects spriteEffect = FacingRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             Rectangle source = _animation.Frames[_currentFrame];
             spriteBatch.Draw(_animation.Texture, Position, source, Color.White, 0f, Vector2.Zero, Scale, spriteEffect, 0f);
+
+            Texture2D rectTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+            rectTexture.SetData(new[] { Color.Red });
+            spriteBatch.Draw(rectTexture, new Rectangle((int)Position.X, (int)Position.Y, source.Width, source.Height), Color.Red * 0.5f);
+
         }
 
         public void Draw(SpriteBatch spriteBatch, Color color)

@@ -116,7 +116,7 @@ namespace TheKnightAwakening
                     pixel_tilesize
                 );
                 this.hitbox = hitbox;
-                spriteBatch.Draw(hitboxTexture, drest, src, Color.White);
+                // spriteBatch.Draw(hitboxTexture, drest, src, Color.White);
             }
 
             foreach (var item in prop_1)

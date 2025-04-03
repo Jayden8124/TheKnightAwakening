@@ -94,10 +94,10 @@ namespace TheKnightAwakening
                 },
                 { "Dead", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(20, 534, 39, 64),
-                        new Rectangle(115, 537, 39, 64),
-                        new Rectangle(224, 555, 51, 64),
-                        new Rectangle(321, 575, 64, 64)
+                        new Rectangle(20, 527, 39, 64),
+                        new Rectangle(115, 527, 39, 64),
+                        new Rectangle(224, 527, 51, 64),
+                        new Rectangle(321, 527, 64, 64)
                     }, 0.25f, false)
                 }
             };
@@ -166,9 +166,9 @@ namespace TheKnightAwakening
                 },
                 { "Dead", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(16, 654, 46, 49),
-                        new Rectangle(144, 662, 50, 41),
-                        new Rectangle(272, 693, 68, 10)
+                        new Rectangle(16, 635, 46, 80),
+                        new Rectangle(144, 635, 50, 80),
+                        new Rectangle(272, 635, 68, 80)
                     }, 0.25f, false)
                 }
             };
@@ -238,9 +238,9 @@ namespace TheKnightAwakening
                 },
                 { "Dead", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(16, 325, 46, 27),
-                        new Rectangle(80, 333, 47, 19),
-                        new Rectangle(144, 337, 52, 15)
+                        new Rectangle(16, 319, 46, 35),
+                        new Rectangle(80, 319, 47, 35),
+                        new Rectangle(144, 319, 52, 35)
                     }, 0.25f, false)
                 }
             };
@@ -303,11 +303,11 @@ namespace TheKnightAwakening
                 },
                 { "Dead", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(16, 574, 42, 82),
-                        new Rectangle(154, 574, 36, 82),
-                        new Rectangle(282, 583, 49, 73),
-                        new Rectangle(410, 619, 62, 37),
-                        new Rectangle(538, 642, 64, 14)
+                        new Rectangle(16, 567, 42, 90),
+                        new Rectangle(154, 567, 36, 90),
+                        new Rectangle(282, 567, 49, 90),
+                        new Rectangle(410, 567, 62, 90),
+                        new Rectangle(538, 567, 64, 90)
                     }, 0.20f, false)
                 }
             };
@@ -379,9 +379,9 @@ namespace TheKnightAwakening
                 },
                 { "Dead", new Animation(texture, new List<Rectangle>
                     {
-                        new Rectangle(30, 166, 66, 90),
-                        new Rectangle(158, 166, 66, 90),
-                        new Rectangle(286, 230, 83, 26)
+                        new Rectangle(30, 168, 66, 90),
+                        new Rectangle(158, 168, 66, 90),
+                        new Rectangle(286, 168, 83, 90)
                     }, 0.25f, false)
                 }
             };

@@ -24,6 +24,11 @@ namespace TheKnightAwakening
         // Rectacngle
         public Texture2D _rect;
 
+        // Section Monster 
+        public int CurrentSection = 0;
+        public int PreviousSection = -1;
+
+
         // Game state
         public enum GameState
         {

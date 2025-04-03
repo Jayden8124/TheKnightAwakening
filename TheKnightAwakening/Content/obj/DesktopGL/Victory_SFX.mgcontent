@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>d:/Kmitl Work/Y3T2/Computer Game/Final proj/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Victory_SFX.mp3</SourceFile>
-  <SourceTime>2025-03-29T23:18:10.4303806+07:00</SourceTime>
-  <DestFile>d:/Kmitl Work/Y3T2/Computer Game/Final proj/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Victory_SFX.xnb</DestFile>
-  <DestTime>2025-03-30T22:01:58.3999182+07:00</DestTime>
+  <SourceFile>c:/Study-Comsci/Y3T2/COMGAME/Final/P/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Victory_SFX.mp3</SourceFile>
+  <SourceTime>2025-03-31T22:46:31.2369417+07:00</SourceTime>
+  <DestFile>c:/Study-Comsci/Y3T2/COMGAME/Final/P/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Victory_SFX.xnb</DestFile>
+  <DestTime>2025-04-03T13:56:31.6742036+07:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

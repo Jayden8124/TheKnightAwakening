@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>d:/Kmitl Work/Y3T2/Computer Game/Final proj/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Coin_Collect.mp3</SourceFile>
-  <SourceTime>2025-03-30T02:59:25.6859633+07:00</SourceTime>
-  <DestFile>d:/Kmitl Work/Y3T2/Computer Game/Final proj/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Coin_Collect.xnb</DestFile>
-  <DestTime>2025-03-30T03:13:13.748829+07:00</DestTime>
+  <SourceFile>c:/Study-Comsci/Y3T2/COMGAME/Final/P/TheKnightAwakening/TheKnightAwakening/Content/Audio/SFX/Coin_Collect.mp3</SourceFile>
+  <SourceTime>2025-03-30T18:47:18.8741378+07:00</SourceTime>
+  <DestFile>c:/Study-Comsci/Y3T2/COMGAME/Final/P/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Coin_Collect.xnb</DestFile>
+  <DestTime>2025-04-03T13:56:29.447952+07:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

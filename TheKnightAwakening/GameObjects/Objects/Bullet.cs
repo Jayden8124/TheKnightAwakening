@@ -64,7 +64,7 @@ namespace TheKnightAwakening
             DistanceMoved += Math.Abs(Velocity.X * deltaTime);
             Position += Velocity * deltaTime;
 
-            if (DistanceMoved > 2000 || DistanceMoved >= Singleton.SCREENHEIGHT || time > 15f)
+            if (DistanceMoved > 2000 || DistanceMoved >= Singleton.SCREENHEIGHT || time > 5f)
             {
                 time = 0f;
                 IsActive = false;
@@ -77,10 +77,10 @@ namespace TheKnightAwakening
                 {
                     if (CheckAABBCollision(s.Rectangle, Rectangle) && (s.Name.Equals("SKLT_WR") || s.Name.Equals("SL") || s.Name.Equals("SKLT_SM") || s.Name.Equals("SKLT_AC") || s.Name.Equals("MDS")))
                     {
-                        s.IsActive = false;
+                        // s.IsActive = false;
                         if (s is MonsterType monster)
                         {
-                            Singleton.Instance.Score += monster.Score;
+                            monster.TakeDamage(150, Position);
                         }
                         IsActive = false;
                     }

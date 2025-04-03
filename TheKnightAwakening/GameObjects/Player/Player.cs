@@ -19,7 +19,6 @@ namespace TheKnightAwakening
         public Vector2 LastCheckpoint { get; set; }
 
         // Properties
-        private int maxHealth = 200;
         public int Ultimate { get; private set; }
         private float speed;
         private bool isAttacking;
@@ -51,7 +50,8 @@ namespace TheKnightAwakening
 
         public override void Reset()
         {
-            Health = maxHealth;
+            MaxHealth = 200;
+            Health = MaxHealth;
             Damage = 50;
             Ultimate = 0;
             isDead = false;
@@ -200,6 +200,7 @@ namespace TheKnightAwakening
             !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
             {
                 TriggerAttack("Attack2", _gameObjects);
+                Ultimate -= 1;
             }
             else if (Ultimate >= 5 && Singleton.Instance.CurrentKey.IsKeyDown(Attack3) &&
             !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
@@ -221,7 +222,7 @@ namespace TheKnightAwakening
             isAttacking = true;
             attackTimer = 0f;
             if (activeDebuffs.ContainsKey(DebuffType.Weak))
-                this.Damage /= 2;
+                this.Damage = 25;
 
             Singleton.Instance.AudioManager.PlayEffect("Sword_SFX"); 
 
@@ -236,13 +237,6 @@ namespace TheKnightAwakening
                         Console.WriteLine("Monster taken damage: " + this.Damage);
                     }
                 }
-                // if (gameObject is Bullet bullet)
-                // {
-                //     if (Player.CheckAABBCollision(this.Rectangle, bullet.Rectangle))
-                //     {
-                //         bullet.IsActive = false;
-                //     }
-                // }
             }
         }
 
@@ -302,10 +296,10 @@ namespace TheKnightAwakening
             }
         }
 
-        public void Heal(int heal)
+        public void Heal(float heal)
         {
             this.Health += heal;
-            if (this.Health > maxHealth) this.Health = maxHealth;
+            if (this.Health > this.MaxHealth) this.Health = MaxHealth;
         }
 
         public void LoadDebufIcons(ContentManager Content)

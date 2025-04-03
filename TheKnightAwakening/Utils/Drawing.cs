@@ -37,6 +37,7 @@ namespace TheKnightAwakening
         public Texture2D HowToPlay { get; private set; }
         public Texture2D HealthBarTexture { get; private set; }
         public Texture2D UltimateTexture { get; private set; }
+        public Texture2D ButtonUISONG { get; private set; }
 
         // Button Rectangles
         public Rectangle MenuPlay { get; private set; }
@@ -48,6 +49,12 @@ namespace TheKnightAwakening
         public Rectangle ForegroundSourceHealthBar { get; private set; }
         public Rectangle BackgroundSourceUltimate { get; private set; }
         public Rectangle ForegroundSourceUltimate { get; private set; }
+
+        public Rectangle SettingsButtonDOWN { get; private set; }
+        public Rectangle SettingsButtonUP { get; private set; }
+        public Rectangle SettingsButtonMute { get; private set; }
+        public Rectangle SettingsButtonButtonUISONG { get; private set; }
+
 
         // Health Bar
         public Healthbar Healthbar { get; private set; }
@@ -70,6 +77,12 @@ namespace TheKnightAwakening
             Setting = new Rectangle(1175, 53, 35, 35);
             PauseExit = new Rectangle(565, 364, 167, 100);
             PauseResume = new Rectangle(565, 250, 167, 100);
+
+            // Audio
+            SettingsButtonDOWN = new Rectangle(590, 518, 17, 17);
+            SettingsButtonUP = new Rectangle(666, 518, 17, 17);
+            SettingsButtonMute = new Rectangle(692, 518, 17, 17);
+            SettingsButtonButtonUISONG = new Rectangle(565, 478, 165, 98);
 
             // Health Bar Source Rectangles
             BackgroundSourceHealthBar = new Rectangle(0, 0, 163, 23);
@@ -105,12 +118,13 @@ namespace TheKnightAwakening
                 PotionSheet = Content.Load<Texture2D>("health_potion");
                 IconSheet = Content.Load<Texture2D>("Icon-sheet");
                 FlagSheet = Content.Load<Texture2D>("Flag_Raise");
+                ButtonUISONG = Content.Load<Texture2D>("ButtonSONG");
             }
 
             {   // Health Bar
                 HealthBarTexture = Content.Load<Texture2D>("health_bar");
-                Healthbar = new Healthbar(HealthBarTexture, BackgroundSourceHealthBar, ForegroundSourceHealthBar, 100);
-                HealthbarAnimated = new HealthbarAnimated(HealthBarTexture, BackgroundSourceHealthBar, ForegroundSourceHealthBar, 100);
+                Healthbar = new Healthbar(HealthBarTexture, BackgroundSourceHealthBar, ForegroundSourceHealthBar, 200);
+                HealthbarAnimated = new HealthbarAnimated(HealthBarTexture, BackgroundSourceHealthBar, ForegroundSourceHealthBar, 200);
             }
 
             {   // Ultimate Bar
@@ -133,6 +147,46 @@ namespace TheKnightAwakening
                 // Cutscene
                 Cutscene.LoadContent(Content);
             }
+        }
+
+        public void DrawVolumeBar(SpriteBatch spriteBatch)
+        {
+            // ตรวจสอบระดับเสียงปัจจุบัน
+            float volume = Singleton.Instance.AudioManager.GetCurrentVolume();
+
+            // ขนาดแท่ง
+            int barWidth = 7;  // ความกว้างของแต่ละแท่ง
+            int barMaxHeight = 25; // ความสูงของแท่ง (สูงสุด 100%)
+            int gapBetweenBars = 5; // ช่องว่างระหว่างแท่งแต่ละอัน
+
+            // กำหนดตำแหน่งเริ่มต้นของแท่ง
+            int startX = 605; // ตำแหน่งเริ่มต้น X
+            int startY = 515; // ตำแหน่งเริ่มต้น Y
+
+            // วาดแท่งระดับเสียงทั้งหมด 5 ระดับ (0%, 25%, 50%, 75%, 100%)
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+            for (int i = 0; i < 5; i++)
+            {
+                // คำนวณระดับเสียงที่แท่งนี้จะต้องแสดง
+                float threshold = i * 0.25f; // 0%, 25%, 50%, 75%, 100%
+                // กำหนดสีของแท่ง
+                Color color = Color.Gray; // สีเริ่มต้น (ถ้าเสียงยังไม่ถึง)
+                if (volume >= threshold)
+                {
+                    color = Color.White;  // ถ้าระดับเสียงถึงหรือเกินกว่า threshold จะเปลี่ยนเป็นสีขาว
+                }
+
+                // คำนวณขนาดของแท่ง (สูงสุด 100%)
+                int levelHeight = (int)(barMaxHeight * threshold); // ความสูงของแท่งตามระดับ
+
+                // วาดแท่งระดับเสียง
+                spriteBatch.Draw(Singleton.Instance._rect,
+                    new Rectangle(startX + i * (barWidth + gapBetweenBars), startY + (barMaxHeight - levelHeight), barWidth, levelHeight),
+                    color);
+            }
+
+            spriteBatch.End();
         }
 
         public void _DrawStart(SpriteBatch _spriteBatch)
@@ -199,7 +253,7 @@ namespace TheKnightAwakening
                 Healthbar.Draw(_spriteBatch);
                 HealthbarAnimated.Draw(_spriteBatch);
                 Ultimatebar.Draw(_spriteBatch);
-                // UltimatebarAnimated.Draw(_spriteBatch);
+                UltimatebarAnimated.Draw(_spriteBatch);
 
                 _spriteBatch.DrawString(Font, Singleton.Instance.Score.ToString(), new Vector2(1050, 55), Color.White);
                 _spriteBatch.Draw(CoinSheet, new Vector2(1100, 50), new Rectangle(0, 0, 27, 27), Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0); // Coin Score
@@ -207,6 +261,10 @@ namespace TheKnightAwakening
 
                 _spriteBatch.Draw(ButtonUI, PauseResume, new Rectangle(37, 329, 594, 296), Color.White); // Resune
                 _spriteBatch.Draw(ButtonUI, PauseExit, new Rectangle(681, 13, 594, 296), Color.White); // Exit
+
+                //ohm
+                _spriteBatch.Draw(ButtonUISONG, SettingsButtonButtonUISONG, new Rectangle(0, 0, 143, 60), Color.White); // Settings
+
                 _spriteBatch.End();
             }
         }
@@ -241,6 +299,7 @@ namespace TheKnightAwakening
             {
                 _gameObjects[i].Draw(_spriteBatch);
             }
+            
             _spriteBatch.End();
 
             // Layer 3: UI
@@ -272,13 +331,13 @@ namespace TheKnightAwakening
 
         public void DrawDebuffIcons(SpriteBatch _spriteBatch)
         {
-            int offsetX = 0; 
+            int offsetX = 0;
             foreach (var debuff in Singleton.Instance.player.activeDebuffs)
             {
                 if (Singleton.Instance.player.debuffIcons.TryGetValue(debuff.Key, out Texture2D icon))
                 {
                     _spriteBatch.Draw(icon, new Vector2(50 + offsetX, 90), null, Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0f);
-                    offsetX += (icon.Width / 2) + 5; 
+                    offsetX += (icon.Width / 2) + 5;
                 }
             }
         }

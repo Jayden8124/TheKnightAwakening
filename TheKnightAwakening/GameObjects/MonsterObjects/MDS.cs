@@ -21,17 +21,20 @@ namespace TheKnightAwakening
 
         }
 
-        public override void Update(GameTime gameTime, List<GameObject> gameObjects)
+        public override void Update(GameTime gameTime, List<GameObject> _gameObjects)
         {
-            collidedWithHitblock = false;
-            HandleHitblockCollision();
+            if (Health <= 0)
+            {
+                base.Update(gameTime, _gameObjects);
+                return;
+            }
 
             bulletSpawnTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             weakDebuffTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (bulletSpawnTimer <= 0)
             {
-                SpawnBullets(gameObjects);
+                SpawnBullets(_gameObjects);
                 bulletSpawnTimer = 10f;
             }
 
@@ -45,12 +48,12 @@ namespace TheKnightAwakening
                     Singleton.Instance.player.TakeDebuff(Player.DebuffType.Stun, 1f, Position);
                     Console.WriteLine("Applied Weak Debuff to Player");
                 }
-                weakDebuffTimer = 5f;
+                weakDebuffTimer = 3f;
             }
 
             if (gameTime.TotalGameTime.TotalSeconds > 1)
             {
-                if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, this.Rectangle))
+                if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, this.Rectangle) && Math.Abs(Position.Y - Singleton.Instance.player.Position.Y) <= 35)
                 {
                     HandleMeleeAttack(gameTime);
                 }
@@ -62,33 +65,7 @@ namespace TheKnightAwakening
             }
 
             AnimationManager.Update(gameTime);
-            base.Update(gameTime, gameObjects);
-        }
-
-        private void HandleHitblockCollision()
-        {
-            const int frontOffset = 5;
-            Rectangle frontRect = AnimationManager.FacingRight ?
-                new Rectangle(this.Rectangle.Right, this.Rectangle.Y, frontOffset, this.Rectangle.Height) :
-                new Rectangle(this.Rectangle.X - frontOffset, this.Rectangle.Y, frontOffset, this.Rectangle.Height);
-
-            if (Singleton.Instance.HitblockTiles != null)
-            {
-                foreach (var tile in Singleton.Instance.HitblockTiles)
-                {
-                    if (frontRect.Intersects(tile))
-                    {
-                        collidedWithHitblock = true;
-                        break;
-                    }
-                }
-            }
-
-            if (collidedWithHitblock)
-            {
-                moveDirection *= -1;
-                AnimationManager.FacingRight = moveDirection > 0;
-            }
+            base.Update(gameTime, _gameObjects);
         }
 
         private void HandleMeleeAttack(GameTime gameTime)
@@ -120,7 +97,7 @@ namespace TheKnightAwakening
         {
             const int chaseDistance = 150;
 
-            if (DistanceMoved <= chaseDistance)
+            if (DistanceMoved <= chaseDistance && Math.Abs(Position.Y - Singleton.Instance.player.Position.Y) <= 5)
             {
                 if (Singleton.Instance.player.Position.X < Position.X)
                 {
@@ -177,7 +154,8 @@ namespace TheKnightAwakening
 
         public override void Reset()
         {
-            Health = 1250;
+            MaxHealth = 1;
+            Health = MaxHealth;
             Damage = 20;
             walkSpeed = 3f;
             runSpeed = 6f;
@@ -189,10 +167,11 @@ namespace TheKnightAwakening
             base.Reset();
         }
 
-        public static List<Vector2> SpawnPositions = new List<Vector2>
+        public static Dictionary<int, List<Vector2>> SpawnPositions = new Dictionary<int, List<Vector2>>()
         {
-            new Vector2(100, 0) // Test
-            // new Vector2(6740, 4049)
+            { 6, new List<Vector2> { 
+               new Vector2(6740, 4049),
+            } },
         };
     }
 }

@@ -243,11 +243,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/TheKnightAwakening.csproj",
+      "projectUniqueName": "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/TheKnightAwakening/TheKnightAwakening/TheKnightAwakening.csproj",
       "projectName": "TheKnightAwakening",
-      "projectPath": "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/TheKnightAwakening.csproj",
+      "projectPath": "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/TheKnightAwakening/TheKnightAwakening/TheKnightAwakening.csproj",
       "packagesPath": "/Users/jay/.nuget/packages/",
-      "outputPath": "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/The_Knight_Awakening/TheKnightAwakening/TheKnightAwakening/obj/",
+      "outputPath": "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/TheKnightAwakening/TheKnightAwakening/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/jay/.nuget/NuGet/NuGet.Config"
