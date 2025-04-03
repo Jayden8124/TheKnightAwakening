@@ -19,7 +19,7 @@ namespace TheKnightAwakening
         protected int moveDirection; // 1: เคลื่อนที่ไปทางขวา, -1: เคลื่อนที่ไปทางซ้าย
         protected bool isHurt;
         protected float attackTimer;
-        protected float attackDelay; // Delay 3 วินาทีระหว่างการโจมตี
+        protected float attackDelay; 
         protected bool collidedWithHitblock = false;
         protected float deadDelay;
         public int Section { get; set; } = -1;
@@ -29,7 +29,6 @@ namespace TheKnightAwakening
         {
             Animations = animations;
             isHurt = false;
-            // AnimationManager = new AnimationManager(Animations["Idle"]);  // จำเป็นไหม?
             IsActive = true;
         }
 

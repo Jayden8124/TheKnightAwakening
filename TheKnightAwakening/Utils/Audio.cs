@@ -21,7 +21,7 @@ namespace TheKnightAwakening
             _soundInstances = new Dictionary<string, SoundEffectInstance>();
             _songs = new Dictionary<string, Song>();
             _SFXVolume = 0.2f;
-            isMuted = false; // เริ่มต้นเสียงเปิด
+            isMuted = false; 
         }
 
         public void LoadSounds(ContentManager Content)
@@ -79,31 +79,25 @@ namespace TheKnightAwakening
             }
         }
         
-        // ฟังก์ชันสำหรับตั้งค่าระดับเสียงทั้งหมด
         public void SetVolume(float volume)
         {
-            // ตั้งระดับเสียงของเพลง
             MediaPlayer.Volume = MathHelper.Clamp(volume, 0f, 1f);
 
-            // ตั้งระดับเสียงของ SFX
             _SFXVolume = MathHelper.Clamp(volume, 0f, 1f);
 
-            // ตั้งระดับเสียงของทุกๆ Instance ของ SFX
             foreach (var _sinst in _soundInstances.Values)
             {
                 _sinst.Volume = _SFXVolume;
             }
         }
 
-        // ฟังก์ชันเพิ่มระดับเสียง
         public void IncreaseVolume(float increment = 0.1f)
         {
-            if (!isMuted)  // ตรวจสอบว่าถึงแม้จะไม่ปิดเสียง (ไม่ใช่ mute) ก็สามารถเพิ่มเสียงได้
+            if (!isMuted)  
             {
                 float newVolume = MathHelper.Clamp(MediaPlayer.Volume + increment, 0f, 1f);
-                SetVolume(newVolume);  // ปรับระดับเสียงของเพลงและ SFX
+                SetVolume(newVolume);  
 
-                // ถ้าเสียงถูกเพิ่มแล้ว, เปลี่ยนสถานะเป็นเปิดเสียง (Unmute)
                 if (isMuted)
                 {
                     UnmuteAll();
@@ -111,15 +105,13 @@ namespace TheKnightAwakening
             }
         }
 
-        // ฟังก์ชันลดระดับเสียง
         public void DecreaseVolume(float decrement = 0.1f)
         {
-            if (!isMuted)  // ตรวจสอบว่าถึงแม้จะไม่ปิดเสียง (ไม่ใช่ mute) ก็สามารถลดเสียงได้
+            if (!isMuted)  
             {
                 float newVolume = MathHelper.Clamp(MediaPlayer.Volume - decrement, 0f, 1f);
-                SetVolume(newVolume);  // ปรับระดับเสียงของเพลงและ SFX
+                SetVolume(newVolume);  
 
-                // ถ้าลดเสียงจนถึง 0, เปลี่ยนสถานะเป็นปิดเสียง (Mute)
                 if (newVolume <= 0f)
                 {
                     MuteAll();
@@ -127,54 +119,46 @@ namespace TheKnightAwakening
             }
         }
 
-        // ฟังก์ชันปิดเสียงทั้งหมด
         public void MuteAll()
         {
-            if (!isMuted)  // ถ้ายังไม่ได้ปิดเสียง
+            if (!isMuted)  
             {
-                // เก็บระดับเสียงก่อนที่จะทำการปิดเสียง
                 previousMusicVolume = MediaPlayer.Volume;
                 previousSFXVolume = _SFXVolume;
 
-                // ปิดเสียงเพลงทั้งหมด
                 MediaPlayer.Volume = 0f;
 
-                // ปิดเสียงเอฟเฟกต์ทั้งหมด
                 foreach (var _sinst in _soundInstances.Values)
                 {
                     _sinst.Volume = 0f;
                 }
 
-                isMuted = true;  // เปลี่ยนสถานะเป็นเสียงปิด
+                isMuted = true;  
             }
         }
 
-        // ฟังก์ชันเปิดเสียงทั้งหมด
         public void UnmuteAll()
         {
-            if (isMuted)  // ถ้ามีการปิดเสียงแล้ว
+            if (isMuted)  
             {
-                // คืนค่าเสียงที่เคยเก็บไว้
                 MediaPlayer.Volume = previousMusicVolume;
                 foreach (var _sinst in _soundInstances.Values)
                 {
                     _sinst.Volume = previousSFXVolume;
                 }
 
-                isMuted = false;  // เปลี่ยนสถานะเป็นเสียงเปิด
+                isMuted = false;  
             }
         }
 
-        // ฟังก์ชันตรวจสอบสถานะเสียง
         public bool IsMuted()
         {
             return isMuted;
         }
 
-        // ฟังก์ชันดึงระดับเสียงปัจจุบัน
         public float GetCurrentVolume()
         {
-            return MediaPlayer.Volume; // คืนค่าระดับเสียงของเพลง
+            return MediaPlayer.Volume; 
         }
     }
 }

@@ -314,7 +314,6 @@ namespace TheKnightAwakening
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // วาดตัวละครตามปกติ
             Color playerColor = Color.White;
             if (activeDebuffs.ContainsKey(DebuffType.Stun))
             {

@@ -26,13 +26,11 @@ namespace TheKnightAwakening
         private Texture2D _scene1, _scene2, _scene3, _scene4, _scene5, _scene6;
         private Texture2D _btnYes, _btnNo;
 
-        // สำหรับระบบ choice แบบปุ่ม
         Rectangle btnKill;
         Rectangle btnSpare;
         private bool isChoiceActive;
 
-        // ตัวแปรสำหรับ End Credits (เลื่อนข้อความ)
-        private float creditsYPosition = 600; // เริ่มต้นจากด้านล่างของหน้าจอ
+        private float creditsYPosition = 600; 
 
         public void ResetGame()
         {
@@ -42,7 +40,7 @@ namespace TheKnightAwakening
         public CutScene(GraphicsDevice graphicsDevice)
         {
             this._graphicsDevice = graphicsDevice;
-            Singleton.Instance.currentCutscene = Singleton.CutsceneType.StartGame; // ค่าเริ่มต้นสำหรับทดลอง (คุณสามารถเปลี่ยนได้)
+            Singleton.Instance.currentCutscene = Singleton.CutsceneType.StartGame; 
             messages = new List<string>();
             backgrounds = new Dictionary<int, Texture2D>();
 
@@ -52,7 +50,6 @@ namespace TheKnightAwakening
             isTextFullyDisplayed = false;
             displayedText = "";
 
-            // กำหนดตำแหน่งและขนาดปุ่มสำหรับการเลือก (Execute และ Spare)
             btnKill = new Rectangle(425, 595, 202, 63);
             btnSpare = new Rectangle(700, 595, 202, 63);
             isChoiceActive = false;
@@ -84,7 +81,6 @@ namespace TheKnightAwakening
             isTextFullyDisplayed = false;
             isChoiceActive = false;
 
-            // ถ้ากำลังโหลด EndCredits ให้รีเซ็ตตำแหน่งเครดิตใหม่
             if (Singleton.Instance.currentCutscene == Singleton.CutsceneType.EndCredits)
             {
                 creditsYPosition = 600;
@@ -264,7 +260,6 @@ namespace TheKnightAwakening
                 return;
             }
 
-            // หากกำลังแสดงตัวเลือก (choice) ให้ตรวจสอบการคลิกปุ่ม
             if (isChoiceActive)
             {
                 if (IsButtonClicked(btnKill))
@@ -286,13 +281,11 @@ namespace TheKnightAwakening
                 case Singleton.CutsceneType.EndCredits:
                     UpdateCredits(gameTime);
 
-                    // เมื่อข้อความเลื่อนขึ้นจนหมดหน้าจอแล้ว เปลี่ยนสถานะเกมกลับไปที่เมนูหลัก
                     if (creditsYPosition < -messages.Count * 40)
                     {
                         Singleton.Instance.CurrentGameState = Singleton.GameState.GameStart;
                         Singleton.Instance.currentCutscene = Singleton.CutsceneType.StartGame;
 
-                        // รีเซ็ตเกมเพื่อให้เริ่มใหม่ได้
                         ResetGame();
 
                         backgrounds.Clear();
@@ -300,13 +293,11 @@ namespace TheKnightAwakening
                         LoadSceneData();
                     }
 
-                    // หรือกดปุ่ม Space เพื่อข้าม credits
                     if (Singleton.Instance.CurrentKey.IsKeyDown(Keys.Space) && !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
                     {
                         Singleton.Instance.CurrentGameState = Singleton.GameState.GameStart;
                         Singleton.Instance.currentCutscene = Singleton.CutsceneType.StartGame;
 
-                        // รีเซ็ตเกมเพื่อให้เริ่มใหม่ได้
                         ResetGame();
 
                         backgrounds.Clear();
@@ -315,7 +306,6 @@ namespace TheKnightAwakening
                     }
                     break;
                 case Singleton.CutsceneType.StartGame:
-                    // ในกรณีของ cutscene เริ่มเกมให้ปรับสถานะว่าได้เล่น cutscene แล้ว
                     UpdateRegularCutscene(gameTime);
                     break;
 
@@ -327,10 +317,8 @@ namespace TheKnightAwakening
             Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
         }
 
-        // แยกโค้ดการอัปเดต cutscene ทั่วไปออกมาเป็นเมทอดใหม่
         private void UpdateRegularCutscene(GameTime gameTime)
         {
-            // Update การแสดงข้อความแบบตัวอักษรทีละตัว
             if (!isTextFullyDisplayed)
             {
                 textTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -359,7 +347,6 @@ namespace TheKnightAwakening
                 }
                 else
                 {
-                    // จบ cutscene - ตรวจสอบประเภทของ cutscene ปัจจุบันและดำเนินการต่อ
                     switch (Singleton.Instance.currentCutscene)
                     {
                         case Singleton.CutsceneType.BossDefeated:
@@ -389,27 +376,15 @@ namespace TheKnightAwakening
                     }
                 }
             }
-
-            // ตรวจสอบตัวอักษรที่แสดง (สำหรับ Debug)
-            foreach (char c in displayedText)
-            {
-                if (!_font.Characters.Contains(c))
-                {
-                    Console.WriteLine($"Missing char: {c} ({(int)c})");
-                }
-            }
         }
 
-        // อัพเดทการแสดงเครดิต
         private void UpdateCredits(GameTime gameTime)
         {
-            // ลดค่า creditsYPosition ให้ข้อความเลื่อนขึ้น
             creditsYPosition -= (float)gameTime.ElapsedGameTime.TotalSeconds * 50;
         }
 
         public void Draw(SpriteBatch _spriteBatch)
         {
-            // ถ้าไม่ใช่ EndCredits ให้วาด cutscene ปกติ
             if (Singleton.Instance.currentCutscene != Singleton.CutsceneType.EndCredits)
             {
                 if (backgrounds.Count == 0)
@@ -419,7 +394,7 @@ namespace TheKnightAwakening
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(backgrounds[currentMessageIndex], new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
                 _spriteBatch.Draw(_frame, new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
-                _spriteBatch.DrawString(_font, WrapText(displayedText, frameWidth), new Vector2(320, 540), Color.White);
+                _spriteBatch.DrawString(_font, WrapText(displayedText, frameWidth), new Vector2(320, 540), Color.White); 
 
                 if (isChoiceActive)
                 {
@@ -430,23 +405,9 @@ namespace TheKnightAwakening
             }
             else
             {
-                // ถ้าเป็น EndCredits ให้วาดเครดิตที่เลื่อนขึ้น
                 DrawCredits(_spriteBatch);
             }
         }
-        // เมธอดสำหรับ Draw End Credits
-        // public void DrawCredits(SpriteBatch _spriteBatch)
-        // {
-        //     _spriteBatch.GraphicsDevice.Clear(Color.Black);
-        //     _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-        //     for (int i = 0; i < messages.Count; i++)
-        //     {
-        //         // วาดแต่ละบรรทัด โดยตำแหน่ง Y คำนวณจาก creditsYPosition + i * 40
-        //         _spriteBatch.DrawString(_font, messages[i], new Vector2(320, creditsYPosition + i * 40), Color.White);
-        //     }
-        //     _spriteBatch.End();
-        // }
 
         public void DrawCredits(SpriteBatch _spriteBatch)
         {

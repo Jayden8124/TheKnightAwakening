@@ -88,7 +88,6 @@ namespace TheKnightAwakening
             }
             else
             {
-                // หากระยะห่าง > 150 ให้เดินตามทิศทางที่กำหนด
                 Position = new Vector2(Position.X + walkSpeed * moveDirection, Position.Y);
                 AnimationManager.FacingRight = moveDirection > 0;
                 AnimationManager.Play(Animations["Walk"]);

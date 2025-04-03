@@ -77,18 +77,8 @@ public class MainScene : Game
             case Singleton.GameState.GameStart:
                 if (IsButtonClicked(_drawing.MenuPlay))
                 {
-                    // if (!_cutscene.hasCutsceneBeenPlayed || _cutscene.hasGameBeenCompleted)
-                    // {
-                    //     Singleton.Instance.CurrentGameState = Singleton.GameState.Cutscene;
-                    //     Singleton.Instance.currentCutscene = Singleton.CutsceneType.StartGame;
-                    // }
-                    // else
-                    // {
-                    //     Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
-                    // }
-                        // ทุกครั้งที่กด Play ให้เริ่มใหม่เสมอ
                     Reset();
-                    _cutscene.ResetGame(); // reset cutscene flags ด้วย (hasCutsceneBeenPlayed / hasGameBeenCompleted)
+                    _cutscene.ResetGame();
 
                     Singleton.Instance.CurrentGameState = Singleton.GameState.Cutscene;
                     Singleton.Instance.currentCutscene = Singleton.CutsceneType.StartGame;
@@ -159,7 +149,7 @@ public class MainScene : Game
                 _numOjects = _gameObjects.Count;
 
 
-                // ตรวจสอบและแก้ไข collision สำหรับ Monster แต่ละตัว for Collision   
+                // Collision Monsters
                 foreach (var obj in _gameObjects)
                 {
                     if (_camera.IsVisible(obj.Rectangle))
@@ -175,17 +165,11 @@ public class MainScene : Game
                 {
                     if (_camera.IsVisible(obj.Rectangle))
                     {
-
                         if (obj is MonsterType monster)
                         {
                             if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, monster.Rectangle))
                             {
                                 CollisionManager.ResolveCharacterCollision(Singleton.Instance.player, monster);
-
-                                if (!(monster is SKLT_WR))
-                                {
-                                    // Singleton.Instance.player.TakeDamage(1, obj.Position);
-                                }
                             }
                         }
                     }
@@ -368,7 +352,7 @@ public class MainScene : Game
     {
         Singleton.Instance.Score = 0;
         Singleton.Instance.Timer = 0;
-        Singleton.Instance.CurrentGameState = Singleton.GameState.GamePlaying;
+        Singleton.Instance.CurrentGameState = Singleton.GameState.GameStart;
 
         _gameObjects.Clear();
 
@@ -384,7 +368,7 @@ public class MainScene : Game
         }
     }
 
-    public void ResetPlayer() // Adjust
+    public void ResetPlayer()
     {
         // Load Texture Singleton.Instance.player
         Texture2D knightSheet = Content.Load<Texture2D>("player");
@@ -398,11 +382,8 @@ public class MainScene : Game
         {
             Name = "Player",
             Viewport = new Rectangle(5, 0, 43, 64),
-            // Position = new Vector2(200, 100),
-            // LastCheckpoint = new Vector2(720, 470),
-            // LastCheckpoint = new Vector2(4097, 932),
-            // LastCheckpoint = new Vector2(5490, 71),
-            LastCheckpoint = new Vector2(3800, 3847),
+            Position = new Vector2(650, 470),
+            LastCheckpoint = new Vector2(650, 470),
             Left = Keys.Left,
             Right = Keys.Right,
             Up = Keys.Up,
@@ -494,24 +475,10 @@ public class MainScene : Game
         monsterPrototypes["SKLT_WR"] = prototypeWR;
         monsterPrototypes["SL"] = prototypeSL;
         monsterPrototypes["MDS"] = prototypeMDS;
-
-
-        // foreach (var pos in spawnPositionsMDS)
-        // {
-        //     var clone = prototypeMDS.Clone();
-        //     clone.Position = pos;
-        //     _gameObjects.Add(clone);
-        // }
     }
 
     private void SpawnMonstersForSection(int section)
     {
-        // ลบมอนสเตอร์ของ section ก่อนหน้าออก
-        // _gameObjects.RemoveAll(obj =>
-        //     obj is MonsterType monster &&
-        //     monster.Section == Singleton.Instance.PreviousSection);
-
-        // Spawn มอนสเตอร์ใหม่ของทุกประเภท
         foreach (var pair in monsterPrototypes)
         {
             string type = pair.Key;
@@ -533,7 +500,7 @@ public class MainScene : Game
                 {
                     MonsterType clone = prototype.Clone();
                     clone.Position = pos;
-                    clone.Section = section; // กำหนด Section ให้ตัว clone
+                    clone.Section = section;
                     _gameObjects.Add(clone);
                 }
             }

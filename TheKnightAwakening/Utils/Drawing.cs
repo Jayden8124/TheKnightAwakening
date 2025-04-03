@@ -162,36 +162,28 @@ namespace TheKnightAwakening
 
         public void DrawVolumeBar(SpriteBatch spriteBatch)
         {
-            // ตรวจสอบระดับเสียงปัจจุบัน
             float volume = Singleton.Instance.AudioManager.GetCurrentVolume();
 
-            // ขนาดแท่ง
-            int barWidth = 7;  // ความกว้างของแต่ละแท่ง
-            int barMaxHeight = 25; // ความสูงของแท่ง (สูงสุด 100%)
-            int gapBetweenBars = 5; // ช่องว่างระหว่างแท่งแต่ละอัน
+            int barWidth = 7;  
+            int barMaxHeight = 25;  
+            int gapBetweenBars = 5; 
 
-            // กำหนดตำแหน่งเริ่มต้นของแท่ง
-            int startX = 605; // ตำแหน่งเริ่มต้น X
-            int startY = 515; // ตำแหน่งเริ่มต้น Y
+            int startX = 605; 
+            int startY = 515; 
 
-            // วาดแท่งระดับเสียงทั้งหมด 5 ระดับ (0%, 25%, 50%, 75%, 100%)
             spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             for (int i = 0; i < 5; i++)
             {
-                // คำนวณระดับเสียงที่แท่งนี้จะต้องแสดง
                 float threshold = i * 0.25f; // 0%, 25%, 50%, 75%, 100%
-                // กำหนดสีของแท่ง
-                Color color = Color.Gray; // สีเริ่มต้น (ถ้าเสียงยังไม่ถึง)
+                Color color = Color.Gray;
                 if (volume >= threshold)
                 {
-                    color = Color.White;  // ถ้าระดับเสียงถึงหรือเกินกว่า threshold จะเปลี่ยนเป็นสีขาว
+                    color = Color.White;  
                 }
 
-                // คำนวณขนาดของแท่ง (สูงสุด 100%)
-                int levelHeight = (int)(barMaxHeight * threshold); // ความสูงของแท่งตามระดับ
-
-                // วาดแท่งระดับเสียง
+                int levelHeight = (int)(barMaxHeight * threshold); 
+                
                 spriteBatch.Draw(Singleton.Instance._rect,
                     new Rectangle(startX + i * (barWidth + gapBetweenBars), startY + (barMaxHeight - levelHeight), barWidth, levelHeight),
                     color);

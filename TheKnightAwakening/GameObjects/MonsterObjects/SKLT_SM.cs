@@ -54,7 +54,6 @@ namespace TheKnightAwakening
 
             if (attackTimer <= -0.4f)
             {
-                // AnimationManager.Play(Animations["Attack"]);
                 Singleton.Instance.player.TakeDamage(this.Damage + 200, this.Position);
                 attackTimer = attackDelay;
             }

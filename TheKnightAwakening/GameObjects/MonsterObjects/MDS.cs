@@ -115,7 +115,6 @@ namespace TheKnightAwakening
             }
             else
             {
-                // หากระยะห่าง > 150 ให้เดินตามทิศทางที่กำหนด
                 Position = new Vector2(Position.X + walkSpeed * moveDirection, Position.Y);
                 AnimationManager.FacingRight = moveDirection > 0;
                 AnimationManager.Play(Animations["Walk"]);
@@ -135,7 +134,6 @@ namespace TheKnightAwakening
             foreach (var dir in directions)
             {
                 var newBullet = bullet.Clone() as Bullet;
-                // กำหนดตำแหน่งเริ่มต้นของกระสุนให้รอบตัวบอส โดยปรับตำแหน่งออกไปจากแกนหลักเล็กน้อย
                 newBullet.Position = new Vector2(Rectangle.Center.X + (dir.X * 10), Rectangle.Center.Y + (dir.Y * 10)); 
                 newBullet.Velocity = Vector2.Normalize(dir) * 300;
                 newBullet.Rotation = (float) Math.Atan2(dir.X, dir.Y);
@@ -154,16 +152,16 @@ namespace TheKnightAwakening
 
         public override void Reset()
         {
-            MaxHealth = 1;
+            MaxHealth = 1250;
             Health = MaxHealth;
             Damage = 20;
             walkSpeed = 3f;
             runSpeed = 6f;
             moveDirection = -1;
             attackTimer = 0f;
-            attackDelay = Animations["Attack"].FrameSpeed * Animations["Attack"].FrameCount / 2; // or 3.5f
+            attackDelay = Animations["Attack"].FrameSpeed * Animations["Attack"].FrameCount / 2; 
             bulletSpawnTimer = 8f;
-            weakDebuffTimer = 5f; //Cooldown ร้อง Debuff = 24 Sec(จาก /2 เป็น หาร 1.4 พอ) 7 Sec Duration 
+            weakDebuffTimer = 5f; 
             base.Reset();
         }
 

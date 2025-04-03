@@ -34,7 +34,6 @@ namespace TheKnightAwakening
                 else
                 {
                     attackTimer = 0f;
-                    // HandleMovement();
                     AnimationManager.Play(Animations["Idle"]);
                 }
             }
@@ -63,7 +62,6 @@ namespace TheKnightAwakening
             if (attackTimer < -attackDelay)
             {
                 attackTimer = 0;
-                // สร้างกระสุนจากตำแหน่ง monster
                 var newBullet = bullet.Clone() as Bullet;
                 int bulletX = AnimationManager.FacingRight ? Rectangle.Width : -newBullet.Rectangle.Width;
                 newBullet.Position = new Vector2(Rectangle.X + bulletX, Position.Y + 15);

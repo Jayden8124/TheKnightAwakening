@@ -74,7 +74,6 @@ namespace TheKnightAwakening
 
             if (DistanceMoved <= closeRangeDistance && Math.Abs(this.Position.Y - Singleton.Instance.player.Position.Y) <= 35)
             {
-                // เมื่อ Player ใกล้ (≤150) ให้วิ่งเข้าหา
                 if (Singleton.Instance.player.Position.X < Position.X)
                 {
                     Position = new Vector2(Position.X - runSpeed, Position.Y);

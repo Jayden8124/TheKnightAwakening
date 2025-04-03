@@ -11,7 +11,7 @@ namespace TheKnightAwakening
         protected Rectangle Background, Foreground;
         protected float maxHealth;
         protected float currentHealth;
-        protected Rectangle currentHealthForeground; // source rectangle สำหรับ foreground ที่จะวาด (ปรับความกว้างตามค่า health)
+        protected Rectangle currentHealthForeground; 
 
         // Animation Shade
         public HealthbarAnimated healthbarAnimated;
@@ -29,7 +29,6 @@ namespace TheKnightAwakening
 
         public void Update(float value)
         {
-            // ปรับความกว้างของ foreground ให้สัมพันธ์กับค่า health
             currentHealthForeground.Width = (int)(value / maxHealth * Foreground.Width);
         }
 
@@ -51,16 +50,16 @@ namespace TheKnightAwakening
         public HealthbarAnimated(Texture2D tex, Rectangle bgSource, Rectangle fgSource, float max) : base(tex, bgSource, fgSource, max)
         {
             _targetValue = max;
-            _animationSource = new Rectangle(Foreground.X + Foreground.Width, Foreground.Y, 0, Foreground.Height); // เริ่มต้น _animationSource จาก source ของ foreground
+            _animationSource = new Rectangle(Foreground.X + Foreground.Width, Foreground.Y, 0, Foreground.Height); 
             _animationPosition = new Vector2(76, 63);
             _animationShade = Color.DarkGray;
         }
 
         public void Update(float value, GameTime gameTime)
         {
-            if (value == currentHealth) // หากค่า value เท่ากับ currentHealth ให้ล้างส่วนแอนิเมชันแล้ว return
+            if (value == currentHealth) 
             {
-                _animationSource.Width = 0; // ลบแถบแอนิเมชันออก
+                _animationSource.Width = 0; 
                 return;
             }
 
@@ -84,10 +83,10 @@ namespace TheKnightAwakening
                 _animationShade = Color.DarkGray * 0.5f;
             }
 
-            currentHealthForeground.Width = x; // ปรับความกว้างของส่วน Foreground ตามค่า health ที่อัปเดท
-            _animationSource.X = Foreground.X + x; // ปรับ _animationSource ให้เริ่มจากตำแหน่งที่ต่อจาก Foreground ที่แสดงปัจจุบัน
+            currentHealthForeground.Width = x; 
+            _animationSource.X = Foreground.X + x; 
             _animationSource.Width = (int)(Math.Abs(currentHealth - _targetValue) / maxHealth * Foreground.Width);
-            _animationPosition.X = 76 + currentHealthForeground.Width * 1.53f; // ตำแหน่งที่วาด + ความกว้างภาพ * Scale
+            _animationPosition.X = 76 + currentHealthForeground.Width * 1.53f; 
         }
 
 

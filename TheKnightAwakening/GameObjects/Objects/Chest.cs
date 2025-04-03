@@ -115,7 +115,6 @@ namespace TheKnightAwakening
         public override object Clone()
         {
             Chest clone = (Chest)base.Clone();
-            // สร้าง AnimationManager ใหม่จาก animations ที่ต้องการ
             clone.AnimationManager = new AnimationManager(this.Animations["Closed"]);
             return clone;
         }

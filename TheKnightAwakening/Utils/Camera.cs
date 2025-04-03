@@ -33,9 +33,10 @@ namespace TheKnightAwakening
 
             // Proper clamping for Y to ensure camera doesn't move too far
             float clampedY = MathHelper.Clamp(targetY, 0, (TotalFloors * FloorHeight) - _viewport.Height);
+            float clampedX = MathHelper.Clamp(targetX, 0, 12800);
 
             // Smooth movement with Lerp
-            Position = Vector2.Lerp(Position, new Vector2(targetX, clampedY), 0.03f * _speed);
+            Position = Vector2.Lerp(Position, new Vector2(clampedX, clampedY), 0.03f * _speed);
 
             // Apply the transformation matrix
             Transform = Matrix.CreateTranslation(new Vector3(-Position, 0));
