@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/TheKnightAwakening/TheKnightAwakening/Content/Audio/Music/Bgm.mp3</SourceFile>
-  <SourceTime>2025-04-03T14:08:04.2748351+07:00</SourceTime>
-  <DestFile>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Content/Bgm.xnb</DestFile>
-  <DestTime>2025-04-03T14:19:52.9504775+07:00</DestTime>
+  <SourceFile>C:/Study-Comsci/Y3T2/COMGAME/Final/FINAL/TheKnightAwakening/TheKnightAwakening/Content/Audio/Music/Bgm.mp3</SourceFile>
+  <SourceTime>2025-04-04T22:35:01.1047102+07:00</SourceTime>
+  <DestFile>C:/Study-Comsci/Y3T2/COMGAME/Final/FINAL/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Content/Bgm.xnb</DestFile>
+  <DestTime>2025-04-04T22:36:29.1977297+07:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Content/Bgm.ogg</string>
+    <string>C:/Study-Comsci/Y3T2/COMGAME/Final/FINAL/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Content/Bgm.ogg</string>
   </BuildOutput>
 </PipelineBuildEvent>

@@ -21,7 +21,7 @@ namespace TheKnightAwakening
 
         public void Collected()
         {
-            Console.WriteLine("Coin Collected");
+            // Console.WriteLine("Coin Collected");
             Singleton.Instance.AudioManager.PlayEffect("Coin_Collect");
             IsActive = false;
         }

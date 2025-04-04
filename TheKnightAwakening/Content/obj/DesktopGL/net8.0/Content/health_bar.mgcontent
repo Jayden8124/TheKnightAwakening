@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/TheKnightAwakening/TheKnightAwakening/Content/UI/health_bar.png</SourceFile>
-  <SourceTime>2025-04-03T14:08:04.3032036+07:00</SourceTime>
-  <DestFile>/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Content/health_bar.xnb</DestFile>
-  <DestTime>2025-04-03T14:19:57.6154441+07:00</DestTime>
+  <SourceFile>C:/Study-Comsci/Y3T2/COMGAME/Final/FINAL/TheKnightAwakening/TheKnightAwakening/Content/UI/health_bar.png</SourceFile>
+  <SourceTime>2025-04-04T22:35:01.3447543+07:00</SourceTime>
+  <DestFile>C:/Study-Comsci/Y3T2/COMGAME/Final/FINAL/TheKnightAwakening/TheKnightAwakening/Content/bin/DesktopGL/Content/health_bar.xnb</DestFile>
+  <DestTime>2025-04-04T22:36:40.1555504+07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

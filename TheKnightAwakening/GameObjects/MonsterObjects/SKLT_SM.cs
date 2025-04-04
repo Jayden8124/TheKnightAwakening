@@ -126,11 +126,11 @@ namespace TheKnightAwakening
             } },
 
             { 2, new List<Vector2> { 
-                new Vector2(8786, 1220), 
-                new Vector2(10365, 1220),  
-                new Vector2(11039, 1220),
-                new Vector2(7389, 1205),
-                new Vector2(6173, 1206),
+                new Vector2(8786, 1200), 
+                new Vector2(10365, 1200),  
+                new Vector2(11039, 1200),
+                new Vector2(7389, 1200),
+                new Vector2(6173, 1200),
             } },
 
             { 3, new List<Vector2> { 

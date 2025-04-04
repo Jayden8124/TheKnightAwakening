@@ -52,7 +52,7 @@ namespace TheKnightAwakening
                 Singleton.Instance.player.TakeDamage(this.Damage, this.Position);
                 // Singleton.Instance.player.TakeDebuff(Player.DebuffType.Stun, 5.0f, this.Position);
                 Singleton.Instance.player.TakeDebuff(Player.DebuffType.Slow, 5.0f, this.Position);
-                Singleton.Instance.player.TakeDebuff(Player.DebuffType.Poison, 15.0f, this.Position);
+                Singleton.Instance.player.TakeDebuff(Player.DebuffType.Poison, 5.0f, this.Position);
                 attackTimer = attackDelay;
             }
             else
@@ -129,7 +129,7 @@ namespace TheKnightAwakening
             { 2, new List<Vector2> { 
                 new Vector2(11343, 500), 
                 new Vector2(12074, 1220),
-                new Vector2(12074, 1250),
+                new Vector2(12074, 1220),
                 new Vector2(9089, 1220),
                 new Vector2(5584, 1220),
                 new Vector2(4575, 1220),

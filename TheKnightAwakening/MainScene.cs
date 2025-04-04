@@ -307,7 +307,7 @@ public class MainScene : Game
                 break;
         }
 
-        Console.WriteLine("Count Game Objects : " + _numOjects);
+        // Console.WriteLine("Count Game Objects : " + _numOjects);
         Singleton.Instance.PreviousMouse = Singleton.Instance.CurrentMouse;
         Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
 
@@ -384,6 +384,7 @@ public class MainScene : Game
             Viewport = new Rectangle(5, 0, 43, 64),
             Position = new Vector2(650, 470),
             LastCheckpoint = new Vector2(650, 470),
+            // LastCheckpoint = new Vector2(3800, 3847),
             Left = Keys.Left,
             Right = Keys.Right,
             Up = Keys.Up,
@@ -427,28 +428,28 @@ public class MainScene : Game
         MonsterType prototypeWR = new SKLT_WR(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_WR))
         {
             Name = "SKLT_WR",
-            Score = 40,
+            Score = 4,
             Viewport = new Rectangle(0, 0, 53, 65)
         };
 
         MonsterType prototypeSL = new SL(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SL))
         {
             Name = "SL",
-            Score = 20,
+            Score = 2,
             Viewport = new Rectangle(0, 0, 47, 32)
         };
 
         MonsterType prototypeSM = new SKLT_SM(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_SM))
         {
             Name = "SKLT_SM",
-            Score = 40,
+            Score = 4,
             Viewport = new Rectangle(0, 0, 30, 90)
         };
 
         MonsterType prototypeAC = new SKLT_AC(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.SKLT_AC))
         {
             Name = "SKLT_AC",
-            Score = 30,
+            Score = 3,
             Viewport = new Rectangle(0, 0, 37, 68),
             bullet = new Bullet(monsterTextures[AnimationMonster.AnimationMonsterType.SKLT_AC])
             {
@@ -460,7 +461,7 @@ public class MainScene : Game
         MonsterType prototypeMDS = new MDS(_animationMonster.GetAnimations(AnimationMonster.AnimationMonsterType.MDS))
         {
             Name = "MDS",
-            Score = 50,
+            Score = 10,
             Viewport = new Rectangle(0, 0, 65, 77),
             Position = new Vector2(6740, 4049),
             bullet = new Bullet(_animationsBullet)

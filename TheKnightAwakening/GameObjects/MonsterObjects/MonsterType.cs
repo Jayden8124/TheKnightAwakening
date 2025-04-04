@@ -56,7 +56,7 @@ namespace TheKnightAwakening
                 {
                     isDead = true;
                     Singleton.Instance.Score += Score;
-                    Console.WriteLine(Singleton.Instance.Score);
+                    // Console.WriteLine(Singleton.Instance.Score);
 
                     // Heal player if needed (only once)
                     if (Singleton.Instance.player.Health <= 50)
@@ -128,14 +128,10 @@ namespace TheKnightAwakening
             bool isFacingEnemy = (enemyPosition.X > Position.X && AnimationManager.FacingRight) ||
                                 (enemyPosition.X < Position.X && !AnimationManager.FacingRight);
 
-            if (isFacingEnemy && Math.Abs(Position.Y - Singleton.Instance.player.Position.Y) <= 35)
+            // if (isFacingEnemy && Math.Abs(Position.Y - Singleton.Instance.player.Position.Y) <= 40)
             {
-                // Apply knockback effect
-                Velocity.X = (enemyPosition.X - Position.X) * 0.5f; // Adjust the knockback strength as needed
-                Velocity.Y = -10f; // Adjust the vertical knockback strength as needed
-                Position += Velocity;
                 Health -= damage;
-                Console.WriteLine("Monster Health: " + Health);
+                // Console.WriteLine("Monster Health: " + Health);
             }
         }
 

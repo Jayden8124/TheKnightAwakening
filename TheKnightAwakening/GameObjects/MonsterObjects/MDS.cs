@@ -41,19 +41,19 @@ namespace TheKnightAwakening
             if (weakDebuffTimer <= 0)
             {
 
-                if (Vector2.Distance(Singleton.Instance.player.Position, Position) <=  500)
+                if (Vector2.Distance(Singleton.Instance.player.Position, Position) <= 500)
                 {
                     Singleton.Instance.AudioManager.PlayEffect("Medusa_Scream");
                     Singleton.Instance.player.TakeDebuff(Player.DebuffType.Weak, 5.0f, Position);
                     Singleton.Instance.player.TakeDebuff(Player.DebuffType.Stun, 1f, Position);
-                    Console.WriteLine("Applied Weak Debuff to Player");
+                    // Console.WriteLine("Applied Weak Debuff to Player");
                 }
                 weakDebuffTimer = 3f;
             }
 
             if (gameTime.TotalGameTime.TotalSeconds > 1)
             {
-                if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, this.Rectangle) && Math.Abs(Position.Y - Singleton.Instance.player.Position.Y) <= 35)
+                if (GameObject.CheckAABBCollision(Singleton.Instance.player.Rectangle, this.Rectangle) && Math.Abs(Position.Y - Singleton.Instance.player.Position.Y) <= 40)
                 {
                     HandleMeleeAttack(gameTime);
                 }
@@ -70,12 +70,17 @@ namespace TheKnightAwakening
 
         private void HandleMeleeAttack(GameTime gameTime)
         {
+            bool isFacingEnemy = (Singleton.Instance.player.Position.X < Position.X && AnimationManager.FacingRight) ||
+                                 (Singleton.Instance.player.Position.X > Position.X && !AnimationManager.FacingRight);
+            if (isFacingEnemy)
+            {
+                AnimationManager.FacingRight = !AnimationManager.FacingRight;
+            }
             float attackAnimDuration = Animations["Attack"].FrameSpeed * Animations["Attack"].FrameCount;
             attackTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (attackTimer <= -0.4f)
+            if (attackTimer <= -0.8f)
             {
-                AnimationManager.Play(Animations["Attack"]);
                 Singleton.Instance.player.TakeDamage(this.Damage, this.Position);
                 Singleton.Instance.player.TakeDebuff(Player.DebuffType.Poison, 5.0f, Position);
                 attackTimer = attackDelay;
@@ -97,7 +102,7 @@ namespace TheKnightAwakening
         {
             const int chaseDistance = 150;
 
-            if (DistanceMoved <= chaseDistance && Math.Abs(Position.Y - Singleton.Instance.player.Position.Y) <= 5)
+            if (DistanceMoved <= chaseDistance && Math.Abs(Position.Y - Singleton.Instance.player.Position.Y) <= 35)
             {
                 if (Singleton.Instance.player.Position.X < Position.X)
                 {
@@ -140,7 +145,7 @@ namespace TheKnightAwakening
                 newBullet.Reset();
                 gameObjects.Add(newBullet);
             }
-            Console.WriteLine("Spawned bullets in all directions");
+            // Console.WriteLine("Spawned bullets in all directions");
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -159,7 +164,7 @@ namespace TheKnightAwakening
             runSpeed = 6f;
             moveDirection = -1;
             attackTimer = 0f;
-            attackDelay = Animations["Attack"].FrameSpeed * Animations["Attack"].FrameCount / 2; 
+            attackDelay = Animations["Attack"].FrameSpeed * Animations["Attack"].FrameCount; 
             bulletSpawnTimer = 8f;
             weakDebuffTimer = 5f; 
             base.Reset();

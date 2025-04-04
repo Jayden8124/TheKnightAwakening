@@ -44,7 +44,7 @@ namespace TheKnightAwakening
         private bool ShouldPerformMeleeAttack()
         {
             const int meleeDistanceLimit = 500;
-            const int verticalTolerance = 5;
+            const int verticalTolerance = 10;
 
             return DistanceMoved <= meleeDistanceLimit && Math.Abs(this.Position.Y - Singleton.Instance.player.Position.Y) <= verticalTolerance;
         }

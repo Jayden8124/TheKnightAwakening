@@ -22,7 +22,7 @@ namespace TheKnightAwakening
 
         public void Collected()
         {
-            Console.WriteLine("Flag Collected");
+            // Console.WriteLine("Flag Collected");
             Singleton.Instance.player.LastCheckpoint = Position;
             Singleton.Instance.AudioManager.PlayEffect("Save_SFX");
             Checked = true;

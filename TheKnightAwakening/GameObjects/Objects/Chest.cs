@@ -71,7 +71,7 @@ namespace TheKnightAwakening
                 ItemType itemType = GetRandomItemTypeWithProbability(itemProbabilities);
                 if (itemType == ItemType.None)
                 {
-                    Console.WriteLine("No item spawned.");
+                    // Console.WriteLine("No item spawned.");
                     continue;
                 }
                 GameObject item = itemType switch
@@ -83,13 +83,13 @@ namespace TheKnightAwakening
 
                 item.Position = GetRandomPosition();
                 _gameObjects.Add(item);
-                Console.WriteLine($"Item spawned: {itemType}");
+                // Console.WriteLine($"Item spawned: {itemType}");
             }
         }
 
         private Vector2 GetRandomPosition()
         {
-            int randomX = Singleton.Instance.Random.Next(Rectangle.X - 100, Rectangle.X + 100);
+            int randomX = Singleton.Instance.Random.Next(Rectangle.X - 50, Rectangle.X + 25);
             int randomY = this.Rectangle.Y;
 
             return new Vector2(randomX, randomY);

@@ -10,6 +10,8 @@ namespace TheKnightAwakening
         public float DistanceMoved;
         private AnimationManager AnimationManager;
         private Dictionary<string, Animation> Animations;
+        float time; 
+
 
         public Bullet(Texture2D texture) : base(texture)
         {
@@ -53,13 +55,14 @@ namespace TheKnightAwakening
         public override void Reset()
         {
             DistanceMoved = 0;
+            time = 0f;
             base.Reset();
         }
 
         public override void Update(GameTime gameTime, List<GameObject> _gameObjects)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-            float time = (float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+            time += (float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
 
             DistanceMoved += Math.Abs(Velocity.X * deltaTime);
             Position += Velocity * deltaTime;

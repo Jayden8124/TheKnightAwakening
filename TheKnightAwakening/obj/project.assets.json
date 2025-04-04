@@ -238,19 +238,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/jay/.nuget/packages/": {}
+    "C:\\Users\\Petch\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/TheKnightAwakening/TheKnightAwakening/TheKnightAwakening.csproj",
+      "projectUniqueName": "C:\\Study-Comsci\\Y3T2\\COMGAME\\Final\\FINAL\\TheKnightAwakening\\TheKnightAwakening\\TheKnightAwakening.csproj",
       "projectName": "TheKnightAwakening",
-      "projectPath": "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/TheKnightAwakening/TheKnightAwakening/TheKnightAwakening.csproj",
-      "packagesPath": "/Users/jay/.nuget/packages/",
-      "outputPath": "/Users/jay/KMITL/Year_3_2567/Semester_2/Computer_Game_Programming/Final_Project/TheKnightAwakening/TheKnightAwakening/obj/",
+      "projectPath": "C:\\Study-Comsci\\Y3T2\\COMGAME\\Final\\FINAL\\TheKnightAwakening\\TheKnightAwakening\\TheKnightAwakening.csproj",
+      "packagesPath": "C:\\Users\\Petch\\.nuget\\packages\\",
+      "outputPath": "C:\\Study-Comsci\\Y3T2\\COMGAME\\Final\\FINAL\\TheKnightAwakening\\TheKnightAwakening\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/jay/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Petch\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -304,7 +304,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -30,7 +30,7 @@ namespace TheKnightAwakening
         Rectangle btnSpare;
         private bool isChoiceActive;
 
-        private float creditsYPosition = 600; 
+        private float creditsYPosition = 600;
 
         public void ResetGame()
         {
@@ -40,7 +40,7 @@ namespace TheKnightAwakening
         public CutScene(GraphicsDevice graphicsDevice)
         {
             this._graphicsDevice = graphicsDevice;
-            Singleton.Instance.currentCutscene = Singleton.CutsceneType.StartGame; 
+            Singleton.Instance.currentCutscene = Singleton.CutsceneType.StartGame;
             messages = new List<string>();
             backgrounds = new Dictionary<int, Texture2D>();
 
@@ -110,14 +110,17 @@ namespace TheKnightAwakening
                     messages.Add("Medusa: But this... is where your tale ends. None escape the web of fate I have spun!");
                     backgrounds.Add(2, _scene4);
 
-                    messages.Add("Knight: Even if it costs me my life, I will strike you down. No power you wield shall sway me. I will not allow your blight to claim another soul! There is no place in this realm for a heartless fiend like you!");
-                    backgrounds.Add(3, _scene4);
+                    messages.Add("Knight: Even if it costs me my life, I will strike you down. No power you wield shall sway me.");
+                    backgrounds.Add(3, _scene4); //**
 
-                    messages.Add("Medusa: A fiend, you say? Hah... I have worn that title like a crown. I am the bringer of this calamity, yes but know this: every curse is born of sorrow, every monster made, not born.");
+                    messages.Add("Knight: I will not allow your blight to claim another soul! There is no place in this realm for a heartless fiend like you!");
                     backgrounds.Add(4, _scene4);
 
-                    messages.Add("Medusa: Come then, hero. Let fate judge us both!");
+                    messages.Add("Medusa: A fiend, you say? Hah... I have worn that title like a crown. I am the bringer of this calamity, yes but know this: every curse is born of sorrow, every monster made, not born.");
                     backgrounds.Add(5, _scene4);
+
+                    messages.Add("Medusa: Come then, hero. Let fate judge us both!");
+                    backgrounds.Add(6, _scene4);
                     break;
 
                 case Singleton.CutsceneType.BossDefeated:
@@ -130,28 +133,28 @@ namespace TheKnightAwakening
                     messages.Add("Medusa: Your king! He betrayed me... he deceived me.");
                     backgrounds.Add(2, _scene5);
 
-                    messages.Add("Medusa: I was once but a simple girl... a loyal handmaid devoted to this very kingdom. But it was your king who laid his eyes upon me, who crossed boundaries best left untouched! And the queen... she cast me aside, offered no hand, no mercy only a curse.");
+                    messages.Add("Medusa: I was once but a simple girl... a loyal handmaid devoted to this very kingdom.");
                     backgrounds.Add(3, _scene5);
 
-                    messages.Add("Medusa: She turned me into this monster.");
+                    messages.Add("Medusa: But it was your king who laid his eyes upon me, who crossed boundaries best left untouched! And the queen... she cast me aside, offered no hand, no mercy only a curse.");
                     backgrounds.Add(4, _scene5);
 
-                    messages.Add("Medusa: I became what they feared most. Hunted. Exiled. Cast into shadows like a plague.");
+                    messages.Add("Medusa: She turned me into this monster.");
                     backgrounds.Add(5, _scene5);
 
-                    messages.Add("Medusa: So let them feel it let them taste the dread they sowed! Let fear consume them as it consumed me!");
+                    messages.Add("Medusa: I became what they feared most. Hunted. Exiled. Cast into shadows like a plague.");
                     backgrounds.Add(6, _scene5);
 
-                    messages.Add("Medusa: But in the end... I was undone. Brought low by the very blade that sought to end me. Your blade.");
+                    messages.Add("Medusa: So let them feel it let them taste the dread they sowed! Let fear consume them as it consumed me!");
                     backgrounds.Add(7, _scene5);
 
-                    messages.Add("Knight: My king is not the man you speak of. He is a noble ruler a beacon of strength and honor. He would never commit such vile acts.");
+                    messages.Add("Medusa: But in the end... I was undone. Brought low by the very blade that sought to end me. Your blade.");
                     backgrounds.Add(8, _scene5);
 
-                    messages.Add("Medusa: And yet... do you truly believe I would curse the world without cause?");
+                    messages.Add("Knight: My king is not the man you speak of. He is a noble ruler a beacon of strength and honor. He would never commit such vile acts.");
                     backgrounds.Add(9, _scene5);
 
-                    messages.Add("           Do you want to kill or spare Medusa?");
+                    messages.Add("Medusa: And yet... do you truly believe I would curse the world without cause?");
                     backgrounds.Add(10, _scene5);
                     break;
 
@@ -168,11 +171,14 @@ namespace TheKnightAwakening
                     messages.Add("Medusa: Strike me down, O knight of the kingdom you so proudly serve!");
                     backgrounds.Add(3, _scene3);
 
-                    messages.Add("At last, Medusa falls... and with her final breath, the curse is lifted. But there is no triumph in the heart of knight is no joy in the silence that follows. She stands alone amidst the stillness... a single question echoing in her soul.");
+                    messages.Add("At last, Medusa falls... and with her final breath, the curse is lifted.");
                     backgrounds.Add(4, _scene3);
 
-                    messages.Add("Was this truly the right thing to do...?");
+                    messages.Add("But there is no triumph in the heart of knight is no joy in the silence that follows. She stands alone amidst the stillness... a single question echoing in her soul.");
                     backgrounds.Add(5, _scene3);
+
+                    messages.Add("Was this truly the right thing to do...?");
+                    backgrounds.Add(6, _scene3);
                     break;
 
                 case Singleton.CutsceneType.BossSpared:
@@ -394,7 +400,7 @@ namespace TheKnightAwakening
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(backgrounds[currentMessageIndex], new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
                 _spriteBatch.Draw(_frame, new Rectangle(0, 0, Singleton.SCREENWIDTH, Singleton.SCREENHEIGHT), Color.White);
-                _spriteBatch.DrawString(_font, WrapText(displayedText, frameWidth), new Vector2(320, 540), Color.White); 
+                _spriteBatch.DrawString(_font, WrapText(displayedText, frameWidth), new Vector2(320, 540), Color.White);
 
                 if (isChoiceActive)
                 {

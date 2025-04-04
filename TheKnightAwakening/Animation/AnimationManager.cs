@@ -79,10 +79,9 @@ namespace TheKnightAwakening
 
             spriteBatch.Draw(_animation.Texture, Position, source, color, 0f, Vector2.Zero, Scale, spriteEffect, 0f);
             // วาดกรอบ hitbox ของเฟรม (debug)
-            Texture2D rectTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
-            rectTexture.SetData(new[] { Color.Red });
-            spriteBatch.Draw(rectTexture, new Rectangle((int)Position.X, (int)Position.Y, source.Width, source.Height), Color.Red * 0.5f);
-
+            // Texture2D rectTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+            // rectTexture.SetData(new[] { Color.Red });
+            // spriteBatch.Draw(rectTexture, new Rectangle((int)Position.X, (int)Position.Y, source.Width, source.Height), Color.Red * 0.5f);
         }
 
         public Animation CurrentAnimation // Check Animation Current

@@ -82,7 +82,7 @@ namespace TheKnightAwakening
                 {
                     TakeDamage(1, Vector2.Zero);
                     time = 5f;
-                    Console.WriteLine("Poisoned! Health: " + Health);
+                    // Console.WriteLine("Poisoned! Health: " + Health);
                 }
             }
             UpdateDebuffs(gameTime);
@@ -144,7 +144,7 @@ namespace TheKnightAwakening
             if (OnGround && Singleton.Instance.CurrentKey.IsKeyDown(Up) &&
                 !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
             {
-                Velocity.Y = -15;
+                Velocity.Y = -11;
                 OnGround = false;
                 AnimationManager.Play(Animations["Jump"]);
             }
@@ -194,29 +194,28 @@ namespace TheKnightAwakening
             if (Singleton.Instance.CurrentKey.IsKeyDown(Fire) &&
                 !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
             {
-                TriggerAttack("Attack1", _gameObjects);
+                TriggerAttack("Attack1", _gameObjects, 0);
             }
-            else if (Singleton.Instance.CurrentKey.IsKeyDown(Attack2) &&
+            else if (Ultimate >= 1 && Singleton.Instance.CurrentKey.IsKeyDown(Attack2) &&
             !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
             {
-                TriggerAttack("Attack2", _gameObjects);
+                TriggerAttack("Attack2", _gameObjects, 20);
                 Ultimate -= 1;
             }
             else if (Ultimate >= 5 && Singleton.Instance.CurrentKey.IsKeyDown(Attack3) &&
             !Singleton.Instance.CurrentKey.Equals(Singleton.Instance.PreviousKey))
             {
-                TriggerAttack("Attack3", _gameObjects);
+                TriggerAttack("Attack3", _gameObjects, 50);
                 var newBullet = Bullet.Clone() as Bullet;
                 newBullet.Position = new Vector2(Rectangle.X + (AnimationManager.FacingRight ? Rectangle.Width : -newBullet.Rectangle.Width), Position.Y + 15);
                 newBullet.Velocity = new Vector2(AnimationManager.FacingRight ? 300 : -300, 0);
                 newBullet.Reset();
                 _gameObjects.Add(newBullet);
-                Console.WriteLine("Bullet spawned");
                 Ultimate = 0;
             }
         }
 
-        private void TriggerAttack(string attack, List<GameObject> gameObjects)
+        private void TriggerAttack(string attack, List<GameObject> gameObjects, int Extradamage)
         {
             AnimationManager.Play(Animations[attack]);
             isAttacking = true;
@@ -232,9 +231,9 @@ namespace TheKnightAwakening
                 {
                     if (Player.CheckAABBCollision(this.Rectangle, monster.Rectangle))
                     {
-                        monster.TakeDamage(this.Damage, this.Position);
+                        monster.TakeDamage(this.Damage + Extradamage, this.Position);
                         Ultimate++; // Test Befor Edit
-                        Console.WriteLine("Monster taken damage: " + this.Damage);
+    
                     }
                 }
             }
@@ -292,7 +291,7 @@ namespace TheKnightAwakening
             }
             else
             {
-                Console.WriteLine("Debuff already applied");
+                // Console.WriteLine("Debuff already applied");
             }
         }
 

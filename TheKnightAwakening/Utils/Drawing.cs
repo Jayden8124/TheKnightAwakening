@@ -312,8 +312,7 @@ namespace TheKnightAwakening
             }
 
             _spriteBatch.End();
-            Console.WriteLine($"Drawn Objects: {drawnObjects}/{_gameObjects.Count}");
-
+            // Console.WriteLine($"Drawn Objects: {drawnObjects}/{_gameObjects.Count}");
 
             // Layer 3: UI
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
